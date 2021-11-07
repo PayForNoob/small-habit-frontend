@@ -1,26 +1,25 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <app-habit></app-habit>
+  <app-input></app-input>
+  <app-list></app-list>
+  <app-footer></app-footer>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import appHabit from "./components/appHabit.vue"; // eslint-disable-line no-unused-vars
+import appList from "./components/appList.vue";
+import appInput from "./components/appInput.vue";
+import appFooter from "./components/appFooter.vue";
 
 export default {
-  name: 'App',
   components: {
-    HelloWorld
-  }
-}
+    "app-habit": appHabit,
+    "app-list": appList,
+    "app-input": appInput,
+    "app-footer": appFooter,
+  },
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
