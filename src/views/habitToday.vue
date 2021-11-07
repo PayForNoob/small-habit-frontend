@@ -15,16 +15,19 @@
           <div class="달성목표이름">[운동]걷기</div>
           <i class="far fa-edit fa-2x"></i>
         </div>
-        <div class="달성후목표박스윗부분">
-          <i class="far fa-check-circle fa-2x"></i>
-          <div class="달성목표이름">[운동]뛰기</div>
-          <i class="far fa-edit fa-2x"></i>
-        </div>
-        <div class="달성후목표박스아랫부분">
-          <div class="달성실천횟수">11회 실천중</div>
-          <i class="far fa-grin-alt fa-2x"></i>
-          <i class="far fa-grin-alt fa-2x"></i>
-          <i class="far fa-grin-alt fa-2x"></i>
+        <div style="display: flex; flex-flow: column; padding: 25px; background-color: #ffce85;">
+          <div class="달성후목표박스윗부분">
+            <i class="far fa-check-circle fa-2x"></i>
+            <div class="달성목표이름">[운동]뛰기</div>
+            <i class="far fa-edit fa-2x"></i>
+          </div>
+          <div class="구분선"></div>
+          <div class="달성후목표박스아랫부분">
+            <div class="달성실천횟수">11회 실천중</div>
+            <i class="far fa-grin-alt fa-2x"></i>
+            <i class="far fa-grin-alt fa-2x"></i>
+            <i class="far fa-grin-alt fa-2x"></i>
+          </div>
         </div>
       </div>
     </div>
@@ -142,7 +145,7 @@ export default {
   background-color: #ffce85;
   justify-content: flex-start;
   border-radius: 0% 0% 5px 5px;
-  border-top: solid 1px white;
+  /* border-top: solid 1px white; */
 }
 .달성목표이름 {
   font-family: Roboto;
@@ -171,5 +174,11 @@ export default {
 .check아이콘 {
   width: 50px;
   height: 50px;
+}
+
+.구분선 {
+  border-top: 1px solid #fff;
+  height: 0;
+  width: 100%;
 }
 </style>

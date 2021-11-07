@@ -1,9 +1,11 @@
 <template>
   <div>
+    <header>
+      <img src="@/assets/logo.png" alt="로고" class="small_habit_logo">
+    </header>
     <router-view></router-view>
     <spinner :loading = 'loadingStatus'></spinner>
   </div>
-
 </template>
 
 <script>
@@ -44,5 +46,17 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  background-color: #fff;
+}
+
+img {
+  height: 80px;
 }
 </style>

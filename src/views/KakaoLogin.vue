@@ -1,8 +1,5 @@
 <template>
   <div class="container">
-    <header>
-      <img src="../assets/KakaoTalk_20211031_004210593_01.png" alt="로고" class="small_habit_logo">
-    </header>
     <div class="login">
       로그인
     </div>
@@ -40,14 +37,8 @@ export default {
 .container {
   display: flex;
   flex-direction: column;
-}
-header {
   width: 100%;
-  height: 80px;
-}
-.small_habit_logo {
-  width: auto;
-  height: 80px;
+  box-sizing: border-box;
 }
 .login {
   flex-basis: 300px;
