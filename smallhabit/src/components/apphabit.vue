@@ -52,7 +52,7 @@ export default {
   display: flex;
   flex-flow: column;
   width: 720px;
-  border: 1px solid grey;
+  border: 1px solid rgb(224, 218, 218);
 
   /* justify-content: center; */
 }
@@ -84,9 +84,13 @@ export default {
 }
 #오늘실천 {
   color: black;
+  width: 120px;
+  text-align: center;
 }
 #전체목표_마이페이지 {
   color: grey;
+  width: 120px;
+  text-align: center;
 }
 .상단메뉴라인 {
   border-top: 2px solid gray;
