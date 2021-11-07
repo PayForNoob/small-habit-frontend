@@ -1,28 +1,48 @@
 <template>
-  <habitToday></habitToday>
-  <habitTotal></habitTotal>
-  <app-input></app-input>
-  <app-list></app-list>
-  <app-footer></app-footer>
+  <div>
+    <router-view></router-view>
+    <spinner :loading = 'loadingStatus'></spinner>
+  </div>
+
 </template>
 
 <script>
-import habitToday from "./views/habitToday.vue"; // eslint-disable-line no-unused-vars
-import habitTotal from "./views/habitTotal.vue"; // eslint-disable-line no-unused-vars
-import appList from "./components/appList.vue";
-import appInput from "./components/appInput.vue";
-import appFooter from "./components/appFooter.vue";
+import Spinner from './components/Spinner.vue'
 
 export default {
   components: {
-    habitToday: habitToday,
-    habitTotal: habitTotal,
-    "app-list": appList,
-    "app-input": appInput,
-    "app-footer": appFooter,
+    Spinner,
   },
-};
+  data() {
+    return {
+      loadingStatus: false,
+    };
+  },
+  methods: {
+    startSpinner() {
+      this.loadingStatus = true;
+    },
+    endSpinner() {
+      this.loadingStatus = false;
+    }
+  }
+}
 </script>
 
-<style>
+<style> 
+* {
+  margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
 </style>
