@@ -1,7 +1,6 @@
 import { createWebHistory, createRouter} from 'vue-router'
 import Main from './views/Main.vue'
 import KakaoLogin from './views/KakaoLogin.vue'
-import HabitToday from './views/HabitToday';
 
 
 const routes = [
@@ -17,10 +16,6 @@ const routes = [
     path: '/login',
     component: KakaoLogin
   },
-  {
-    path: '/today',
-    component: HabitToday
-  }
 ]
 
 export const router = createRouter({

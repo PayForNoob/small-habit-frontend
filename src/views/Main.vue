@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="content">
     <router-link to="/login">로그인</router-link>
     <div @click="console">
       Main
@@ -37,6 +37,7 @@ export default {
             code
           }
         })
+        console.log('res', response)
       }
       catch (err) {
         console.log(err);
@@ -50,5 +51,7 @@ export default {
 </script>
 
 <style>
-
+.content {
+  margin-top: 80px;
+}
 </style>
