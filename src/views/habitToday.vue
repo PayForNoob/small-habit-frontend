@@ -9,36 +9,65 @@
       </div>
       <div class="상단메뉴라인"></div>
       <div class="목표목록박스">
-        <div class="목표숫자표시박스">목표5</div>
-        <div class="달성전목표박스">
-          <i class="far fa-check-circle fa-2x"></i>
-          <div class="달성목표이름">[운동]걷기</div>
-          <i class="far fa-edit fa-2x"></i>
-        </div>
-        <div style="display: flex; flex-flow: column; padding: 25px; background-color: #ffce85;">
-          <div class="달성후목표박스윗부분">
-            <i class="far fa-check-circle fa-2x"></i>
-            <div class="달성목표이름">[운동]뛰기</div>
-            <i class="far fa-edit fa-2x"></i>
-          </div>
-          <div class="구분선"></div>
-          <div class="달성후목표박스아랫부분">
-            <div class="달성실천횟수">11회 실천중</div>
-            <i class="far fa-grin-alt fa-2x"></i>
-            <i class="far fa-grin-alt fa-2x"></i>
-            <i class="far fa-grin-alt fa-2x"></i>
-          </div>
-        </div>
+
+        <div class="목표숫자표시박스">목표{{habitTotalNum}}</div>
+<!-- 반복문 넣기. -->
+    <habit-list></habit-list>
+      
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import HabitList from '@/components/HabitList.vue'
 export default {
+  components:{
+    'habit-list' : HabitList
+  },
+  methods: {
+    log(item){
+      console.log(item)
+    }
+  },
   data: function () {
     return {
       LogoData: "Logo",
+      
+      actionButtonClick:0,
+      habitItems:[ 
+                  {
+                    userId: 1,
+                    field: '돈관리',
+                    objective: '매일 커피 1잔 덜마시기',
+                    schedule: {
+                    everyday: true
+                    },
+                    activated: true
+                  },
+                  {
+                    userId: 1,
+                    field: '운동',
+                    objective: '달리기',
+                    schedule: {
+                    everyday: true
+                    },
+                    activated: true
+                  },
+                  {
+                    userId: 1,
+                    field: '숨쉬기',
+                    objective: '숨쉬기',
+                    schedule: {
+                    everyday: true
+                    },
+                    activated: false
+                  }
+],
+      habitTypes : "운동",
+      habitName : "걷기",
+      habitTotalNum: 0,
+      habitExecutionCount : 0,
     };
   },
 };
@@ -56,7 +85,7 @@ export default {
   flex-flow: column;
   width: 720px;
   border: 1px solid rgb(224, 218, 218);
-
+  margin-top: 80px;
   /* justify-content: center; */
 }
 
@@ -101,12 +130,13 @@ export default {
 .목표목록박스 {
   display: flex;
   flex-direction: column;
+  padding: 20px;
 }
 .목표숫자표시박스 {
   display: flex;
   flex-flow: row-reverse;
-  margin: 10px 24px 10px 24px;
-  padding: 11px 20px 11px 20px;
+  /* margin: 10px 24px 10px 24px; */
+  padding: 0px 20px 11px 20px;
   font-family: Roboto;
   font-style: normal;
   font-weight: bold;
@@ -116,33 +146,48 @@ export default {
 
   color: #000000;
 }
-.달성전목표박스 {
-  display: flex;
+.목표container{
+
+}
+.목표box {
+  /* display: flex;
   flex-flow: row;
-  /* height: 100px; */
-  margin: 0px 24px 10px 24px;
+ 
+  margin: 0px 0px 10px 0px;
   padding: 25px;
   background-color: #dddddd;
   justify-content: space-between;
-  border-radius: 5px;
+  border-radius: 5px; */
+  display: flex; 
+  flex-flow: column; 
+  padding: 25px 20px; 
+  /* background-color: #ffce85; */
+  margin-bottom: 10px;
+  border-radius: 15px;
 }
-.달성후목표박스윗부분 {
+.목표미실행color{
+  background: #DDDDDD;
+}
+.목표실행후color{
+  background: #FFD98E;;
+}
+.달성목표_내용박스 {
   display: flex;
   flex-flow: row;
   /* height: 100px; */
-  margin: 0px 24px 0px 24px;
-  padding: 25px;
-  background-color: #ffce85;
+  /* margin: 0px 24px 0px 24px;
+  padding: 25px; */
+  
   justify-content: space-between;
   border-radius: 5px 5px 0% 0%;
 }
-.달성후목표박스아랫부분 {
+.달성목표_실천박스 {
   display: flex;
   flex-flow: row;
   /* height: 100px; */
-  margin: 0px 24px 0px 24px;
-  padding: 25px;
-  background-color: #ffce85;
+  /* margin: 0px 24px 0px 24px;
+  padding: 25px; */
+  
   justify-content: flex-start;
   border-radius: 0% 0% 5px 5px;
   /* border-top: solid 1px white; */
@@ -155,7 +200,8 @@ export default {
   line-height: 28px;
   flex-grow: 1;
   color: #000000;
-  margin: 0 0 0 30px;
+  text-align: left;
+  margin: 5px 0 0 30px;
 }
 .달성실천횟수 {
   font-family: Roboto;
@@ -167,7 +213,7 @@ export default {
   color: #666666;
   flex-grow: 0;
 
-  margin: 0 0 0 62px;
+  margin: 0 0 0 80px;
 }
 .목표윗border {
 }
@@ -177,8 +223,16 @@ export default {
 }
 
 .구분선 {
+  margin: 26px 30px 25px 80px;
   border-top: 1px solid #fff;
   height: 0;
-  width: 100%;
+  width: 87%;
+}
+img{
+  width: 50px;
+  height: 50px;
+ 
+
+
 }
 </style>
