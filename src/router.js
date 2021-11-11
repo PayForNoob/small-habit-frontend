@@ -1,8 +1,7 @@
-import { createWebHistory, createRouter } from 'vue-router'
-import Main from '../views/Main.vue'
-import KakaoLogin from '../views/KakaoLogin.vue'
-import HabitToday from '../views/HabitToday';
-
+import { createWebHistory, createRouter} from 'vue-router'
+import Main from './views/MainPage.vue'
+import KakaoLogin from './views/KakaoLogin.vue'
+import HabitToday from './views/TodaysHabit.vue';
 
 const routes = [
   {
