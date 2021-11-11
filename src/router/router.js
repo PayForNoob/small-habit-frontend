@@ -1,21 +1,26 @@
 import { createWebHistory, createRouter } from 'vue-router'
-import Main from '../views/Main.vue'
+import MainPage from '../views/MainPage.vue'
 import KakaoLogin from '../views/KakaoLogin.vue'
-import HabitToday from '../views/HabitToday';
+import LoginMiddle from '../components/LoginMiddle.vue'
+import HabitToday from '../views/TodaysHabit.vue';
 
 
 const routes = [
   {
     path: '/',
-    redirect: '/login'
+    redirect: '/main'
   },
   {
     path: '/main',
-    component: Main
+    component: MainPage
   },
   {
     path: '/login',
     component: KakaoLogin
+  },
+  {
+    path: '/login/middle',
+    component: LoginMiddle
   },
   {
     path: '/today',

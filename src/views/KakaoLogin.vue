@@ -21,7 +21,7 @@ export default {
   methods: {
     kakaoLogin() {
       window.Kakao.Auth.authorize({
-        redirectUri: 'http://localhost:8080/main'
+        redirectUri: 'http://localhost:8080/login/middle'
       });
     },
   },
