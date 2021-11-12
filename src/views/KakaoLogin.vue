@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import store from '../store/index.js'
 
 export default {
   data() {
@@ -21,15 +22,34 @@ export default {
   methods: {
     kakaoLogin() {
       window.Kakao.Auth.authorize({
-        redirectUri: 'http://localhost:8080/login/middle'
+        redirectUri: 'http://localhost:8080/login'
       });
     },
   },
-  mounted() {
+  created() {
     window.Kakao.init('fdca4725465aabcee10a91e15f7307e1');
 
     console.log(window.Kakao.isInitialized());
   },
+  async mounted() {
+    let response;
+    const url = new URL(window.location.href)
+    let code = url.searchParams.get('code')
+    try {
+      response = await this.$axios({
+        method: 'post',
+        url: '/auth/kakao',
+        params: {
+          code
+        }
+      })
+      console.log('res', response)
+      store.state.user = response
+    }
+    catch (err) {
+      console.log(err.data);
+    } 
+  }
 }
 </script>
 

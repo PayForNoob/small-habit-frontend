@@ -11,7 +11,7 @@
 </template>
 
 <script>
-// import axios from 'axios'
+
 
 export default {
   data() {
@@ -21,9 +21,10 @@ export default {
   },
   methods: {
     console() {
-      console.log(this.userAuth)
+      console.log(this)
     }
   },
+  
 }
 </script>
 
