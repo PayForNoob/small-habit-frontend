@@ -43,8 +43,9 @@ export default {
           code
         }
       })
-      console.log('res', response)
-      store.state.user = response
+      console.log('res', response.data[0])
+      store.state.user = response.data[0]
+      this.$router.push('main')
     }
     catch (err) {
       console.log(err.data);

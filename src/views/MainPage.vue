@@ -5,7 +5,6 @@
       Main
     </div>
     <div>
-      {{ user }}
     </div>
   </div>
 </template>
@@ -14,17 +13,7 @@
 
 
 export default {
-  data() {
-    return {
-      user: {},
-    }
-  },
-  methods: {
-    console() {
-      console.log(this)
-    }
-  },
-  
+
 }
 </script>
 
