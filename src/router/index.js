@@ -3,7 +3,7 @@ import MainPage from '../views/MainPage.vue'
 import KakaoLogin from '../views/KakaoLogin.vue'
 import HabitToday from '../views/TodaysHabit.vue'
 import axios  from 'axios'
-import store from '../store'
+import { store } from '../store'
 
 
 const routes = [
