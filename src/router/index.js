@@ -33,7 +33,7 @@ export const router = createRouter({
 router.beforeEach(async (to, from, next) => {
   let res = null
   try {
-    res = await axios.get('/auth') 
+    res = await axios.get('http://localhost:3000/auth') 
   } catch(err) {
     res = err.response
   }
