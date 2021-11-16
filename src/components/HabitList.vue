@@ -121,7 +121,7 @@ export default {
 };
 </script>
 
-<style scope>
+<style scoped>
 .습관카드_상위박스 {
   display: flex;
   flex-flow: column;
@@ -213,8 +213,6 @@ export default {
   flex-grow: 0;
 
   margin: 0 0 0 80px;
-}
-.목표윗border {
 }
 .check아이콘 {
   width: 50px;

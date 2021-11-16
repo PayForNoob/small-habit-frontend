@@ -25,6 +25,7 @@
 <script>
 import HabitList from "@/components/HabitList.vue";
 import axios from "axios";
+
 export default {
   components: {
     "habit-list": HabitList,

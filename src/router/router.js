@@ -10,8 +10,7 @@ import TodaysHabit from '../views/TodaysHabit.vue'
 const routes = [
   {
     path: '/',
-
-    redirect: '/login'
+    redirect: '/main'
   },
   {
     path: '/main',

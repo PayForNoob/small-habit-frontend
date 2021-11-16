@@ -1,24 +1,13 @@
 <template>
   <div>
-<<<<<<< HEAD
     <habit-header class="header"></habit-header>
-=======
-    <header>
-      <img src="@/assets/logo.png" alt="로고" class="small_habit_logo" />
-    </header>
->>>>>>> bfbd5ec21aabbb4dca264035c536339fe0223a4e
-    <router-view></router-view>
+    <router-view class="contents"></router-view>
   </div>
 </template>
 
 <script>
-import HabitHeader from './components/HabitHeader.vue'
-
-
 export default {
-  comments: {
-    HabitHeader
-  }
+  
 }
 
 </script>
@@ -31,6 +20,11 @@ export default {
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+  color: #2c3e50;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -43,5 +37,8 @@ export default {
   position: fixed;
   top: 0;
   left: 0;
+}
+.contents {
+  margin-top: 150px;
 }
 </style>

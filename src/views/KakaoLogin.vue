@@ -40,6 +40,8 @@ export default {
       })
       console.log('res', response.data[0])
       store.state.user = response.data[0]
+      store.state.logined = true
+      console.log( store.state.user, store.state.logined)
       this.$router.push('main')
     }
     catch (err) {
@@ -54,7 +56,6 @@ export default {
   display: flex;
   flex-direction: column;
   width: 100%;
-  box-sizing: border-box;
 }
 .login {
   flex-basis: 300px;

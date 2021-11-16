@@ -1,6 +1,5 @@
 <template>
-  <div class="content">
-    <router-link to="/login">로그인</router-link>
+  <div class="contents">
     <button @click="logout">로그아웃</button>
     <div>
       Main
@@ -28,11 +27,12 @@ export default {
       } 
     },
   },
+  mounted() {
+    console.log('url', new URL(window.location.href).pathname)
+  }
 }
 </script>
 
 <style scoped>
-.content {
-  margin-top: 80px;
-}
+
 </style>

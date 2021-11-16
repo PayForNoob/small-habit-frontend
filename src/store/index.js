@@ -2,7 +2,8 @@ import { createStore } from 'vuex'
 
 export const store = createStore({
   state: {
-    user: null
+    user: null,
+    logined: false
   },
   mutations: {
   },
