@@ -209,4 +209,86 @@ export default {
 
   color: #000000;
 }
+.목표box {
+  /* display: flex;
+  flex-flow: row;
+ 
+  margin: 0px 0px 10px 0px;
+  padding: 25px;
+  background-color: #dddddd;
+  justify-content: space-between;
+  border-radius: 5px; */
+  display: flex;
+  flex-flow: column;
+  padding: 25px 20px;
+  /* background-color: #ffce85; */
+  margin-bottom: 10px;
+  border-radius: 15px;
+}
+.목표미실행color {
+  background: #dddddd;
+}
+.목표실행후color {
+  background: #ffd98e;
+}
+.달성목표_내용박스 {
+  display: flex;
+  flex-flow: row;
+  /* height: 100px; */
+  /* margin: 0px 24px 0px 24px;
+  padding: 25px; */
+
+  justify-content: space-between;
+  border-radius: 5px 5px 0% 0%;
+}
+.달성목표_실천박스 {
+  display: flex;
+  flex-flow: row;
+  /* height: 100px; */
+  /* margin: 0px 24px 0px 24px;
+  padding: 25px; */
+
+  justify-content: flex-start;
+  border-radius: 0% 0% 5px 5px;
+  /* border-top: solid 1px white; */
+}
+.달성목표이름 {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 28px;
+  flex-grow: 1;
+  color: #000000;
+  text-align: left;
+  margin: 5px 0 0 30px;
+}
+.달성실천횟수 {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 28px;
+
+  color: #666666;
+  flex-grow: 0;
+
+  margin: 0 0 0 80px;
+}
+.check아이콘 {
+  width: 50px;
+  height: 50px;
+}
+
+.구분선 {
+  margin: 26px 30px 25px 80px;
+  border-top: 1px solid #fff;
+  height: 0;
+  width: 87%;
+}
+img {
+  width: 50px;
+  height: 50px;
+}
+
 </style>

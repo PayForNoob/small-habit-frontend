@@ -6,9 +6,7 @@ import { store } from '@/store/index.js'
 import axios from 'axios'
 
 const app = createApp(App)
-app.config.globalProperties.$axios = axios.create({
-  baseURL: 'http://localhost:3000'
-});
+app.config.globalProperties.axios = axios.create();
 
 app
   .use(router)
