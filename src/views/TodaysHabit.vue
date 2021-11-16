@@ -9,7 +9,7 @@
       </div>
       <div class="상단메뉴_구분선"></div>
       <div class="목표목록_박스">
-        <div class="목표목록_목표갯수">목표{{ habitTotalNum }}</div>
+        <div class="목표목록_목표갯수">목표{{ habitItems.length }}</div>
 
         <habit-list
           v-for="(habitItem, index) in habitItems"
@@ -141,7 +141,7 @@ export default {
 .row {
   display: flex;
   flex-flow: row;
-  height: 1260px;
+
   justify-content: center;
 }
 .container {
