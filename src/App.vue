@@ -1,26 +1,20 @@
 <template>
   <div>
-<<<<<<< HEAD
-    <habit-header class="header"></habit-header>
-=======
     <header>
       <img src="@/assets/logo.png" alt="로고" class="small_habit_logo" />
     </header>
->>>>>>> bfbd5ec21aabbb4dca264035c536339fe0223a4e
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-import HabitHeader from './components/HabitHeader.vue'
-
+import HabitHeader from "./components/HabitHeader.vue";
 
 export default {
   comments: {
-    HabitHeader
-  }
-}
-
+    HabitHeader,
+  },
+};
 </script>
 
 <style>
@@ -43,5 +37,8 @@ export default {
   position: fixed;
   top: 0;
   left: 0;
+}
+.small_habit_logo {
+  height: 80px;
 }
 </style>

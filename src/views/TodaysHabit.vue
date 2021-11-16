@@ -175,8 +175,8 @@ export default {
   font-family: Roboto;
   font-style: normal;
   font-weight: bold;
-  font-size: 24px;
-  line-height: 28px;
+  font-size: 30px;
+  line-height: 35px;
   text-align: center;
   width: 120px;
 }
@@ -290,5 +290,4 @@ img {
   width: 50px;
   height: 50px;
 }
-
 </style>

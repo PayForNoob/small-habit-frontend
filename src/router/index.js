@@ -2,7 +2,8 @@ import { createWebHistory, createRouter } from 'vue-router'
 import MainPage from '../views/MainPage.vue'
 import KakaoLogin from '../views/KakaoLogin.vue'
 import TodaysHabit from '../views/TodaysHabit.vue'
-import axios  from 'axios'
+import EditHabit from '../views/EditHabit.vue'
+import axios from 'axios'
 import { store } from '../store'
 
 
@@ -22,6 +23,10 @@ const routes = [
   {
     path: '/today',
     component: TodaysHabit
+  },
+  {
+    path: '/edit',
+    component: EditHabit
   }
 ]
 
@@ -33,13 +38,13 @@ export const router = createRouter({
 router.beforeEach(async (to, from, next) => {
   let res = null
   try {
-    res = await axios.get('/api/auth') 
-  } catch(err) {
+    res = await axios.get('/api/auth')
+  } catch (err) {
     res = err.response
     console.log('err', err)
   }
 
-  if(res.status < 400) {
+  if (res.status < 400) {
     store.state.user = res.data
   } else {
     store.state.user = null

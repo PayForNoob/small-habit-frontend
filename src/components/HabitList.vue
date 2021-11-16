@@ -121,7 +121,7 @@ export default {
 };
 </script>
 
-<style scope>
+<style scoped>
 .습관카드_상위박스 {
   display: flex;
   flex-flow: column;
