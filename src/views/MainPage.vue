@@ -16,13 +16,12 @@
 export default {
   methods: {
     async logout() {
-      await window.Kakao.Auth.logout();
       try {
         await this.axios({
           method: 'delete',
           url: '/api/auth/logout',
         })
-        this.$router.go();
+        // this.$router.go();
       }
       catch (err) {
         console.log(err.data);
