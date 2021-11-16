@@ -1,7 +1,8 @@
 <template>
   <div class="content">
     <router-link to="/login">로그인</router-link>
-    <div @click="console">
+    <button @click="logout">로그아웃</button>
+    <div>
       Main
     </div>
     <div>
@@ -13,7 +14,21 @@
 
 
 export default {
-
+  methods: {
+    async logout() {
+      await window.Kakao.Auth.logout();
+      try {
+        await this.axios({
+          method: 'delete',
+          url: '/api/auth/logout',
+        })
+        this.$router.go();
+      }
+      catch (err) {
+        console.log(err.data);
+      } 
+    },
+  },
 }
 </script>
 

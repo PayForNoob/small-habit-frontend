@@ -14,11 +14,6 @@
 import {store} from '../store/index.js'
 
 export default {
-  data() {
-    return {
-
-    }
-  },
   methods: {
     kakaoLogin() {
       window.Kakao.Auth.authorize({
@@ -36,9 +31,9 @@ export default {
     const url = new URL(window.location.href)
     let code = url.searchParams.get('code')
     try {
-      response = await this.$axios({
+      response = await this.axios({
         method: 'post',
-        url: '/auth/kakao',
+        url: '/api/auth/login',
         params: {
           code
         }

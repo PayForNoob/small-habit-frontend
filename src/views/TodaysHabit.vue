@@ -151,8 +151,6 @@ export default {
 
   color: #000000;
 }
-.목표container {
-}
 .목표box {
   /* display: flex;
   flex-flow: row;
@@ -218,8 +216,6 @@ export default {
   flex-grow: 0;
 
   margin: 0 0 0 80px;
-}
-.목표윗border {
 }
 .check아이콘 {
   width: 50px;
