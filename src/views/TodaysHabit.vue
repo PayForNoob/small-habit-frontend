@@ -2,16 +2,21 @@
   <div class="row">
     <div class="container">
       <div class="로고">{{ LogoData }}</div>
-      <div class="상단메뉴">
-        <div class="상단메뉴텍스트" id="전체목표_마이페이지">전체목표</div>
-        <div class="상단메뉴텍스트" id="오늘실천">오늘실천</div>
-        <div class="상단메뉴텍스트" id="전체목표_마이페이지">마이페이지</div>
+      <div class="상단메뉴_박스">
+        <div class="상단메뉴_글자 상단메뉴_회색글씨">전체목표</div>
+        <div class="상단메뉴_글자" id="상단메뉴_검은색글씨">오늘실천</div>
+        <div class="상단메뉴_글자 상단메뉴_회색글씨">마이페이지</div>
       </div>
-      <div class="상단메뉴라인"></div>
-      <div class="목표목록박스">
-        <div class="목표숫자표시박스">목표{{ habitTotalNum }}</div>
+      <div class="상단메뉴_구분선"></div>
+      <div class="목표목록_박스">
+        <div class="목표목록_목표갯수">목표{{ habitTotalNum }}</div>
 
-        <habit-list v-bind:habitItems="habitItems"></habit-list>
+        <habit-list
+          v-for="(habitItem, index) in habitItems"
+          v-bind:habitItem="habitItem"
+          v-bind:key="index"
+        >
+        </habit-list>
       </div>
     </div>
   </div>
@@ -61,12 +66,66 @@ export default {
         },
         {
           userId: 1,
-          field: "숨쉬기",
+          field: "생활습관",
           objective: "숨쉬기",
           schedule: {
             everyday: true,
           },
           activated: false,
+        },
+        {
+          userId: 1,
+          field: "학습",
+          objective: "코딩공부",
+          schedule: {
+            everyday: true,
+          },
+          activated: true,
+        },
+        {
+          userId: 1,
+          field: "생활습관",
+          objective: "숨쉬기",
+          schedule: {
+            everyday: true,
+          },
+          activated: true,
+        },
+        {
+          userId: 1,
+          field: "회사생활",
+          objective: "출근 5분 빨리하기",
+          schedule: {
+            everyday: true,
+          },
+          activated: false,
+        },
+        {
+          userId: 1,
+          field: "독서",
+          objective: "한달에 1권 읽기",
+          schedule: {
+            everyday: true,
+          },
+          activated: true,
+        },
+        {
+          userId: 1,
+          field: "취미",
+          objective: "게임",
+          schedule: {
+            everyday: true,
+          },
+          activated: false,
+        },
+        {
+          userId: 1,
+          field: "나를 위한 시간",
+          objective: "맛있는거 먹기",
+          schedule: {
+            everyday: true,
+          },
+          activated: true,
         },
       ],
       habitTypes: "운동",
@@ -104,7 +163,7 @@ export default {
   font-size: 48px;
   line-height: 58px;
 }
-.상단메뉴 {
+.상단메뉴_박스 {
   display: flex;
   flex-flow: row;
   justify-content: space-around;
@@ -112,32 +171,31 @@ export default {
   /* height: 70px; */
   padding: 21px 40px 21px 40px;
 }
-.상단메뉴텍스트 {
+.상단메뉴_글자 {
   font-family: Roboto;
   font-style: normal;
   font-weight: bold;
   font-size: 24px;
   line-height: 28px;
+  text-align: center;
+  width: 120px;
 }
-#오늘실천 {
+#상단메뉴_검은색글씨 {
   color: black;
-  width: 120px;
-  text-align: center;
 }
-#전체목표_마이페이지 {
+.상단메뉴_회색글씨 {
   color: grey;
-  width: 120px;
-  text-align: center;
 }
-.상단메뉴라인 {
+.상단메뉴_구분선 {
   border-top: 2px solid gray;
 }
-.목표목록박스 {
+.목표목록_박스 {
   display: flex;
   flex-direction: column;
   padding: 20px;
+  overflow: auto;
 }
-.목표숫자표시박스 {
+.목표목록_목표갯수 {
   display: flex;
   flex-flow: row-reverse;
   /* margin: 10px 24px 10px 24px; */
@@ -232,4 +290,5 @@ img {
   width: 50px;
   height: 50px;
 }
+
 </style>

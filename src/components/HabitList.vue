@@ -1,76 +1,234 @@
 <template>
-<div v-for="(habitItem, index) in habitItems" v-bind:key="index" class="목표container" >
-        <div  class="목표box 목표미실행color" v-if="habitItem.activated === false" :load="log(habitItem)"  >
-          <div class="달성목표_내용박스">
-            <img @click=" habitItem.activated=true "  src='../assets/check-mark1.png'>
-            <div class="달성목표이름">[{{habitItem.field}}]{{habitItem.objective}}</div>
-            <img src='../assets/edit.png'>
-          </div>
-        </div>
+  <div class="습관카드_상위박스">
+    <div
+      class="습관카드_박스 습관카드_미달성"
+      v-if="habitItem.activated === false"
+    >
+      <div class="습관카드_내용카드">
+        <img
+          @click="recieveHabitItem.activated = true"
+          src="@/assets/img_check_unexecuted.png"
+        />
 
-        <div class="목표box 목표실행후color" v-if="habitItem.activated === true "> 
-          <div class="달성목표_내용박스">
-            <img @click=" habitItem.activated=false"  src='../assets/check-mark2.png'>
-            <div class="달성목표이름">[{{habitItem.field}}]{{habitItem.objective}}</div>
-            <img src='../assets/edit.png'>
-          </div>
-          <div class="구분선"></div>
-          <div class="달성목표_실천박스">
-            <div class="달성실천횟수">{{habitExecutionCount}}회 실천중</div>
-            <i class="far fa-grin-alt fa-2x"></i>
-            <i class="far fa-grin-alt fa-2x"></i>
-            <i class="far fa-grin-alt fa-2x"></i>
-          </div>
-
+        <div class="내용카드_습관이름">
+          [{{ habitItem.field }}]{{ habitItem.objective }}
         </div>
+        <img src="@/assets/img_edit.png" />
+      </div>
     </div>
-    
+    <div
+      class="습관카드_박스"
+      :class="[
+        { 습관카드_달성색상1: habitItem.field == '회사생활' },
+        { 습관카드_달성색상2: habitItem.field == '생활습관' },
+        { 습관카드_달성색상3: habitItem.field == '학습' },
+        { 습관카드_달성색상4: habitItem.field == '취미' },
+        { 습관카드_달성색상5: habitItem.field == '운동' },
+        { 습관카드_달성색상6: habitItem.field == '독서' },
+        { 습관카드_달성색상7: habitItem.field == '돈관리' },
+        { 습관카드_달성색상8: habitItem.field == '나를 위한 시간' },
+      ]"
+      v-if="habitItem.activated === true"
+    >
+      <div class="습관카드_내용카드">
+        <img
+          @click="recieveHabitItem.activated = false"
+          v-if="habitItem.field == '회사생활'"
+          src="@/assets/img_check_business_life.png"
+        />
+        <img
+          @click="recieveHabitItem.activated = false"
+          v-if="habitItem.field == '생활습관'"
+          src="@/assets/img_check_lifestyle.png"
+        />
+        <img
+          @click="recieveHabitItem.activated = false"
+          v-if="habitItem.field == '학습'"
+          src="@/assets/img_check_learning.png"
+        />
+        <img
+          @click="recieveHabitItem.activated = false"
+          v-if="habitItem.field == '취미'"
+          src="@/assets/img_check_hobby.png"
+        />
+        <img
+          @click="recieveHabitItem.activated = false"
+          v-if="habitItem.field == '운동'"
+          src="@/assets/img_check_exercise.png"
+        />
+        <img
+          @click="recieveHabitItem.activated = false"
+          v-if="habitItem.field == '독서'"
+          src="@/assets/img_check_reading.png"
+        />
+        <img
+          @click="recieveHabitItem.activated = false"
+          v-if="habitItem.field == '돈관리'"
+          src="@/assets/img_check_money_management.png"
+        />
+        <img
+          @click="recieveHabitItem.activated = false"
+          v-if="habitItem.field == '나를 위한 시간'"
+          src="@/assets/img_check_time_for_me.png"
+        />
+        <div class="내용카드_습관이름">
+          [{{ habitItem.field }}]{{ habitItem.objective }}
+        </div>
+        <img src="../assets/img_edit.png" />
+      </div>
+      <div class="내용카드_구분선"></div>
+      <div class="달성목표_실천박스">
+        <div class="내용카드_실천횟수">{{ 0 }}회 실천중</div>
+        <img
+          style="height: 30px; width: 30px"
+          src="@/assets/img_clapping.png"
+        />
+        <img
+          style="height: 30px; width: 30px"
+          src="@/assets/img_clapping.png"
+        />
+        <img
+          style="height: 30px; width: 30px"
+          src="@/assets/img_clapping.png"
+        />
+        >
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
-    data() {
-        return {
-            LogoData: "Logo",
-      
-      actionButtonClick:0,
-      habitItems:[ 
-                  {
-                    userId: 1,
-                    field: '돈관리',
-                    objective: '매일 커피 1잔 덜마시기',
-                    schedule: {
-                    everyday: true
-                    },
-                    activated: true
-                  },
-                  {
-                    userId: 1,
-                    field: '운동',
-                    objective: '달리기',
-                    schedule: {
-                    everyday: true
-                    },
-                    activated: true
-                  },
-                  {
-                    userId: 1,
-                    field: '숨쉬기',
-                    objective: '숨쉬기',
-                    schedule: {
-                    everyday: true
-                    },
-                    activated: false
-                  }
-],
-      habitTypes : "운동",
-      habitName : "걷기",
-      habitTotalNum: 0,
-      habitExecutionCount : 0,
-        }
-    },
+  created() {
+    console.log(this.habitItem.field);
+  },
+  props: ["habitItem"],
+  data() {
+    return {
+      recieveHabitItem: this.habitItem,
+      habitfields: {
+        field1: "회사생활",
+        field2: "생활습관",
+        field3: "학습",
+        field4: "취미",
+        field5: "운동",
+        field6: "독서",
+        field7: "돈관리",
+        field8: "나를 위한 시간",
+      },
+    };
+  },
 };
 </script>
 
-<style>
+<style scope>
+.습관카드_상위박스 {
+  display: flex;
+  flex-flow: column;
+}
+
+.습관카드_박스 {
+  /* display: flex;
+  flex-flow: row;
+ 
+  margin: 0px 0px 10px 0px;
+  padding: 25px;
+  background-color: #dddddd;
+  justify-content: space-between;
+  border-radius: 5px; */
+  display: flex;
+  flex-flow: column;
+  padding: 25px 20px;
+  /* background-color: #ffce85; */
+  margin-bottom: 10px;
+  border-radius: 15px;
+}
+.습관카드_미달성 {
+  background: #dddddd;
+}
+.습관카드_달성색상1 {
+  background: #95dfd2;
+}
+.습관카드_달성색상2 {
+  background: #ffb6f2;
+}
+.습관카드_달성색상3 {
+  background: #ffd98e;
+}
+.습관카드_달성색상4 {
+  background: #eaa2a6;
+}
+.습관카드_달성색상5 {
+  background: #b8b1f0;
+}
+.습관카드_달성색상6 {
+  background: #a8ddad;
+}
+.습관카드_달성색상7 {
+  background: #afc2ff;
+}
+.습관카드_달성색상8 {
+  background: #ffbaaa;
+}
+.습관카드_내용카드 {
+  display: flex;
+  flex-flow: row;
+  /* height: 100px; */
+  /* margin: 0px 24px 0px 24px;
+  padding: 25px; */
+
+  justify-content: space-between;
+  border-radius: 5px 5px 0% 0%;
+}
+.달성목표_실천박스 {
+  display: flex;
+  flex-flow: row;
+  /* height: 100px; */
+  /* margin: 0px 24px 0px 24px;
+  padding: 25px; */
+
+  justify-content: flex-start;
+  border-radius: 0% 0% 5px 5px;
+  /* border-top: solid 1px white; */
+}
+.내용카드_습관이름 {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 28px;
+  flex-grow: 1;
+  color: #000000;
+  text-align: left;
+  margin: 5px 0 0 30px;
+}
+.내용카드_실천횟수 {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 28px;
+
+  color: #666666;
+  flex-grow: 0;
+
+  margin: 0 0 0 80px;
+}
+.목표윗border {
+}
+.check아이콘 {
+  width: 50px;
+  height: 50px;
+}
+
+.내용카드_구분선 {
+  margin: 26px 30px 25px 80px;
+  border-top: 1px solid #fff;
+  height: 0;
+  width: 87%;
+}
+img {
+  width: 50px;
+  height: 50px;
+}
 </style>
