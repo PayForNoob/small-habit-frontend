@@ -1,6 +1,12 @@
 <template>
   <div>
+<<<<<<< HEAD
     <habit-header class="header"></habit-header>
+=======
+    <header>
+      <img src="@/assets/logo.png" alt="로고" class="small_habit_logo" />
+    </header>
+>>>>>>> bfbd5ec21aabbb4dca264035c536339fe0223a4e
     <router-view></router-view>
   </div>
 </template>
@@ -14,16 +20,17 @@ export default {
     HabitHeader
   }
 }
+
 </script>
 
-<style> 
+<style>
 * {
   margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
