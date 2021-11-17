@@ -88,8 +88,14 @@ img {
   font-weight: bold;
   line-height: 70px;
 }
-div.active {
+.상단메뉴 a {
+  color: #9b9b9b;
+}
+.active {
   border-bottom: 4px solid #000;
+}
+.active a {
+  color: #2c3e50;
 }
 
 </style>

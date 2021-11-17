@@ -1,6 +1,7 @@
 import { createWebHistory, createRouter } from 'vue-router'
 import MainPage from '../views/MainPage.vue'
 import KakaoLogin from '../views/KakaoLogin.vue'
+import TotalHabit from '../views/TotalHabit.vue'
 import TodaysHabit from '../views/TodaysHabit.vue'
 import axios  from 'axios'
 import { store } from '../store'
@@ -20,8 +21,13 @@ const routes = [
     component: KakaoLogin
   },
   {
-    path: '/today',
+    path: '/habit/total',
+    component: TotalHabit
+  },
+  {
+    path: '/habit/today',
     component: TodaysHabit
+
   }
 ]
 

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="container">
     <habit-header class="header"></habit-header>
     <router-view class="contents"></router-view>
   </div>
@@ -18,7 +18,6 @@ export default {
   padding: 0;
   border: 0;
   font-size: 100%;
-  font: inherit;
   vertical-align: baseline;
   box-sizing: border-box;
 }
@@ -32,6 +31,8 @@ a {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  max-height: 100vh;
+  overflow: hidden;
 }
 .header {
   position: fixed;
@@ -39,6 +40,6 @@ a {
   left: 0;
 }
 .contents {
-  margin-top: 150px;
+  padding-top: 150px;
 }
 </style>

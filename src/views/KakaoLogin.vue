@@ -42,7 +42,7 @@ export default {
       store.state.user = response.data[0]
       store.state.logined = true
       console.log( store.state.user, store.state.logined)
-      this.$router.push('main')
+      this.$router.push('/habit/today')
     }
     catch (err) {
       console.log(err.data);
