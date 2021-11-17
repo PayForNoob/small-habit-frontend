@@ -3,6 +3,7 @@ import MainPage from '../views/MainPage.vue'
 import KakaoLogin from '../views/KakaoLogin.vue'
 import TotalHabit from '../views/TotalHabit.vue'
 import TodaysHabit from '../views/TodaysHabit.vue'
+import MyPage from '../views/MyPage.vue'
 import EditHabit from '../views/EditHabit.vue'
 import axios from 'axios'
 import { store } from '../store'
@@ -28,6 +29,10 @@ const routes = [
   {
     path: '/habit/today',
     component: TodaysHabit
+  },
+  {
+    path: '/mypage',
+    component: MyPage
   },
   {
     path: '/edit',

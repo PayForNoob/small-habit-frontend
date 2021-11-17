@@ -10,13 +10,13 @@
       로그아웃
     </div>
     <div class="상단메뉴">
-      <div :class="{ active: totalHabit }">
+      <div :class="{ active: totalPath }">
         <router-link to="/habit/total" >전체습관</router-link>
       </div>
-      <div :class="{ active: todaysHabit }">
+      <div :class="{ active: todayPath }">
         <router-link to="/habit/today" >오늘 실천</router-link>
       </div>
-      <div :class="{ active: myPage }">
+      <div :class="{ active: myPagePath }">
         <router-link to="/mypage" >마이페이지</router-link>
       </div>
     </div>
@@ -29,11 +29,35 @@ import {store} from '../store/index.js'
 export default {
   data() {
     return {
-      totalHabit: true,
-      todaysHabit: false,
-      myPage: false,
-      logined: store.state.logined
+      logined: store.state.logined,
+      path: new URL(window.location.href).pathname
     }
+  },
+  computed: {
+    totalPath() {
+      if(this.path == '/habit/total') {
+        return true
+      } else {
+        return false
+      }
+    },
+    todayPath() {
+      if(this.path == '/habit/today') {
+        return true
+      } else {
+        return false
+      }
+    },
+    myPagePath() {
+      if(this.path == '/mypage') {
+        return true
+      } else {
+        return false
+      }
+    }
+  },
+  updated() {
+    this.$router.go();
   },
   methods: {
     async logout() {

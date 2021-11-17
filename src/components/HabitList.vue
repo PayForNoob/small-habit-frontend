@@ -74,11 +74,11 @@
         <div class="내용카드_습관이름">
           [{{ habitItem.field }}]{{ habitItem.objective }}
         </div>
-        <img src="../assets/img_edit.png" />
+        <img class="수정버튼" src="../assets/img_edit.png" />
       </div>
       <div class="내용카드_구분선"></div>
       <div class="달성목표_실천박스">
-        <div class="내용카드_실천횟수">{{ 0 }}회 실천중</div>
+        <div class="내용카드_실천횟수">{{ 0 }}째 실천중!!!</div>
         <img
           style="height: 30px; width: 30px"
           src="@/assets/img_clapping.png"
@@ -91,7 +91,6 @@
           style="height: 30px; width: 30px"
           src="@/assets/img_clapping.png"
         />
-        >
       </div>
     </div>
   </div>
@@ -123,28 +122,25 @@ export default {
 
 <style scoped>
 .습관카드_상위박스 {
-  display: flex;
-  flex-flow: column;
+  width: max-content;
+  height: max-content;
 }
 
 .습관카드_박스 {
-  /* display: flex;
-  flex-flow: row;
- 
-  margin: 0px 0px 10px 0px;
-  padding: 25px;
-  background-color: #dddddd;
-  justify-content: space-between;
-  border-radius: 5px; */
+  position: relative;
   display: flex;
   flex-flow: column;
-  padding: 25px 20px;
-  /* background-color: #ffce85; */
+  width: 672px;
+  height: 160px;
+  padding: 10px 5px 14px 20px;
   margin-bottom: 10px;
   border-radius: 15px;
 }
 .습관카드_미달성 {
   background: #dddddd;
+  height: 100px;
+  padding: 25px 5px 25px 20px;
+  font-weight: bold;
 }
 .습관카드_달성색상1 {
   background: #95dfd2;
@@ -173,46 +169,55 @@ export default {
 .습관카드_내용카드 {
   display: flex;
   flex-flow: row;
-  /* height: 100px; */
-  /* margin: 0px 24px 0px 24px;
-  padding: 25px; */
-
-  justify-content: space-between;
+  height: 54px;
+  margin-bottom: 14px;
   border-radius: 5px 5px 0% 0%;
+}
+.체크버튼 {
+  margin-top: 4px;
+}
+.습관카드_내용카드 img {
+  margin-top: 4px;
+}
+.습관카드_미달성 img {
+  margin: 0;
+}
+.습관카드_미달성 .습관카드_내용카드 {
+  height: 50px;
+  margin: 0;
 }
 .달성목표_실천박스 {
   display: flex;
   flex-flow: row;
-  /* height: 100px; */
-  /* margin: 0px 24px 0px 24px;
-  padding: 25px; */
+  height: 30px;
+  margin: auto 0;
 
   justify-content: flex-start;
   border-radius: 0% 0% 5px 5px;
   /* border-top: solid 1px white; */
 }
 .내용카드_습관이름 {
-  font-family: Roboto;
-  font-style: normal;
   font-weight: bold;
   font-size: 24px;
-  line-height: 28px;
+  line-height: 54px;
   flex-grow: 1;
   color: #000000;
   text-align: left;
-  margin: 5px 0 0 30px;
+  padding-left: 30px;
+}
+.습관카드_미달성 .내용카드_습관이름 {
+  line-height: 50px;
 }
 .내용카드_실천횟수 {
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
   font-size: 24px;
-  line-height: 28px;
-
+  line-height: 30px;
   color: #666666;
   flex-grow: 0;
 
-  margin: 0 0 0 80px;
+  margin: 0 18px 0 80px;
 }
 .check아이콘 {
   width: 50px;
@@ -220,10 +225,10 @@ export default {
 }
 
 .내용카드_구분선 {
-  margin: 26px 30px 25px 80px;
-  border-top: 1px solid #fff;
+  border-top: 2px solid #fff;
+  width: 540px;
   height: 0;
-  width: 87%;
+  margin-left: 80px;
 }
 img {
   width: 50px;
