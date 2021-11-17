@@ -128,8 +128,10 @@ export default {
 </script>
 
 <style scoped>
+
 .contents {
   width: 100%;
+
 }
 .container {
   display: flex;
