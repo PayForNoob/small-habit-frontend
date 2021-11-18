@@ -24,7 +24,7 @@ export default {
         // console.log('res', response.data[0])
         this.$store.state.user = response.data[0]
         console.log('user', this.$store.state.user)
-        this.$router.push('/habit/today')
+        this.$router.push('/today')
       }
       catch (err) {
         console.log(err.data);

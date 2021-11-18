@@ -11,12 +11,12 @@
     </div>
     <div class="상단메뉴" v-if="user">
       <router-link to="/habit/total" >
-        <div :class="{ 'active': $route.path == '/habit/total' }">
+        <div :class="{ 'active': $route.path == '/total' }">
           전체습관
         </div>
       </router-link>
       <router-link to="/habit/today" >
-        <div :class="{ 'active': $route.path == '/habit/today' }">
+        <div :class="{ 'active': $route.path == '/today' }">
           오늘 실천
         </div>
       </router-link>

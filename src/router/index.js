@@ -24,11 +24,11 @@ const routes = [
     component: KakaoLogin
   },
   {
-    path: '/habit/total',
+    path: '/total',
     component: TotalHabit
   },
   {
-    path: '/habit/today',
+    path: '/today',
     component: TodaysHabit
   },
   {
