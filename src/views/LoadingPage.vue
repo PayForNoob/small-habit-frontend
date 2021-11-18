@@ -5,10 +5,10 @@
 </template>
 
 <script>
-import { store } from '../store/index.js'
+
 
 export default {
-  async mounted() {
+  async created() {
     console.log('router', this.$route.query.code)
     let response;
     let code = this.$route.query.code
@@ -22,8 +22,8 @@ export default {
           }
         })
         // console.log('res', response.data[0])
-        store.state.user = response.data[0]
-        console.log('user', store.state.user)
+        this.$store.state.user = response.data[0]
+        console.log('user', this.$store.state.user)
         this.$router.push('/habit/today')
       }
       catch (err) {

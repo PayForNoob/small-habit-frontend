@@ -6,10 +6,12 @@
 </template>
 
 <script>
-
+import HabitHeader from './components/HabitHeader.vue'
 
 export default {
-
+components: {
+  HabitHeader,
+},
 }
 </script>
 

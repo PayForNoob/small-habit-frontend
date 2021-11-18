@@ -9,7 +9,7 @@
     <div class="로그아웃" @click="logout" v-else>
       로그아웃
     </div>
-    <div class="상단메뉴">
+    <div class="상단메뉴" v-if="user">
       <router-link to="/habit/total" >
         <div :class="{ 'active': $route.path == '/habit/total' }">
           전체습관
@@ -30,22 +30,23 @@
 </template>
 
 <script>
-import { store } from '../store/index.js'
 
 export default {
   computed: {
     user() {
-      return store.state.user.data
+      return this.$store.state.user.data
     },
   },
   methods: {
     async logout() {
-      console.log('tag', store.state.user)
+      console.log('tag', this.$store.state.user)
       try {
         await this.axios({
           method: 'delete',
           url: '/api/auth',
         })
+        this.$store.state.user = {}
+        this.$router.push('/main')
       }
       catch (err) {
         console.log(err.data);
