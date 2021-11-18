@@ -6,7 +6,7 @@ import TodaysHabit from '../views/TodaysHabit.vue'
 import MyPage from '../views/MyPage.vue'
 import EditHabit from '../views/EditHabit.vue'
 import axios from 'axios'
-import { store } from '../store'
+import { store } from '../store/index.js'
 
 
 const routes = [

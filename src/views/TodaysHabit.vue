@@ -17,7 +17,7 @@
 
 <script>
 import HabitList from "@/components/HabitList.vue";
-import axios from "axios";
+import { store } from '../store/index.js'
 
 export default {
   components: {
@@ -27,12 +27,24 @@ export default {
     log(item) {
       console.log(item);
     },
-    beforeCreate() {
-      axios.get("localhost:3000/objective/today").then((res) => {
-        console.log(res);
-        console.log("1");
-      });
-    },
+  },
+  async beforeCreate() {
+    // console.log('tag', store.state.user.data[0].id)
+    let obj = {
+      userId: store.state.user.data[0].id,
+      schedule: 7,
+      activated: true
+    }
+    let response = await this.axios({
+      method: 'get',
+      url: '/api/objectives',
+      params: {
+        userId: obj.userId,
+        schedule: obj.schedule,
+        activated: obj.activated
+      }
+    })
+    console.log('res', response.data)
   },
   data: function () {
     return {
@@ -42,7 +54,7 @@ export default {
       habitItems: [
         {
           userId: 1,
-          field: "돈관리",
+          categorie: "돈관리",
           objective: "매일 커피 1잔 덜마시기",
           schedule: {
             everyday: true,
@@ -51,7 +63,7 @@ export default {
         },
         {
           userId: 1,
-          field: "운동",
+          categorie: "운동",
           objective: "달리기",
           schedule: {
             everyday: true,
@@ -60,7 +72,7 @@ export default {
         },
         {
           userId: 1,
-          field: "생활습관",
+          categorie: "생활습관",
           objective: "숨쉬기",
           schedule: {
             everyday: true,
@@ -69,7 +81,7 @@ export default {
         },
         {
           userId: 1,
-          field: "학습",
+          categorie: "학습",
           objective: "코딩공부",
           schedule: {
             everyday: true,
@@ -78,7 +90,7 @@ export default {
         },
         {
           userId: 1,
-          field: "생활습관",
+          categorie: "생활습관",
           objective: "숨쉬기",
           schedule: {
             everyday: true,
@@ -87,7 +99,7 @@ export default {
         },
         {
           userId: 1,
-          field: "회사생활",
+          categorie: "회사생활",
           objective: "출근 5분 빨리하기",
           schedule: {
             everyday: true,
@@ -96,7 +108,7 @@ export default {
         },
         {
           userId: 1,
-          field: "독서",
+          categorie: "독서",
           objective: "한달에 1권 읽기",
           schedule: {
             everyday: true,
@@ -105,7 +117,7 @@ export default {
         },
         {
           userId: 1,
-          field: "취미",
+          categorie: "취미",
           objective: "게임",
           schedule: {
             everyday: true,
@@ -114,7 +126,7 @@ export default {
         },
         {
           userId: 1,
-          field: "나를 위한 시간",
+          categorie: "나를 위한 시간",
           objective: "맛있는거 먹기",
           schedule: {
             everyday: true,
@@ -143,7 +155,7 @@ export default {
   display: flex;
   flex-direction: column;
   padding: 10px 24px;
-  height: 80vh;
+  height: 86vh;
   overflow: auto;
 }
 .목표목록_목표갯수 {

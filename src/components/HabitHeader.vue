@@ -3,20 +3,20 @@
     <div  class="로고">
       <img src="../assets/logo.png" alt="">
     </div>
-    <router-link to="/login" class="로그인" v-if="!logined">
+    <router-link to="/login" class="로그인" v-if="!login">
       로그인
     </router-link>
-    <div class="로그아웃" v-if="logined" @click="logout">
+    <div class="로그아웃" v-if="login" @click="logout">
       로그아웃
     </div>
     <div class="상단메뉴">
-      <div :class="{ active: totalPath }">
+      <div :class="{ 'active': pathname == '/habit/total' }" @click="nowPath">
         <router-link to="/habit/total" >전체습관</router-link>
       </div>
-      <div :class="{ active: todayPath }">
+      <div :class="{ 'active': pathname == '/habit/today' }" @click="nowPath">
         <router-link to="/habit/today" >오늘 실천</router-link>
       </div>
-      <div :class="{ active: myPagePath }">
+      <div :class="{ 'active': pathname == '/mypage' }" @click="nowPath">
         <router-link to="/mypage" >마이페이지</router-link>
       </div>
     </div>
@@ -24,40 +24,18 @@
 </template>
 
 <script>
-import {store} from '../store/index.js'
+import { store } from '../store/index.js'
 
 export default {
   data() {
     return {
-      logined: store.state.logined,
-      path: new URL(window.location.href).pathname
+      pathname: '/'
     }
   },
   computed: {
-    totalPath() {
-      if(this.path == '/habit/total') {
-        return true
-      } else {
-        return false
-      }
+    login() {
+      return store.state.login
     },
-    todayPath() {
-      if(this.path == '/habit/today') {
-        return true
-      } else {
-        return false
-      }
-    },
-    myPagePath() {
-      if(this.path == '/mypage') {
-        return true
-      } else {
-        return false
-      }
-    }
-  },
-  updated() {
-    this.$router.go();
   },
   methods: {
     async logout() {
@@ -66,11 +44,16 @@ export default {
           method: 'delete',
           url: '/api/auth/logout',
         })
-        this.$router.go();
+        store.state.login = false
       }
       catch (err) {
         console.log(err.data);
       } 
+    },
+    nowPath() {
+      let url = new URL(window.location.href)
+      let path = url.pathname
+      this.pathname = path
     },
   },
 }

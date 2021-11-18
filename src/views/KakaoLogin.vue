@@ -11,13 +11,12 @@
 </template>
 
 <script>
-import {store} from '../store/index.js'
 
 export default {
   methods: {
     kakaoLogin() {
       window.Kakao.Auth.authorize({
-        redirectUri: 'http://localhost:8080/login'
+        redirectUri: 'http://localhost:8080/main'
       });
     },
   },
@@ -26,28 +25,6 @@ export default {
 
     console.log(window.Kakao.isInitialized());
   },
-  async mounted() {
-    let response;
-    const url = new URL(window.location.href)
-    let code = url.searchParams.get('code')
-    try {
-      response = await this.axios({
-        method: 'post',
-        url: '/api/auth/login',
-        params: {
-          code
-        }
-      })
-      console.log('res', response.data[0])
-      store.state.user = response.data[0]
-      store.state.logined = true
-      console.log( store.state.user, store.state.logined)
-      this.$router.push('/habit/today')
-    }
-    catch (err) {
-      console.log(err.data);
-    } 
-  }
 }
 </script>
 

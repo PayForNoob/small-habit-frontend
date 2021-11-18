@@ -1,6 +1,5 @@
 <template>
   <div class="contents">
-    <button @click="logout">로그아웃</button>
     <div>
       Main
     </div>
@@ -10,26 +9,33 @@
 </template>
 
 <script>
-
+import { store } from '../store/index.js'
 
 export default {
-  methods: {
-    async logout() {
+  async beforeCreate() {
+    let response;
+    const url = new URL(window.location.href)
+    let code = url.searchParams.get('code')
+    if(code) {
       try {
-        await this.axios({
-          method: 'delete',
-          url: '/api/auth/logout',
+        response = await this.axios({
+          method: 'post',
+          url: '/api/auth/login',
+          params: {
+            code
+          }
         })
-        // this.$router.go();
+        // console.log('res', response.data[0])
+        store.state.user = response.data[0]
+        store.state.login = true
+        console.log('user', store.state.user)
+        this.$router.push('/habit/today')
       }
       catch (err) {
         console.log(err.data);
       } 
-    },
+    }
   },
-  mounted() {
-    console.log('url', new URL(window.location.href).pathname)
-  }
 }
 </script>
 
