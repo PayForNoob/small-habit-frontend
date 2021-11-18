@@ -34,19 +34,20 @@
 export default {
   computed: {
     user() {
-      return this.$store.state.user.data
+      return this.$store.state.user
     },
   },
   methods: {
     async logout() {
-      console.log('tag', this.$store.state.user)
+      // console.log('tag', this.$store.state.user)
       try {
         await this.axios({
           method: 'delete',
           url: '/api/auth',
         })
-        this.$store.state.user = {}
-        this.$router.push('/main')
+
+        // this.$store.state.user = null
+        location.href = '/main'
       }
       catch (err) {
         console.log(err.data);

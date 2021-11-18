@@ -60,6 +60,7 @@ router.beforeEach(async (to, from, next) => {
   }
 
   if (res.status < 400) {
+    console.log(res.data)
     store.state.user = res.data
   } else {
     store.state.user = null

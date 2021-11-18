@@ -17,7 +17,6 @@
 
 <script>
 import HabitList from "@/components/HabitList.vue";
-import { store } from '../store/index.js'
 
 export default {
   components: {
@@ -28,13 +27,14 @@ export default {
       console.log(item);
     },
   },
-  async beforeCreate() {
+  async created() {
     // console.log('tag', store.state.user.data[0].id)
     let obj = {
-      userId: store.state.user.data[0].id,
+      userId: this.$store.state.user.id,
       schedule: 7,
       activated: true
     }
+
     let response = await this.axios({
       method: 'get',
       url: '/api/objectives',
