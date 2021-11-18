@@ -31,7 +31,7 @@ export default {
     // console.log('tag', store.state.user.data[0].id)
     let obj = {
       userId: this.$store.state.user.id,
-      schedule: 7,
+      schedule: '0,1,2,3,4,5,6,7',
       activated: true
     }
 
