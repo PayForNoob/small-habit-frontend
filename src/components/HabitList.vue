@@ -11,7 +11,7 @@
         />
 
         <div class="내용카드_습관이름">
-          [{{ habitItem.categorie }}]{{ habitItem.objective }}
+          [{{ habitItem.category }}]{{ habitItem.objective }}
         </div>
         <img src="@/assets/img_edit.png" />
       </div>
@@ -19,60 +19,60 @@
     <div
       class="습관카드_박스"
       :class="[
-        { 습관카드_달성색상1: habitItem.categorie == '회사생활' },
-        { 습관카드_달성색상2: habitItem.categorie == '생활습관' },
-        { 습관카드_달성색상3: habitItem.categorie == '학습' },
-        { 습관카드_달성색상4: habitItem.categorie == '취미' },
-        { 습관카드_달성색상5: habitItem.categorie == '운동' },
-        { 습관카드_달성색상6: habitItem.categorie == '독서' },
-        { 습관카드_달성색상7: habitItem.categorie == '돈관리' },
-        { 습관카드_달성색상8: habitItem.categorie == '나를 위한 시간' },
+        { 습관카드_달성색상1: habitItem.category == '회사생활' },
+        { 습관카드_달성색상2: habitItem.category == '생활습관' },
+        { 습관카드_달성색상3: habitItem.category == '학습' },
+        { 습관카드_달성색상4: habitItem.category == '취미' },
+        { 습관카드_달성색상5: habitItem.category == '운동' },
+        { 습관카드_달성색상6: habitItem.category == '독서' },
+        { 습관카드_달성색상7: habitItem.category == '돈관리' },
+        { 습관카드_달성색상8: habitItem.category == '나를 위한 시간' },
       ]"
       v-if="habitItem.activated === true"
     >
       <div class="습관카드_내용카드">
         <img
           @click="recieveHabitItem.activated = false"
-          v-if="habitItem.categorie == '회사생활'"
+          v-if="habitItem.category == '회사생활'"
           src="@/assets/img_check_business_life.png"
         />
         <img
           @click="recieveHabitItem.activated = false"
-          v-if="habitItem.categorie == '생활습관'"
+          v-if="habitItem.category == '생활습관'"
           src="@/assets/img_check_lifestyle.png"
         />
         <img
           @click="recieveHabitItem.activated = false"
-          v-if="habitItem.categorie == '학습'"
+          v-if="habitItem.category == '학습'"
           src="@/assets/img_check_learning.png"
         />
         <img
           @click="recieveHabitItem.activated = false"
-          v-if="habitItem.categorie == '취미'"
+          v-if="habitItem.category == '취미'"
           src="@/assets/img_check_hobby.png"
         />
         <img
           @click="recieveHabitItem.activated = false"
-          v-if="habitItem.categorie == '운동'"
+          v-if="habitItem.category == '운동'"
           src="@/assets/img_check_exercise.png"
         />
         <img
           @click="recieveHabitItem.activated = false"
-          v-if="habitItem.categorie == '독서'"
+          v-if="habitItem.category == '독서'"
           src="@/assets/img_check_reading.png"
         />
         <img
           @click="recieveHabitItem.activated = false"
-          v-if="habitItem.categorie == '돈관리'"
+          v-if="habitItem.category == '돈관리'"
           src="@/assets/img_check_money_management.png"
         />
         <img
           @click="recieveHabitItem.activated = false"
-          v-if="habitItem.categorie == '나를 위한 시간'"
+          v-if="habitItem.category == '나를 위한 시간'"
           src="@/assets/img_check_time_for_me.png"
         />
         <div class="내용카드_습관이름">
-          [{{ habitItem.categorie }}]{{ habitItem.objective }}
+          [{{ habitItem.category }}]{{ habitItem.objective }}
         </div>
         <img class="수정버튼" src="../assets/img_edit.png" />
       </div>
@@ -102,15 +102,15 @@ export default {
   data() {
     return {
       recieveHabitItem: this.habitItem,
-      habitcategories: {
-        categorie1: "회사생활",
-        categorie2: "생활습관",
-        categorie3: "학습",
-        categorie4: "취미",
-        categorie5: "운동",
-        categorie6: "독서",
-        categorie7: "돈관리",
-        categorie8: "나를 위한 시간",
+      habitcategorys: {
+        category1: "회사생활",
+        category2: "생활습관",
+        category3: "학습",
+        category4: "취미",
+        category5: "운동",
+        category6: "독서",
+        category7: "돈관리",
+        category8: "나를 위한 시간",
       },
     };
   },

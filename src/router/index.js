@@ -1,4 +1,5 @@
 import { createWebHistory, createRouter } from 'vue-router'
+import LoadingPage from '../views/LoadingPage.vue'
 import MainPage from '../views/MainPage.vue'
 import KakaoLogin from '../views/KakaoLogin.vue'
 import TotalHabit from '../views/TotalHabit.vue'
@@ -37,6 +38,10 @@ const routes = [
   {
     path: '/edit',
     component: EditHabit
+  },
+  {
+    path: '/loading',
+    component: LoadingPage
   }
 ]
 

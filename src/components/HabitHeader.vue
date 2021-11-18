@@ -3,22 +3,28 @@
     <div  class="로고">
       <img src="../assets/logo.png" alt="">
     </div>
-    <router-link to="/login" class="로그인" v-if="!login">
+    <router-link to="/login" class="로그인" v-if="!user">
       로그인
     </router-link>
-    <div class="로그아웃" v-if="login" @click="logout">
+    <div class="로그아웃" @click="logout" v-else>
       로그아웃
     </div>
     <div class="상단메뉴">
-      <div :class="{ 'active': pathname == '/habit/total' }" @click="nowPath">
-        <router-link to="/habit/total" >전체습관</router-link>
-      </div>
-      <div :class="{ 'active': pathname == '/habit/today' }" @click="nowPath">
-        <router-link to="/habit/today" >오늘 실천</router-link>
-      </div>
-      <div :class="{ 'active': pathname == '/mypage' }" @click="nowPath">
-        <router-link to="/mypage" >마이페이지</router-link>
-      </div>
+      <router-link to="/habit/total" >
+        <div :class="{ 'active': $route.path == '/habit/total' }">
+          전체습관
+        </div>
+      </router-link>
+      <router-link to="/habit/today" >
+        <div :class="{ 'active': $route.path == '/habit/today' }">
+          오늘 실천
+        </div>
+      </router-link>
+      <router-link to="/mypage" >
+        <div :class="{ 'active': $route.path == '/mypage' }">
+          마이페이지
+        </div>
+      </router-link>
     </div>
   </header>
 </template>
@@ -27,33 +33,23 @@
 import { store } from '../store/index.js'
 
 export default {
-  data() {
-    return {
-      pathname: '/'
-    }
-  },
   computed: {
-    login() {
-      return store.state.login
+    user() {
+      return store.state.user.data
     },
   },
   methods: {
     async logout() {
+      console.log('tag', store.state.user)
       try {
         await this.axios({
           method: 'delete',
-          url: '/api/auth/logout',
+          url: '/api/auth',
         })
-        store.state.login = false
       }
       catch (err) {
         console.log(err.data);
       } 
-    },
-    nowPath() {
-      let url = new URL(window.location.href)
-      let path = url.pathname
-      this.pathname = path
     },
   },
 }
@@ -100,8 +96,6 @@ img {
 }
 .active {
   border-bottom: 4px solid #000;
-}
-.active a {
   color: #2c3e50;
 }
 

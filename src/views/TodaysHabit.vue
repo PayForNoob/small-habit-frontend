@@ -54,7 +54,7 @@ export default {
       habitItems: [
         {
           userId: 1,
-          categorie: "돈관리",
+          category: "돈관리",
           objective: "매일 커피 1잔 덜마시기",
           schedule: {
             everyday: true,
@@ -63,7 +63,7 @@ export default {
         },
         {
           userId: 1,
-          categorie: "운동",
+          category: "운동",
           objective: "달리기",
           schedule: {
             everyday: true,
@@ -72,7 +72,7 @@ export default {
         },
         {
           userId: 1,
-          categorie: "생활습관",
+          category: "생활습관",
           objective: "숨쉬기",
           schedule: {
             everyday: true,
@@ -81,7 +81,7 @@ export default {
         },
         {
           userId: 1,
-          categorie: "학습",
+          category: "학습",
           objective: "코딩공부",
           schedule: {
             everyday: true,
@@ -90,7 +90,7 @@ export default {
         },
         {
           userId: 1,
-          categorie: "생활습관",
+          category: "생활습관",
           objective: "숨쉬기",
           schedule: {
             everyday: true,
@@ -99,7 +99,7 @@ export default {
         },
         {
           userId: 1,
-          categorie: "회사생활",
+          category: "회사생활",
           objective: "출근 5분 빨리하기",
           schedule: {
             everyday: true,
@@ -108,7 +108,7 @@ export default {
         },
         {
           userId: 1,
-          categorie: "독서",
+          category: "독서",
           objective: "한달에 1권 읽기",
           schedule: {
             everyday: true,
@@ -117,7 +117,7 @@ export default {
         },
         {
           userId: 1,
-          categorie: "취미",
+          category: "취미",
           objective: "게임",
           schedule: {
             everyday: true,
@@ -126,7 +126,7 @@ export default {
         },
         {
           userId: 1,
-          categorie: "나를 위한 시간",
+          category: "나를 위한 시간",
           objective: "맛있는거 먹기",
           schedule: {
             everyday: true,
