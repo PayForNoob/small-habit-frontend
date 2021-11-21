@@ -1,5 +1,6 @@
 <template>
   <div>
+    <habit-header class="header"></habit-header>
     <div class="container">
       <div class="목표목록_박스">
         <div class="목표목록_목표갯수">목표{{ habitTotalNum }}</div>
@@ -19,10 +20,12 @@
 
 <script>
 import HabitList from "@/components/HabitList.vue";
+import HabitHeader from '../components/HabitHeader.vue'
 
 export default {
   components: {
     "habit-list": HabitList,
+    HabitHeader
   },
   async created() {
     let today = new Date().getDay();
@@ -60,6 +63,13 @@ export default {
 .contents {
   width: 100%;
 }
+::-webkit-scrollbar {
+  width: 10px;  
+}
+::-webkit-scrollbar-thumb {
+  background-color: #9b9b9b;
+  border-radius: 5px;
+}
 .container {
   display: flex;
   flex-flow: column;
@@ -69,9 +79,10 @@ export default {
 .목표목록_박스 {
   display: flex;
   flex-direction: column;
-  padding: 10px 24px;
-  height: 86vh;
+  padding: 10px 14px 0 24px;
+  height: calc( 100vh - 150px );
   overflow: auto;
+
 }
 .목표목록_목표갯수 {
   height: 50px;

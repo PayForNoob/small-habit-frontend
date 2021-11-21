@@ -1,17 +1,12 @@
 <template>
   <div id="container">
-    <habit-header class="header"></habit-header>
     <router-view class="contents"></router-view>
   </div>
 </template>
 
 <script>
-import HabitHeader from './components/HabitHeader.vue'
-
 export default {
-components: {
-  HabitHeader,
-},
+
 }
 </script>
 
@@ -36,13 +31,5 @@ a {
   color: #2c3e50;
   max-height: 100vh;
   overflow: hidden;
-}
-.header {
-  position: fixed;
-  top: 0;
-  left: 0;
-}
-.contents {
-  padding-top: 150px;
 }
 </style>
