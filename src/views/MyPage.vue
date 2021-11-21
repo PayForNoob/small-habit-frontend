@@ -1,31 +1,21 @@
 <template>
   <div>
     <div class="box">
-      <div class="category">
-        닉네임
-      </div>
-      <div>
-        맥스
-      </div>
+      <div class="category">닉네임</div>
+      <div>맥스</div>
     </div>
     <div class="box">
-      <div class="category">
-        이메일
-      </div>
-      <div>
-        opa9904@naver.com
-      </div>
+      <div class="category">이메일</div>
+      <div>opa9904@naver.com</div>
     </div>
-    <div class="withdrawal">
-      탈퇴하기
-    </div>
+    <div class="withdrawal">탈퇴하기</div>
   </div>
 </template>
 
 <script>
 export default {
-
-}
+  created() {},
+};
 </script>
 
 <style scoped>

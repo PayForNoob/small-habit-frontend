@@ -8,9 +8,9 @@
         <div class="습관및이미지_박스">
           <div class="습관_박스">
             <div class="습관종류">운동</div>
-            <div class="습관명_박스" >
-              <input class="습관명" v-model="message" placeholder="dd">
-              
+            <div class="습관명_박스">
+              <input class="습관명" v-model="message" placeholder="dd" />
+
               <img class="글자편집_이미지" src="@/assets/img_edit_text.png" />
             </div>
           </div>
@@ -19,11 +19,9 @@
           </div>
         </div>
       </div>
-      
-<div class="흰배경_박스">매주 (주 x회)
-</div>
-<div class="흰배경_박스">세부습관
-</div>
+
+      <div class="흰배경_박스">매주 (주 x회)</div>
+      <div class="흰배경_박스">세부습관</div>
     </div>
   </div>
 </template>
@@ -32,8 +30,8 @@
 export default {
   data() {
     return {
-      message : "습관명입력"
-    }
+      message: "습관명입력",
+    };
   },
 };
 </script>
@@ -49,12 +47,12 @@ export default {
   display: flex;
   flex-flow: column;
   width: 720px;
-  height: 1280px; 
+  height: 1280px;
   /* 높이삭제해야함 */
   border: 1px solid rgb(224, 218, 218);
   margin-top: 80px;
   padding: ;
-  background-color: #E1E1E1;
+  background-color: #e1e1e1;
   /* justify-content: center; */
 }
 .상단메뉴_박스 {
@@ -103,7 +101,7 @@ export default {
   height: 50px;
   padding: 0 26px;
 }
-.습관명_박스{
+.습관명_박스 {
   text-align: left;
   width: min-content;
 }
@@ -117,10 +115,7 @@ export default {
   text-decoration: underline;
   color: #e2e2e2;
 
-
-
   background-color: #887de5;
-  
 }
 .습관이미지_박스 {
   width: 300px;
@@ -132,14 +127,12 @@ export default {
   width: 160px;
   height: 160px;
 }
-.글자편집_이미지{
-  
+.글자편집_이미지 {
 }
-.흰배경_박스{
+.흰배경_박스 {
   margin: 0px 24px 10px 24px;
   min-height: 30px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border-radius: 20px;
-
 }
 </style>
