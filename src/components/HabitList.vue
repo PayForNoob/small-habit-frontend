@@ -10,7 +10,7 @@
           src="@/assets/img_check_unexecuted.png"
         />
         <div class="내용카드_습관이름">
-          [{{ habitItem.category }}]{{ habitItem.objective }}
+          [{{ habitItem.category }}] {{ habitItem.objective }}
         </div>
         <img src="@/assets/img_edit.png" class="수정버튼" />
       </div>
@@ -49,7 +49,7 @@ export default {
   data() {
     return {
       recieveHabitItem: this.habitItem,
-      categoryName: '',
+      categoryName: null,
       checkBtnUrl: null
     };
   },
@@ -103,7 +103,9 @@ export default {
       this.categoryName = "생활습관"
       break;
 
-      default: null;
+      default: 
+      this.checkBtnUrl = null
+      this.categoryName = null
       break;
     }
   }
