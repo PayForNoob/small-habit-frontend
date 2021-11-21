@@ -5,8 +5,8 @@
       <div class="목표목록_목표갯수">목표{{ habitTotalNum }}</div>
       <habit-list
         v-for="(habitItem, index) in habitItems"
-        v-bind:habitItem="habitItem"
-        v-bind:key="index"
+        :habitItem="habitItem"
+        :key="index"
       >
       </habit-list>
     </div>
@@ -21,11 +21,6 @@ import HabitList from "@/components/HabitList.vue";
 export default {
   components: {
     "habit-list": HabitList,
-  },
-  methods: {
-    log(item) {
-      console.log(item);
-    },
   },
   async created() {
     let today = new Date().getDay()
@@ -50,7 +45,6 @@ export default {
   data: function () {
     return {
       LogoData: "Logo",
-
       actionButtonClick: 0,
       habitItems: []
     };

@@ -26,7 +26,7 @@
           :src="checkBtn"
         />
         <div class="내용카드_습관이름">
-          [{{ habitItem.category }}]{{ habitItem.objective }}
+          [{{ categoryName }}]{{ habitItem.objective }}
         </div>
         <img class="수정버튼" src="@/assets/img_edit.png" />
       </div>
@@ -49,6 +49,8 @@ export default {
   data() {
     return {
       recieveHabitItem: this.habitItem,
+      categoryName: '',
+      checkBtnUrl: null
     };
   },
   computed: {
@@ -56,9 +58,55 @@ export default {
       return "습관카드_달성색상" + this.habitItem.category
     },
     checkBtn() {
-      return `../assets/img_check_reading,png`
-    }
+      return require(`@/assets/img_check_${this.checkBtnUrl}.png`)
+    },
   },
+  created() {
+    switch(this.habitItem.category) {
+      case 0: 
+      this.checkBtnUrl = "exercise"
+      this.categoryName = "운동"
+      break;
+
+      case 1: 
+      this.checkBtnUrl = "hobby"
+      this.categoryName = "취미"
+      break;
+
+      case 2: 
+      this.checkBtnUrl = "reading"
+      this.categoryName = "독서"
+      break;
+
+      case 3: 
+      this.checkBtnUrl = "learning"
+      this.categoryName = "학습"
+      break;
+
+      case 4: 
+      this.checkBtnUrl = "money_management"
+      this.categoryName = "자산관리"
+      break;
+
+      case 5: 
+      this.checkBtnUrl = "business_life"
+      this.categoryName = "회사생활"
+      break;
+
+      case 6: 
+      this.checkBtnUrl = "time_for_me"
+      this.categoryName = "나를 위한 시간"
+      break;
+      
+      case 7: 
+      this.checkBtnUrl = "lifestyle"
+      this.categoryName = "생활습관"
+      break;
+
+      default: null;
+      break;
+    }
+  }
 };
 </script>
 
