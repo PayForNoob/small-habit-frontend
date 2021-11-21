@@ -1,18 +1,20 @@
 <template>
-<div>
-  <div class="container">
-    <div class="목표목록_박스">
-      <div class="목표목록_목표갯수">목표{{ habitTotalNum }}</div>
-      <habit-list
-        v-for="(habitItem, index) in habitItems"
-        :habitItem="habitItem"
-        :key="index"
-      >
-      </habit-list>
+  <div>
+    <div class="container">
+      <div class="목표목록_박스">
+        <div class="목표목록_목표갯수">목표{{ habitTotalNum }}</div>
+        <div v-if="habitTotalNum != 0">
+          <habit-list
+            v-for="(habitItem, index) in habitItems"
+            :habitItem="habitItem"
+            :key="index"
+          >
+          </habit-list>
+        </div>
+        <div v-else>오늘의 목표 없음</div>
+      </div>
     </div>
   </div>
-</div>
-
 </template>
 
 <script>
@@ -23,40 +25,40 @@ export default {
     "habit-list": HabitList,
   },
   async created() {
-    let today = new Date().getDay()
+    let today = new Date().getDay();
     let todaysObjectives = {
       schedule: today,
-      activated: true
-    }
+      activated: true,
+    };
     try {
       let { data } = await this.axios({
-        method: 'get',
-        url: '/api/objectives',
+        method: "get",
+        url: "/api/objectives",
         params: {
-          ...todaysObjectives
-        }
-      })
-      console.log(data)
-      this.habitItems = data
-    }catch(err) {
-      console.log(err)
+          ...todaysObjectives,
+        },
+      });
+      console.log(data);
+      this.habitItems = data;
+      this.habitTotalNum = this.habitItems.length;
+    } catch (err) {
+      console.log(err);
     }
   },
   data: function () {
     return {
       LogoData: "Logo",
       actionButtonClick: 0,
-      habitItems: []
+      habitItems: [],
+      habitTotalNum: "",
     };
   },
 };
 </script>
 
 <style scoped>
-
 .contents {
   width: 100%;
-
 }
 .container {
   display: flex;

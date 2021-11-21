@@ -21,10 +21,7 @@
       v-if="habitItem.activated === true"
     >
       <div class="습관카드_내용카드">
-        <img
-          @click="recieveHabitItem.activated = false"
-          :src="checkBtn"
-        />
+        <img @click="recieveHabitItem.activated = false" :src="checkBtn" />
         <div class="내용카드_습관이름">
           [{{ categoryName }}]{{ habitItem.objective }}
         </div>
@@ -33,11 +30,7 @@
       <div class="내용카드_구분선"></div>
       <div class="달성목표_실천박스">
         <div class="내용카드_실천횟수">{{ 0 }}회째 실천중!!!</div>
-        <img
-        v-for="num in 3"
-        :key="num"
-          src="@/assets/img_clapping.png"
-        />
+        <img v-for="num in 3" :key="num" src="@/assets/img_clapping.png" />
       </div>
     </div>
   </div>
@@ -50,72 +43,72 @@ export default {
     return {
       recieveHabitItem: this.habitItem,
       categoryName: null,
-      checkBtnUrl: null
+      checkBtnUrl: null,
     };
   },
   computed: {
     backgroundColor() {
-      return "습관카드_달성색상" + this.habitItem.category
+      return "습관카드_달성색상" + this.habitItem.category;
     },
     checkBtn() {
-      return require(`@/assets/img_check_${this.checkBtnUrl}.png`)
+      return require(`@/assets/img_check_${this.checkBtnUrl}.png`);
     },
   },
   created() {
-    switch(this.habitItem.category) {
-      case 0: 
-      this.checkBtnUrl = "exercise"
-      this.categoryName = "운동"
-      break;
+    switch (this.habitItem.category) {
+      case 0:
+        this.checkBtnUrl = "exercise";
+        this.categoryName = "운동";
+        break;
 
-      case 1: 
-      this.checkBtnUrl = "hobby"
-      this.categoryName = "취미"
-      break;
+      case 1:
+        this.checkBtnUrl = "hobby";
+        this.categoryName = "취미";
+        break;
 
-      case 2: 
-      this.checkBtnUrl = "reading"
-      this.categoryName = "독서"
-      break;
+      case 2:
+        this.checkBtnUrl = "reading";
+        this.categoryName = "독서";
+        break;
 
-      case 3: 
-      this.checkBtnUrl = "learning"
-      this.categoryName = "학습"
-      break;
+      case 3:
+        this.checkBtnUrl = "learning";
+        this.categoryName = "학습";
+        break;
 
-      case 4: 
-      this.checkBtnUrl = "money_management"
-      this.categoryName = "자산관리"
-      break;
+      case 4:
+        this.checkBtnUrl = "money_management";
+        this.categoryName = "자산관리";
+        break;
 
-      case 5: 
-      this.checkBtnUrl = "business_life"
-      this.categoryName = "회사생활"
-      break;
+      case 5:
+        this.checkBtnUrl = "business_life";
+        this.categoryName = "회사생활";
+        break;
 
-      case 6: 
-      this.checkBtnUrl = "time_for_me"
-      this.categoryName = "나를 위한 시간"
-      break;
-      
-      case 7: 
-      this.checkBtnUrl = "lifestyle"
-      this.categoryName = "생활습관"
-      break;
+      case 6:
+        this.checkBtnUrl = "time_for_me";
+        this.categoryName = "나를 위한 시간";
+        break;
 
-      default: 
-      this.checkBtnUrl = null
-      this.categoryName = null
-      break;
+      case 7:
+        this.checkBtnUrl = "lifestyle";
+        this.categoryName = "생활습관";
+        break;
+
+      default:
+        this.checkBtnUrl = null;
+        this.categoryName = null;
+        break;
     }
-  }
+  },
 };
 </script>
 
 <style scoped>
 .습관카드_달성색상0 {
   background: #b8b1f0;
-} 
+}
 .습관카드_달성색상1 {
   background: #eaa2a6;
 }
