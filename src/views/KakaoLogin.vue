@@ -21,7 +21,7 @@ export default {
     },
   },
   created() {
-    window.Kakao.init('fdca4725465aabcee10a91e15f7307e1');
+    window.Kakao.init(process.env.VUE_APP_JAVASCRIPT_KEY);
 
     console.log(window.Kakao.isInitialized());
   },
