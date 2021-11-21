@@ -9,86 +9,33 @@
           @click="recieveHabitItem.activated = true"
           src="@/assets/img_check_unexecuted.png"
         />
-
         <div class="내용카드_습관이름">
           [{{ habitItem.category }}]{{ habitItem.objective }}
         </div>
-        <img src="@/assets/img_edit.png" />
+        <img src="@/assets/img_edit.png" class="수정버튼" />
       </div>
     </div>
     <div
       class="습관카드_박스"
-      :class="[
-        { 습관카드_달성색상1: habitItem.category == '회사생활' },
-        { 습관카드_달성색상2: habitItem.category == '생활습관' },
-        { 습관카드_달성색상3: habitItem.category == '학습' },
-        { 습관카드_달성색상4: habitItem.category == '취미' },
-        { 습관카드_달성색상5: habitItem.category == '운동' },
-        { 습관카드_달성색상6: habitItem.category == '독서' },
-        { 습관카드_달성색상7: habitItem.category == '돈관리' },
-        { 습관카드_달성색상8: habitItem.category == '나를 위한 시간' },
-      ]"
+      :class="backgroundColor"
       v-if="habitItem.activated === true"
     >
       <div class="습관카드_내용카드">
         <img
           @click="recieveHabitItem.activated = false"
-          v-if="habitItem.category == '회사생활'"
-          src="@/assets/img_check_business_life.png"
-        />
-        <img
-          @click="recieveHabitItem.activated = false"
-          v-if="habitItem.category == '생활습관'"
-          src="@/assets/img_check_lifestyle.png"
-        />
-        <img
-          @click="recieveHabitItem.activated = false"
-          v-if="habitItem.category == '학습'"
-          src="@/assets/img_check_learning.png"
-        />
-        <img
-          @click="recieveHabitItem.activated = false"
-          v-if="habitItem.category == '취미'"
-          src="@/assets/img_check_hobby.png"
-        />
-        <img
-          @click="recieveHabitItem.activated = false"
-          v-if="habitItem.category == '운동'"
-          src="@/assets/img_check_exercise.png"
-        />
-        <img
-          @click="recieveHabitItem.activated = false"
-          v-if="habitItem.category == '독서'"
-          src="@/assets/img_check_reading.png"
-        />
-        <img
-          @click="recieveHabitItem.activated = false"
-          v-if="habitItem.category == '돈관리'"
-          src="@/assets/img_check_money_management.png"
-        />
-        <img
-          @click="recieveHabitItem.activated = false"
-          v-if="habitItem.category == '나를 위한 시간'"
-          src="@/assets/img_check_time_for_me.png"
+          :src="checkBtn"
         />
         <div class="내용카드_습관이름">
           [{{ habitItem.category }}]{{ habitItem.objective }}
         </div>
-        <img class="수정버튼" src="../assets/img_edit.png" />
+        <img class="수정버튼" src="@/assets/img_edit.png" />
       </div>
       <div class="내용카드_구분선"></div>
       <div class="달성목표_실천박스">
-        <div class="내용카드_실천횟수">{{ 0 }}째 실천중!!!</div>
+        <div class="내용카드_실천횟수">{{ 0 }}회째 실천중!!!</div>
         <img
-          style="height: 30px; width: 30px"
-          src="@/assets/img_clapping.png"
-        />
-        <img
-          style="height: 30px; width: 30px"
-          src="@/assets/img_clapping.png"
-        />
-        <img
-          style="height: 30px; width: 30px"
+        v-for="num in 3"
+        :key="num"
           src="@/assets/img_clapping.png"
         />
       </div>
@@ -102,96 +49,97 @@ export default {
   data() {
     return {
       recieveHabitItem: this.habitItem,
-      habitcategorys: {
-        category1: "회사생활",
-        category2: "생활습관",
-        category3: "학습",
-        category4: "취미",
-        category5: "운동",
-        category6: "독서",
-        category7: "돈관리",
-        category8: "나를 위한 시간",
-      },
     };
+  },
+  computed: {
+    backgroundColor() {
+      return "습관카드_달성색상" + this.habitItem.category
+    },
+    checkBtn() {
+      return `../assets/img_check_reading,png`
+    }
   },
 };
 </script>
 
 <style scoped>
+.습관카드_달성색상0 {
+  background: #b8b1f0;
+} 
+.습관카드_달성색상1 {
+  background: #eaa2a6;
+}
+.습관카드_달성색상2 {
+  background: #a8ddad;
+}
+.습관카드_달성색상3 {
+  background: #ffd98e;
+}
+.습관카드_달성색상4 {
+  background: #afc2ff;
+}
+.습관카드_달성색상5 {
+  background: #95dfd2;
+}
+.습관카드_달성색상6 {
+  background: #ffbaaa;
+}
+.습관카드_달성색상7 {
+  background: #ffb6f2;
+}
 .습관카드_상위박스 {
   width: max-content;
   height: max-content;
 }
-
 .습관카드_박스 {
   position: relative;
   display: flex;
   flex-flow: column;
+  justify-content: space-evenly;
   width: 672px;
   height: 160px;
-  padding: 10px 5px 14px 20px;
+  padding: 0 5px 0 20px;
   margin-bottom: 10px;
   border-radius: 15px;
 }
 .습관카드_미달성 {
   background: #dddddd;
   height: 100px;
-  padding: 25px 5px 25px 20px;
+  padding: 0 5px 0 20px;
   font-weight: bold;
 }
-.습관카드_달성색상1 {
-  background: #95dfd2;
-}
-.습관카드_달성색상2 {
-  background: #ffb6f2;
-}
-.습관카드_달성색상3 {
-  background: #ffd98e;
-}
-.습관카드_달성색상4 {
-  background: #eaa2a6;
-}
-.습관카드_달성색상5 {
-  background: #b8b1f0;
-}
-.습관카드_달성색상6 {
-  background: #a8ddad;
-}
-.습관카드_달성색상7 {
-  background: #afc2ff;
-}
-.습관카드_달성색상8 {
-  background: #ffbaaa;
+.wraping {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .습관카드_내용카드 {
   display: flex;
   flex-flow: row;
+  align-items: center;
   height: 54px;
-  margin-bottom: 14px;
   border-radius: 5px 5px 0% 0%;
 }
-.체크버튼 {
-  margin-top: 4px;
-}
-.습관카드_내용카드 img {
-  margin-top: 4px;
+img.수정버튼 {
+  margin: 0px;
+  opacity: 40%;
 }
 .습관카드_미달성 img {
   margin: 0;
 }
 .습관카드_미달성 .습관카드_내용카드 {
   height: 50px;
-  margin: 0;
 }
 .달성목표_실천박스 {
   display: flex;
   flex-flow: row;
-  height: 30px;
-  margin: auto 0;
-
-  justify-content: flex-start;
+  height: 54px;
+  align-items: center;
   border-radius: 0% 0% 5px 5px;
-  /* border-top: solid 1px white; */
+}
+.달성목표_실천박스 img {
+  width: 30px;
+  height: 30px;
 }
 .내용카드_습관이름 {
   font-weight: bold;
@@ -200,7 +148,7 @@ export default {
   flex-grow: 1;
   color: #000000;
   text-align: left;
-  padding-left: 30px;
+  margin-left: 30px;
 }
 .습관카드_미달성 .내용카드_습관이름 {
   line-height: 50px;
@@ -223,7 +171,7 @@ export default {
 
 .내용카드_구분선 {
   border-top: 2px solid #fff;
-  width: 540px;
+  width: 517px;
   height: 0;
   margin-left: 80px;
 }

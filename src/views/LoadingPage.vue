@@ -19,7 +19,7 @@ export default {
             code
           }
         })
-        location.href = '/habit/today'
+        location.href = '/today'
       }
       catch (err) {
         location.href = '/login'
