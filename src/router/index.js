@@ -37,7 +37,9 @@ const routes = [
   },
   {
     path: '/edit',
-    component: EditHabit
+    component: EditHabit,
+    name: 'Edit',
+    props: true
   },
   {
     path: '/loading',

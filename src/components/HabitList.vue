@@ -9,7 +9,7 @@
           @click="recieveHabitItem.activated = true"
           src="@/assets/img_check_unexecuted.png"
         />
-        <div class="내용카드_습관이름">
+        <div class="내용카드_습관이름" @click="clickEdit">
           [{{ habitItem.category }}] {{ habitItem.objective }}
         </div>
         <img src="@/assets/img_edit.png" class="수정버튼" />
@@ -22,7 +22,7 @@
     >
       <div class="습관카드_내용카드">
         <img @click="recieveHabitItem.activated = false" :src="checkBtn" />
-        <div class="내용카드_습관이름">
+        <div class="내용카드_습관이름" @click="clickEdit">
           [{{ categoryName }}]{{ habitItem.objective }}
         </div>
         <img class="수정버튼" src="@/assets/img_edit.png" />
@@ -52,6 +52,18 @@ export default {
     },
     checkBtn() {
       return require(`@/assets/img_check_${this.checkBtnUrl}.png`);
+    },
+  },
+  methods: {
+    clickEdit() {
+      this.$router.push({
+        name: "Edit",
+        params: {
+          category: this.habitItem.category,
+          name: this.habitItem.objective,
+        },
+      });
+      console.log(this.habitItem.category);
     },
   },
   created() {
