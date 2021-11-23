@@ -1,5 +1,6 @@
 <template>
   <div class="row">
+    <habit-header class="header"></habit-header>
     <div class="container">
       <div class="로고">{{ LogoData }}</div>
       <div class="상단메뉴">
@@ -33,7 +34,12 @@
 
 
 <script>
+import HabitHeader from '../components/HabitHeader.vue'
+
 export default {
+  components: {
+  HabitHeader,
+},
 
 }
 </script>

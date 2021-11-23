@@ -1,5 +1,6 @@
 <template>
   <div>
+    <habit-header class="header"></habit-header>
     <div class="box">
       <div class="category">닉네임</div>
       <div>맥스</div>
@@ -13,7 +14,12 @@
 </template>
 
 <script>
+import HabitHeader from '../components/HabitHeader.vue'
+
 export default {
+  components: {
+    HabitHeader,
+  },
   created() {},
 };
 </script>
