@@ -34,7 +34,7 @@
       </template>
       <template v-slot:confirm>
         <div class="dual_button">
-          <div class="button_left">확인</div>
+          <div class="button_left" @click="authWithdrawal">확인</div>
           <div class="button_right" @click="activeConfirm">취소</div>
         </div>
       </template>
@@ -61,13 +61,28 @@ export default {
       ],
       nicknamesBackgroundColor: "#000",
       emailsBackgroundColor: "#000",
-      confirm: true
+      confirm: false
     }
   },
   methods: {
     activeConfirm() {
       this.confirm = !this.confirm
     },
+    async authWithdrawal() {
+      try {
+        await this.axios({
+          method: 'delete',
+          url: '/api/withdrawal',
+        })
+
+        // this.$store.state.user = null
+        location.href = '/main'
+      }
+      catch (err) {
+        console.log(err.data);
+      } 
+    }
+    
   },
   created() {
     let nickname = Math.floor(Math.random() * 8)
@@ -113,8 +128,9 @@ export default {
 .withdrawal_btn {
   display: flex;
   justify-content: center;
-  width: 100%;
+  width: 30%;
   height: 50px;
+  margin-top: 20px;
   line-height: 50px;
   background-color: #FF5757;
   border-radius: 100px;

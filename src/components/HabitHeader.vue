@@ -10,7 +10,7 @@
       로그아웃
     </div>
     <div class="상단메뉴" v-if="user">
-      <router-link to="t/total" >
+      <router-link to="/total" >
         <div :class="{ 'active': $route.path == '/total' }">
           전체습관
         </div>
