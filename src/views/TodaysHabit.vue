@@ -12,7 +12,8 @@
           >
           </habit-list>
         </div>
-        <div v-else>오늘의 목표 없음</div>
+        <div v-else>오늘의 목표 없음</div> 
+        <!-- 없음 디자인 추가할 예정-->
       </div>
     </div>
   </div>
