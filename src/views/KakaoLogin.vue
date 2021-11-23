@@ -1,5 +1,8 @@
 <template>
   <div class="container">
+    <header>
+      <img src="@/assets/logo.png" alt="">
+    </header>
     <div class="login">
       로그인
     </div>
@@ -33,6 +36,14 @@ export default {
   display: flex;
   flex-direction: column;
   width: 100%;
+}
+header {
+  width: 100%;
+  height: 80px;
+}
+header img {
+  width: 80px;
+  height: 80px;
 }
 .login {
   flex-basis: 300px;
