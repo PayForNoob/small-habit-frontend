@@ -12,7 +12,7 @@
           >
           </habit-list>
         </div>
-        <div v-else>오늘의 목표 없음</div> 
+        <div v-else>오늘의 목표 없음</div>
         <!-- 없음 디자인 추가할 예정-->
       </div>
     </div>
@@ -21,12 +21,12 @@
 
 <script>
 import HabitList from "@/components/HabitList.vue";
-import HabitHeader from '../components/HabitHeader.vue'
+import HabitHeader from "../components/HabitHeader.vue";
 
 export default {
   components: {
     HabitList,
-    HabitHeader
+    HabitHeader,
   },
   async created() {
     let today = new Date().getDay();
@@ -62,7 +62,7 @@ export default {
 
 <style scoped>
 ::-webkit-scrollbar {
-  width: 10px;  
+  width: 10px;
 }
 ::-webkit-scrollbar-thumb {
   background-color: #9b9b9b;
@@ -78,9 +78,8 @@ export default {
   display: flex;
   flex-direction: column;
   padding: 10px 14px 0 24px;
-  height: calc( 100vh - 150px );
+  height: calc(100vh - 150px);
   overflow: auto;
-
 }
 .목표목록_목표갯수 {
   height: 50px;
