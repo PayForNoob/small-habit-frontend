@@ -24,7 +24,7 @@ import HabitHeader from '../components/HabitHeader.vue'
 
 export default {
   components: {
-    "habit-list": HabitList,
+    HabitList,
     HabitHeader
   },
   async created() {
@@ -48,7 +48,7 @@ export default {
       console.log(err);
     }
   },
-  data: function () {
+  data() {
     return {
       LogoData: "Logo",
       actionButtonClick: 0,
@@ -60,9 +60,6 @@ export default {
 </script>
 
 <style scoped>
-.contents {
-  width: 100%;
-}
 ::-webkit-scrollbar {
   width: 10px;  
 }

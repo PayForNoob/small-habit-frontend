@@ -1,7 +1,7 @@
 <template>
   <header>
     <div  class="로고">
-      <img src="../assets/logo.png" alt="">
+      <img src="@/assets/logo.png" alt="">
     </div>
     <router-link to="/login" class="로그인" v-if="!user">
       로그인

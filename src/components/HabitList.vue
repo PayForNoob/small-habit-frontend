@@ -10,7 +10,7 @@
           src="@/assets/img_check_unexecuted.png"
         />
         <div class="내용카드_습관이름">
-          [{{ habitItem.category }}] {{ habitItem.objective }}
+          [{{ categoryName }}] {{ habitItem.objective }}
         </div>
         <img src="@/assets/img_edit.png" class="수정버튼" />
       </div>
