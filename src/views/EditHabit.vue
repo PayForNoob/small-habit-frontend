@@ -45,7 +45,6 @@ export default {
   /* 높이삭제해야함 */
   border: 1px solid rgb(224, 218, 218);
 
-  padding: ;
   background-color: #e1e1e1;
   /* justify-content: center; */
 }
