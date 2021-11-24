@@ -6,9 +6,9 @@
         <div class="목표목록_목표갯수">목표{{ habitTotalNum }}</div>
         <div v-if="habitTotalNum != 0">
           <habit-list
-            v-for="(habitItem, index) in habitItems"
+            v-for="(habitItem) in habitItems"
             :habitItem="habitItem"
-            :key="index"
+            :key="habitItem.id"
           >
           </habit-list>
         </div>

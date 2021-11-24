@@ -2,15 +2,15 @@
   <div class="습관카드_상위박스">
     <div
       class="습관카드_박스 습관카드_미달성"
-      v-if="habitItem.activated === false"
+      v-if="!practiced"
     >
       <div class="습관카드_내용카드">
         <img
-          @click="recieveHabitItem.activated = true"
+          @click="habitPractice(habitItem.id)"
           src="@/assets/img_check_unexecuted.png"
         />
         <div class="내용카드_습관이름" @click="clickEdit">
-          [{{ habitItem.category }}] {{ habitItem.objective }}
+          [{{ categoryName }}] {{ habitItem.objective }}
         </div>
         <img src="@/assets/img_edit.png" class="수정버튼" />
       </div>
@@ -18,10 +18,10 @@
     <div
       class="습관카드_박스"
       :class="backgroundColor"
-      v-if="habitItem.activated === true"
+      v-if="practiced"
     >
       <div class="습관카드_내용카드">
-        <img @click="recieveHabitItem.activated = false" :src="checkBtn" />
+        <img @click="notPractice(habitItem.id)" :src="checkBtn" />
         <div class="내용카드_습관이름" @click="clickEdit">
           [{{ categoryName }}]{{ habitItem.objective }}
         </div>
@@ -29,7 +29,7 @@
       </div>
       <div class="내용카드_구분선"></div>
       <div class="달성목표_실천박스">
-        <div class="내용카드_실천횟수">{{ 0 }}회째 실천중!!!</div>
+        <div class="내용카드_실천횟수">{{ totalPracticed }}회째 실천중!!!</div>
         <img v-for="num in 3" :key="num" src="@/assets/img_clapping.png" />
       </div>
     </div>
@@ -41,9 +41,11 @@ export default {
   props: ["habitItem"],
   data() {
     return {
-      recieveHabitItem: this.habitItem,
       categoryName: null,
       checkBtnUrl: null,
+      practiced: false,
+      totalPracticed: 0,
+      today: null
     };
   },
   computed: {
@@ -55,6 +57,63 @@ export default {
     },
   },
   methods: {
+    async habitPractice(id) {
+      console.log(id)
+      try {
+        await this.axios({
+          method: 'post',
+          url: `/api/practiced/${id}`,
+          data: {
+            date: this.today
+          },
+        })
+        console.log('practice')
+      }
+      catch (err) {
+        console.log(err)
+      } 
+      this.checkPracticed()
+
+      // 습관 실천횟수 가져오기
+      try {
+        let { data } = await this.axios({
+          method: 'get',
+          url: `/api/totalpracticed/${this.habitItem.id}`,
+        })
+        console.log('data', data)
+        this.totalPracticed = data.length
+
+      } catch(err) {
+        console.log('err', err)
+      }
+    },
+    async notPractice(id) {
+      console.log(id)
+      try {
+        await this.axios({
+          method: 'delete',
+          url: `/api/practiced/${id}`,
+          params: {
+            date: this.today
+          }
+        })
+        console.log('practice')
+      }
+      catch (err) {
+        console.log(err)
+      } 
+      this.checkPracticed()
+    },
+    async checkPracticed() {
+      let { data } = await this.axios({
+        method: 'get',
+        url: `/api/practiced/${this.habitItem.id}`,
+        params: {
+          date: this.today
+        }
+      })
+      this.practiced = data
+    },
     clickEdit() {
       this.$router.push({
         path: `/edit/${this.habitItem.id}`,
@@ -65,7 +124,27 @@ export default {
       console.log(this.habitItem.id);
     },
   },
-  created() {
+  async created() {
+    let year = new Date().getFullYear()
+    let month = new Date().getMonth()
+    let date = new Date().getDate()
+    this.today = year + "-" + month + "-" + date
+
+    // 습관 실천여부 확인
+    this.checkPracticed()
+
+    // 습관 실천횟수 가져오기
+    try {
+      let { data } = await this.axios({
+        method: 'get',
+        url: `/api/totalpracticed/${this.habitItem.id}`,
+      })
+      console.log('data', data)
+      this.totalPracticed = data.length
+
+    } catch(err) {
+      console.log('err', err)
+    }
     switch (this.habitItem.category) {
       case 0:
         this.checkBtnUrl = "exercise";
