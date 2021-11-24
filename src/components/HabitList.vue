@@ -63,16 +63,16 @@ export default {
         await this.axios({
           method: 'post',
           url: `/api/practiced/${id}`,
-          params: {
+          data: {
             date: this.today
-          }
+          },
         })
         console.log('practice')
       }
       catch (err) {
         console.log(err)
       } 
-      this.practiced = !this.practiced
+      this.checkPracticed()
 
       // 습관 실천횟수 가져오기
       try {
@@ -102,7 +102,17 @@ export default {
       catch (err) {
         console.log(err)
       } 
-      this.practiced = !this.practiced
+      this.checkPracticed()
+    },
+    async checkPracticed() {
+      let { data } = await this.axios({
+        method: 'get',
+        url: `/api/practiced/${this.habitItem.id}`,
+        params: {
+          date: this.today
+        }
+      })
+      this.practiced = data
     },
     clickEdit() {
       this.$router.push({
@@ -122,14 +132,7 @@ export default {
     this.today = year + "-" + month + "-" + date
 
     // 습관 실천여부 확인
-    let { data } = await this.axios({
-      method: 'get',
-      url: `/api/practiced/${this.habitItem.id}`,
-      params: {
-        date: this.today
-      }
-    })
-    this.practiced = data
+    this.checkPracticed()
 
     // 습관 실천횟수 가져오기
     try {
