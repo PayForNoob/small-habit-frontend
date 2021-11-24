@@ -36,9 +36,8 @@ const routes = [
     component: MyPage
   },
   {
-    path: '/edit',
+    path: '/edit/:id',
     component: EditHabit,
-    name: 'Edit',
     props: true
   },
   {

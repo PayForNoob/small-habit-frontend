@@ -8,7 +8,7 @@
         <div class="습관종류">{{ categoryName }}</div>
         <div class="습관명_박스">
           <div class="습관명" placeholder="ddasda" contentEditable="true">
-            {{ name }}
+            {{ habitItems.objective }}
           </div>
           <div class="글자편집_이미지박스">
             <img class="글자편집_이미지" src="@/assets/img_edit_text.png" />
@@ -24,8 +24,7 @@
 
 <script>
 export default {
-  name: "Edit",
-  props: ["message", "habitItem", "category", "name"],
+  props: ["message", "id", "habitItems"],
   data() {
     return { categoryName: null, habitImgUrl: null };
   },
@@ -35,45 +34,45 @@ export default {
     },
   },
   created() {
-    console.log(this.name);
-    switch (this.category) {
-      case "0":
+    console.log(this.habitItems);
+    switch (this.habitItems.category) {
+      case 0:
         this.habitImgUrl = "exercise";
         this.categoryName = "운동";
         console.log(this.habitImgUrl);
         break;
 
-      case "1":
+      case 1:
         this.habitImgUrl = "hobby";
         this.categoryName = "취미";
         break;
 
-      case "2":
+      case 2:
         this.habitImgUrl = "reading";
         this.categoryName = "독서";
         break;
 
-      case "3":
+      case 3:
         this.habitImgUrl = "learning";
         this.categoryName = "학습";
         break;
 
-      case "4":
+      case 4:
         this.habitImgUrl = "money_management";
         this.categoryName = "자산관리";
         break;
 
-      case "5":
+      case 5:
         this.habitImgUrl = "business_life";
         this.categoryName = "회사생활";
         break;
 
-      case "6":
+      case 6:
         this.habitImgUrl = "time_for_me";
         this.categoryName = "나를 위한 시간";
         break;
 
-      case "7":
+      case 7:
         this.habitImgUrl = "lifestyle";
         this.categoryName = "생활습관";
         break;

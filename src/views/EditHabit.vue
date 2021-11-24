@@ -1,9 +1,10 @@
 <template>
   <div class="row">
     <div class="container">
-      <HabitEditHeader :message="message" :category="category" :name="name">
+      <HabitEditHeader :message="message" :habitItems="habitItems" :id="id">
       </HabitEditHeader>
       <HabitEditWeek> </HabitEditWeek>
+      <HabitEditDetail></HabitEditDetail>
     </div>
   </div>
 </template>
@@ -11,14 +12,33 @@
 <script>
 import HabitEditHeader from "@/components/HabitEditHeader.vue";
 import HabitEditWeek from "@/components/HabitEditWeek.vue";
+import HabitEditDetail from "@/components/HabitEditDetail.vue";
 export default {
-  props: ["category", "name"],
+  props: ["id"],
   components: {
     HabitEditHeader,
     HabitEditWeek,
+    HabitEditDetail,
   },
-  created() {
-    console.log(name);
+  async created() {
+    let today = new Date().getDay();
+    let todaysObjectives = {
+      schedule: today,
+      activated: true,
+    };
+    try {
+      let { data } = await this.axios({
+        method: "get",
+        url: `/api/objectives/${this.id}`,
+        params: {
+          ...todaysObjectives,
+        },
+      });
+      console.log(data);
+      this.habitItems = data;
+    } catch (err) {
+      console.log(err);
+    }
   },
   data() {
     return {
