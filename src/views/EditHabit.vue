@@ -4,6 +4,7 @@
       <HabitEditHeader :message="message" :habitItems="habitItems" :id="id">
       </HabitEditHeader>
       <HabitEditWeek> </HabitEditWeek>
+      <HabitEditDetail></HabitEditDetail>
     </div>
   </div>
 </template>
@@ -11,11 +12,13 @@
 <script>
 import HabitEditHeader from "@/components/HabitEditHeader.vue";
 import HabitEditWeek from "@/components/HabitEditWeek.vue";
+import HabitEditDetail from "@/components/HabitEditDetail.vue";
 export default {
   props: ["id"],
   components: {
     HabitEditHeader,
     HabitEditWeek,
+    HabitEditDetail,
   },
   async created() {
     let today = new Date().getDay();

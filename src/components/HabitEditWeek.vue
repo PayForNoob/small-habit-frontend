@@ -18,7 +18,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .흰배경_박스 {
   margin: 0px 24px 10px 24px;
   min-height: 30px;
