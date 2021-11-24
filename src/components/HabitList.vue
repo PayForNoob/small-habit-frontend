@@ -57,13 +57,12 @@ export default {
   methods: {
     clickEdit() {
       this.$router.push({
-        name: "Edit",
+        path: `/edit/${this.habitItem.id}`,
         params: {
-          category: this.habitItem.category,
-          name: this.habitItem.objective,
+          id: this.habitItem.id,
         },
       });
-      console.log(this.habitItem.category);
+      console.log(this.habitItem.id);
     },
   },
   created() {
