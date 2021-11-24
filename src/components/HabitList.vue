@@ -18,7 +18,7 @@
     <div
       class="습관카드_박스"
       :class="backgroundColor"
-      v-if="practiced"
+      v-if="practiced && checkBtn"
     >
       <div class="습관카드_내용카드">
         <img @click="notPractice(habitItem.id)" :src="checkBtn" />
