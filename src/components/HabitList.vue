@@ -2,11 +2,11 @@
   <div class="습관카드_상위박스">
     <div
       class="습관카드_박스 습관카드_미달성"
-      v-if="!practiced"
+      v-if="$route.path != '/total' && !practiced"
     >
       <div class="습관카드_내용카드">
         <img
-          @click="habitPractice(habitItem.id)"
+          @click="habitPracticed(habitItem.id)"
           src="@/assets/img_check_unexecuted.png"
         />
         <div class="내용카드_습관이름" @click="clickEdit">
@@ -18,10 +18,10 @@
     <div
       class="습관카드_박스"
       :class="backgroundColor"
-      v-if="practiced && checkBtn"
+      v-if="$route.path == '/total' || practiced"
     >
       <div class="습관카드_내용카드">
-        <img @click="notPractice(habitItem.id)" :src="checkBtn" />
+        <img @click="undoPracticed(habitItem.id)" :src="checkBtn" />
         <div class="내용카드_습관이름" @click="clickEdit">
           [{{ categoryName }}]{{ habitItem.objective }}
         </div>
@@ -44,7 +44,7 @@ export default {
       categoryName: null,
       checkBtnUrl: null,
       practiced: false,
-      totalPracticed: 0,
+      totalPracticed: this.habitItem.totalPracticed,
       today: null
     };
   },
@@ -57,8 +57,8 @@ export default {
     },
   },
   methods: {
-    async habitPractice(id) {
-      console.log(id)
+  // 습관 실천하기
+    async habitPracticed(id) {
       try {
         await this.axios({
           method: 'post',
@@ -67,43 +67,34 @@ export default {
             date: this.today
           },
         })
-        console.log('practice')
       }
       catch (err) {
         console.log(err)
       } 
-      this.checkPracticed()
-
-      // 습관 실천횟수 가져오기
-      try {
-        let { data } = await this.axios({
-          method: 'get',
-          url: `/api/totalpracticed/${this.habitItem.id}`,
-        })
-        console.log('data', data)
-        this.totalPracticed = data.length
-
-      } catch(err) {
-        console.log('err', err)
-      }
+      await this.checkPracticed()
+      this.totalPracticed += 1
     },
-    async notPractice(id) {
-      console.log(id)
-      try {
-        await this.axios({
-          method: 'delete',
-          url: `/api/practiced/${id}`,
-          params: {
-            date: this.today
-          }
-        })
-        console.log('practice')
+  // 습관 실천 취소
+    async undoPracticed(id) {
+      if(this.$route.path != '/total') {
+        try {
+          await this.axios({
+            method: 'delete',
+            url: `/api/practiced/${id}`,
+            params: {
+              date: this.today
+            }
+          })
+        }
+        catch (err) {
+          console.log(err)
+        } 
+        await this.checkPracticed()
+        this.totalPracticed -= 1
       }
-      catch (err) {
-        console.log(err)
-      } 
-      this.checkPracticed()
+
     },
+  // 습관 실천여부 확인
     async checkPracticed() {
       let { data } = await this.axios({
         method: 'get',
@@ -114,6 +105,7 @@ export default {
       })
       this.practiced = data
     },
+  // 수정버튼 클릭
     clickEdit() {
       this.$router.push({
         path: `/edit/${this.habitItem.id}`,
@@ -125,26 +117,6 @@ export default {
     },
   },
   async created() {
-    let year = new Date().getFullYear()
-    let month = new Date().getMonth()
-    let date = new Date().getDate()
-    this.today = year + "-" + month + "-" + date
-
-    // 습관 실천여부 확인
-    this.checkPracticed()
-
-    // 습관 실천횟수 가져오기
-    try {
-      let { data } = await this.axios({
-        method: 'get',
-        url: `/api/totalpracticed/${this.habitItem.id}`,
-      })
-      console.log('data', data)
-      this.totalPracticed = data.length
-
-    } catch(err) {
-      console.log('err', err)
-    }
     switch (this.habitItem.category) {
       case 0:
         this.checkBtnUrl = "exercise";
@@ -191,6 +163,14 @@ export default {
         this.categoryName = null;
         break;
     }
+
+    let year = new Date().getFullYear()
+    let month = new Date().getMonth() + 1
+    let date = new Date().getDate()
+    this.today = year + "-" + month + "-" + date
+
+    // 습관 실천여부 확인
+    await this.checkPracticed()
   },
 };
 </script>

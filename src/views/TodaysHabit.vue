@@ -3,8 +3,8 @@
     <habit-header class="header"></habit-header>
     <div class="container">
       <div class="목표목록_박스">
-        <div class="목표목록_목표갯수">목표{{ habitTotalNum }}</div>
-        <div v-if="habitTotalNum != 0">
+        <div class="목표목록_목표갯수">목표{{ habitItems.length }}</div>
+        <div v-if="habitItems.length != 0">
           <habit-list
             v-for="(habitItem) in habitItems"
             :habitItem="habitItem"
@@ -28,34 +28,26 @@ export default {
     HabitList,
     HabitHeader,
   },
+  data() {
+    return {
+      habitItems: [],
+    };
+  },
   async created() {
     let today = new Date().getDay();
-    let todaysObjectives = {
-      schedule: today,
-      activated: true,
-    };
     try {
       let { data } = await this.axios({
         method: "get",
         url: "/api/objectives",
         params: {
-          ...todaysObjectives,
+          schedule: today,
         },
       });
-      console.log(data);
       this.habitItems = data;
-      this.habitTotalNum = this.habitItems.length;
+      console.log(this.habitItems)
     } catch (err) {
       console.log(err);
     }
-  },
-  data() {
-    return {
-      LogoData: "Logo",
-      actionButtonClick: 0,
-      habitItems: [],
-      habitTotalNum: "",
-    };
   },
 };
 </script>

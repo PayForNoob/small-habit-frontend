@@ -17,7 +17,7 @@
       </router-link>
       <router-link to="/today" >
         <div :class="{ 'active': $route.path == '/today' }">
-          오늘 실천
+          오늘실천
         </div>
       </router-link>
       <router-link to="/mypage" >
@@ -54,6 +54,7 @@ export default {
       } 
     },
   },
+  props: ["isActived", "notActived"],
 }
 </script>
 
