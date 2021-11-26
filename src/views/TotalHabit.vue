@@ -15,6 +15,9 @@
         <div v-else>오늘의 목표 없음</div>
         <!-- 없음 디자인 추가할 예정-->
       </div>
+      <div class="습관_생성">
+        새 습관 생성
+      </div>
     </div>
   </div>
 </template>
@@ -71,7 +74,7 @@ export default {
   display: flex;
   flex-direction: column;
   padding: 10px 14px 0 24px;
-  height: calc(100vh - 150px);
+  height: calc(100vh - 200px);
   overflow: auto;
 }
 .목표목록_목표갯수 {
@@ -84,5 +87,12 @@ export default {
   font-size: 24px;
   text-align: right;
   color: #000000;
+}
+.습관_생성 {
+  height: 40px;
+  margin-bottom: 10px;
+  line-height: 40px;
+  background-color: #BEBEBE;
+  color: #fff;
 }
 </style>
