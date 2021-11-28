@@ -1,55 +1,59 @@
 <template>
   <div>
     <habit-header class="header"></habit-header>
-    <div class="container" v-if="!confirm">
-      <div class="userInfo" :style="{ backgroundColor: nicknamesBackgroundColor }">
-        <div class="nickname">
-          닉네임
+    <div class="container">
+      <div class="userInfo">
+        <div class="infoBox" :style="{ backgroundColor: nicknamesBackgroundColor }">
+          <div class="nickname">
+            닉네임
+          </div>
+          <div>
+            {{ user.nickname }}
+          </div>
         </div>
-        <div>
-          {{ user.nickname }}
+        <div class="infoBox" :style="{ backgroundColor: emailsBackgroundColor }">
+          <div class="email">
+            이메일
+          </div>
+          <div>
+            {{ user.email }}
+          </div>
         </div>
       </div>
-      <div class="userInfo" :style="{ backgroundColor: emailsBackgroundColor }">
-        <div class="email">
-          이메일
-        </div>
-        <div>
-          {{ user.email }}
-        </div>
-      </div>
-      <div class="withdrawal_btn" @click="activeConfirm">
+      <div class="withdrawal_btn" @click="activeConfirm" v-if="!confirm">
         탈퇴하기
       </div>
+      <div class="bg" v-if="confirm"></div>
+      <habit-modal v-if="confirm" class="confirm">
+        <template v-slot:header>
+          <div class="confirm_header">정말 탈퇴하시겠습니까?</div>
+        </template>
+        <template v-slot:contents>
+          <div class="confirm_contents">
+            <p>탈퇴하실 경우 회원님의 모든 정보가</p>
+            <p>사라지고 복구할 수 없습니다.</p>
+          </div>
+        </template>
+        <template v-slot:confirm>
+          <div class="dual_button">
+            <div class="button_left" @click="authWithdrawal">확인</div>
+            <div class="button_right" @click="activeConfirm">취소</div>
+          </div> 
+        </template>
+      </habit-modal>
     </div>
-    <habit-confirm v-if="confirm">
-      <template v-slot:header>
-        <div class="confirm_header">정말 탈퇴하시겠습니까?</div>
-      </template>
-      <template v-slot:contents>
-        <div class="confirm_contents">
-          <p>탈퇴하실 경우 회원님의 모든 정보가</p>
-          <p>사라지고 복구할 수 없습니다.</p>
-        </div>
-      </template>
-      <template v-slot:confirm>
-        <div class="dual_button">
-          <div class="button_left" @click="authWithdrawal">확인</div>
-          <div class="button_right" @click="activeConfirm">취소</div>
-        </div>
-      </template>
-    </habit-confirm>
+
   </div>
 </template>
 
 <script>
 import HabitHeader from '../components/HabitHeader.vue'
-import HabitConfirm from '@/components/HabitConfirm.vue'
+import HabitModal from '@/components/HabitModal.vue'
 
 export default {
   components: {
     HabitHeader,
-    HabitConfirm,
+    HabitModal,
 
   },
   data() {
@@ -74,7 +78,6 @@ export default {
           method: 'delete',
           url: '/api/withdrawal',
         })
-
         // this.$store.state.user = null
         location.href = '/main'
       }
@@ -102,12 +105,19 @@ export default {
 .container {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  width: 672px;
-  padding-top: 30px;
+  width: 720px;
+  height: calc(100vh - 150px);
   margin: 0 auto;
 }
 .userInfo {
+  display: flex;
+  flex-direction: column;
+  padding: 30px 24px 0px;
+  width: 100%;
+}
+.infoBox {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -128,16 +138,34 @@ export default {
 .withdrawal_btn {
   display: flex;
   justify-content: center;
-  width: 30%;
-  height: 50px;
-  margin-top: 20px;
-  line-height: 50px;
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  margin-bottom: 4px;
   background-color: #FF5757;
-  border-radius: 100px;
   color: #fff;
   font-size: 20px;
 }
+@keyframes modal {
 
+  from { 
+    margin-top: 360px; 
+    opacity: 0;
+  }
+
+  to {
+    margin-top: 0px; 
+    opacity: 100%;
+  }
+
+}
+.confirm {
+  animation-name: modal;
+  animation-duration: 1.5s;
+  background-color: #fff;
+  margin-bottom: 4px;
+  z-index: 10000;
+}
 .confirm_header {
   font-size: 30px;
   font-weight: bold;
@@ -154,16 +182,24 @@ export default {
   width: 100%;
 }
 .dual_button div {
-  width: 25%;
-  height: 50px;
-  line-height: 50px;
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
   color: #fff;
-  border-radius: 100px;
 }
 .button_left {
   background-color: #ff545e;
 }
 .button_right {
   background-color: #5e5e5e;
+}
+.bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  opacity: 50%;
 }
 </style>

@@ -2,7 +2,9 @@
   <div class="confirm">
     <slot name="header"></slot>
     <slot name="contents"></slot>
-    <slot name="confirm"> 확인 </slot>
+    <slot name="confirm"> 
+      확인
+    </slot>
   </div>
 </template>
 
@@ -20,8 +22,9 @@ export default {
   align-items: center;
   width: 720px;
   height: 360px;
-  padding: 50px 20px 0px;
+  padding: 50px 0px 0px;
   margin: 0 auto;
   border-radius: 30px;
 }
+
 </style>

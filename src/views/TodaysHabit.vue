@@ -73,7 +73,7 @@ export default {
   display: flex;
   flex-direction: column;
   padding: 10px 14px 0 24px;
-  height: calc(100vh - 200px);
+  height: calc(100vh - 216px);
   overflow: auto;
 }
 .목표목록_목표갯수 {
@@ -88,10 +88,11 @@ export default {
   color: #000000;
 }
 .습관_생성 {
-  height: 40px;
-  margin-bottom: 10px;
-  line-height: 40px;
-  background-color: #BEBEBE;
+  height: 60px;
+  line-height: 60px;
+  margin-bottom: 4px;
+  background-color: #777777;
   color: #fff;
+  font-size: 20px;
 }
 </style>

@@ -44,7 +44,7 @@ export default {
     return {
       message: "습관명입력",
       habitItems: [],
-    };
+     };
   },
 };
 </script>
