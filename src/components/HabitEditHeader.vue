@@ -16,7 +16,7 @@
         </div>
       </div>
       <div class="습관이미지_박스">
-        <img class="습관_이미지" :src="habitImg" />
+        <img v-if="categoryName" class="습관_이미지" :src="habitImg" />
       </div>
     </div>
   </div>
@@ -30,11 +30,14 @@ export default {
   },
   computed: {
     habitImg() {
+      console.log(1);
       return require(`@/assets/img_habit_${this.habitImgUrl}.png`);
     },
   },
-  created() {
-    console.log(this.habitItems);
+  updated() {
+    console.log(this.habitItems.category);
+    console.log(this.message);
+    console.log(this.id);
     switch (this.habitItems.category) {
       case 0:
         this.habitImgUrl = "exercise";
