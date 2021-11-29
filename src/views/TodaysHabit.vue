@@ -50,7 +50,7 @@ export default {
       console.log(this.habitItems)
     } catch (err) {
       console.log(err);
-    }
+    }  
   },
 };
 </script>

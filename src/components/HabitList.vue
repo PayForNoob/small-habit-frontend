@@ -38,12 +38,13 @@
 
 <script>
 export default {
-  props: ["habitItem"],
+  props: ["habitItem",],
   data() {
     return {
       categoryName: null,
       checkBtnUrl: null,
-      practiced: false,
+      detailedHabits: this.habitItem.detailedObjectives,
+      practiced: this.habitItem.practiced,
       totalPracticed: this.habitItem.totalPracticed,
       today: null
     };
@@ -55,6 +56,7 @@ export default {
     checkBtn() {
       return require(`@/assets/img_check_${this.checkBtnUrl}.png`);
     },
+
   },
   methods: {
   // 습관 실천하기
@@ -168,9 +170,6 @@ export default {
     let month = new Date().getMonth() + 1
     let date = new Date().getDate()
     this.today = year + "-" + month + "-" + date
-
-    // 습관 실천여부 확인
-    await this.checkPracticed()
   },
 };
 </script>
