@@ -1,10 +1,10 @@
 <template>
   <div class="row">
     <div class="container">
-      <HabitEditHeader :message="message" :habitItems="habitItems" :id="id">
-      </HabitEditHeader>
-      <HabitEditWeek> </HabitEditWeek>
-      <HabitEditDetail></HabitEditDetail>
+      <HabitEditHeader :message="message" :habitItems="habitItems" :id="id" />
+      <HabitEditWeek :schedules="habitItems.schedule" />
+      <HabitEditDetail />
+      <HabitEditDelSave />
     </div>
   </div>
 </template>
@@ -13,12 +13,14 @@
 import HabitEditHeader from "@/components/HabitEditHeader.vue";
 import HabitEditWeek from "@/components/HabitEditWeek.vue";
 import HabitEditDetail from "@/components/HabitEditDetail.vue";
+import HabitEditDelSave from "@/components/HabitEditDelSave.vue";
 export default {
   props: ["id"],
   components: {
     HabitEditHeader,
     HabitEditWeek,
     HabitEditDetail,
+    HabitEditDelSave,
   },
   async created() {
     let today = new Date().getDay();
@@ -44,7 +46,7 @@ export default {
     return {
       message: "습관명입력",
       habitItems: [],
-     };
+    };
   },
 };
 </script>
