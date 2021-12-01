@@ -6,7 +6,7 @@
         <div class="목표목록_목표갯수">목표{{ habitItems.length }}</div>
         <div v-if="habitItems.length != 0">
           <habit-list
-            v-for="(habitItem) in habitItems"
+            v-for="habitItem in habitItems"
             :habitItem="habitItem"
             :key="habitItem.id"
           >
@@ -95,4 +95,5 @@ export default {
   color: #fff;
   font-size: 20px;
 }
+
 </style>
