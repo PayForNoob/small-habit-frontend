@@ -5,13 +5,21 @@
       <!-- <div class="반복_버튼">◎매주 (주 {{ schedules.length }}번)</div>  -->
       <div class="반복_횟수">
         <img class="반복_버튼" src="@/assets/img_dayCircle_button.png" /> 매주
-        (주 7번)
+        (주 {{ number }}번)
       </div>
     </div>
     <div class="요일_박스">
-      <div v-for="(schedule, index) in schedules" :key="index">
-        <div v-if="schedule == index" class="요일_선택">{{ week[index] }}</div>
-        <div v-else class="요일_미선택"></div>
+      <div v-for="(schedule, index) in schedulesTemp" :key="index">
+        <div
+          v-if="schedulesTemp.includes(index)"
+          class="요일_선택"
+          @click="ButtonDay(index)"
+        >
+          {{ week[index] }}
+        </div>
+        <div v-else class="요일_미선택" @click="ButtonDay(index)">
+          {{ week[index] }}
+        </div>
       </div>
     </div>
   </div>
@@ -22,19 +30,44 @@ export default {
   props: ["schedules"],
   data() {
     return {
-      number: null,
+      number: 7,
       dayCircleImgUrl: null,
       week: ["월", "화", "수", "목", "금", "토", "일"],
+      schedulesTemp: {},
     };
+  },
+  methods: {
+    ButtonDay(id) {
+      console.log(this.schedulesTemp.includes(id));
+      if (this.schedulesTemp[id] != null) {
+        this.schedulesTemp[id] = null;
+        this.number--;
+      } else {
+        this.schedulesTemp[id] = id;
+        this.number++;
+      }
+      this.$forceUpdate;
+      console.log(this.schedulesTemp.includes(id));
+      console.log(this.schedulesTemp);
+    },
+    numberCount() {
+      this.number++;
+    },
   },
   computed: {
     dayImg() {
-      console.log(1);
       return require(`@/assets/img_dayCircle_btn_white.png`);
     },
   },
-  created() {
-    console.log(this.schedules);
+  updated() {
+    // for (let i = 0; i < this.schedules.length; i++) {
+    //   if (this.schedules[i]) {
+    //     this.number++;
+    //   }
+    // }
+    this.schedulesTemp = this.schedules;
+
+    console.log(this.schedulesTemp);
     // this.schedulele.inclued();
   },
 };
@@ -82,6 +115,9 @@ export default {
   height: 30px;
   padding-top: 5px;
 }
+.반복_버튼:hover {
+  cursor: pointer;
+}
 .요일_박스 {
   min-height: 50px;
   display: flex;
@@ -104,6 +140,13 @@ export default {
 
   color: #ffffff;
 }
+.요일_선택:hover {
+  cursor: pointer;
+}
+.요일_선택:active {
+  background: #6b63b6;
+  color: #ffffff;
+}
 .요일_미선택 {
   width: 50px;
   height: 50px;
@@ -117,8 +160,17 @@ export default {
   font-style: normal;
   font-weight: normal;
   font-size: 26px;
+  margin-left: 19px;
+  margin-right: 15px;
   line-height: 50px;
 
   color: #000000;
+}
+.요일_미선택:hover {
+  cursor: pointer;
+}
+.요일_미선택:active {
+  background: #b8b6c9;
+  color: #ffffff;
 }
 </style>
