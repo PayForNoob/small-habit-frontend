@@ -1,7 +1,7 @@
 <template>
   <div class="상단메뉴_박스">
     <div class="뒤로가기_박스">
-      <button class="뒤로가기_글씨">◁ 습관수정</button>
+      <button class="뒤로가기_글씨" @click="clickBackPage">◁ 습관수정</button>
     </div>
     <div class="습관및이미지_박스">
       <div class="습관_박스">
@@ -27,6 +27,14 @@ export default {
   props: ["message", "id", "habitItems"],
   data() {
     return { categoryName: null, habitImgUrl: null };
+  },
+  methods: {
+    clickBackPage() {
+      this.$router.push({
+        path: `/today`,
+        params: {},
+      });
+    },
   },
   computed: {
     habitImg() {
@@ -113,7 +121,11 @@ export default {
   background: #887de5;
   color: #e2e2e2;
 }
-
+.뒤로가기_글씨:hover {
+  background: #887de5;
+  color: #e5d1ee;
+  cursor: pointer;
+}
 .습관및이미지_박스 {
   display: flex;
   flex-flow: row;
