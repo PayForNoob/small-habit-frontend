@@ -7,10 +7,15 @@
     <!-- 상단 -->
       <div class="습관카드_내용카드">
         <!-- 체크버튼 -->
+          <!-- 미달성 -->
         <img @click="habitPracticed(habitItem.id)" 
         src="@/assets/img_check_unexecuted.png" alt="" 
-        v-if="$route.path != '/total' && !practiced">
-        <img @click="undoPracticed(habitItem.id)" :src="checkBtn" v-if="$route.path == '/total' || practiced"/>
+        v-if="$route.path != '/total' && !practiced"
+        :class="{pointer: $route.path != '/total'}">
+          <!-- 달성 -->
+        <img @click="undoPracticed(habitItem.id)" :src="checkBtn" 
+        v-if="$route.path == '/total' || practiced"
+        :class="{pointer: $route.path != '/total'}">
         
         <!-- 습관이름 -->
         <div class="내용카드_습관이름" @click="clickEdit">
@@ -18,7 +23,7 @@
         </div>
 
         <!-- 수정버튼 -->
-        <img class="수정버튼" src="@/assets/img_edit.png" />
+        <img class="수정버튼 pointer" src="@/assets/img_edit.png">
       </div>
 
       <!-- 세부습관 -->
@@ -72,7 +77,6 @@ export default {
 
   },
   methods: {
-
   // 습관 실천하기
     async habitPracticed(id) {
       try {
@@ -188,11 +192,16 @@ export default {
   let date = new Date().getDate()
   this.today =  year + "-" + month + "-" + date
 
+
   },
 };
 </script>
 
 <style scoped>
+.pointer {
+  cursor: pointer;
+}
+
 /* 배경색 */
 .습관카드_달성색상0 {
   background: #b8b1f0;

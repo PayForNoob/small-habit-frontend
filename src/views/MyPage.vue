@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="container">
     <habit-header class="header"></habit-header>
-    <div class="container">
+    <div class="contents">
       <div class="userInfo">
         <div class="infoBox" :style="{ backgroundColor: nicknamesBackgroundColor }">
           <div class="nickname">
@@ -105,11 +105,16 @@ export default {
 .container {
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+.contents {
+  position: relative;
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   width: 720px;
   height: calc(100vh - 150px);
-  margin: 0 auto;
 }
 .userInfo {
   display: flex;
@@ -138,10 +143,10 @@ export default {
 .withdrawal_btn {
   display: flex;
   justify-content: center;
+  cursor: pointer;
   width: 100%;
   height: 60px;
   line-height: 60px;
-  margin-bottom: 4px;
   background-color: #FF5757;
   color: #fff;
   font-size: 20px;
@@ -149,22 +154,45 @@ export default {
 @keyframes modal {
 
   from { 
-    margin-top: 360px; 
+    bottom: -360px; 
     opacity: 0;
   }
 
   to {
-    margin-top: 0px; 
+    bottom: 0px; 
     opacity: 100%;
   }
 
 }
 .confirm {
+  position: absolute;
+  bottom: 0px;
   animation-name: modal;
-  animation-duration: 1.5s;
+  animation-duration: 0.75s;
   background-color: #fff;
-  margin-bottom: 4px;
   z-index: 10000;
+}
+@keyframes bg {
+
+  from { 
+    opacity: 0;
+  }
+
+  to {
+    opacity: 50%;
+  }
+
+}
+.bg {
+  animation-name: bg;
+  animation-duration: 0.75s;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  opacity: 50%;
 }
 .confirm_header {
   font-size: 30px;
@@ -188,18 +216,12 @@ export default {
   color: #fff;
 }
 .button_left {
+  cursor: pointer;
   background-color: #ff545e;
 }
 .button_right {
+  cursor: pointer;
   background-color: #5e5e5e;
 }
-.bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: #000;
-  opacity: 50%;
-}
+
 </style>

@@ -1,7 +1,7 @@
 <template>
-  <div class="contents">
+  <div class="container">
     <habit-header class="header"></habit-header>
-    <div class="container">
+    <div class="contents">
       <div class="text">
         <div class="text_header">
           <p>
@@ -38,13 +38,17 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 header img {
   width: 50px;
   height: 50px;
 }
-.container {
+.contents {
   width: 720px;
-  margin: 0 auto;
   margin-top: calc((100vh - 846px)/4  );
   display: flex;
   flex-direction: column;

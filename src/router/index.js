@@ -1,7 +1,6 @@
 import { createWebHistory, createRouter } from 'vue-router'
 import LoadingPage from '../views/LoadingPage.vue'
 import MainPage from '../views/MainPage.vue'
-import KakaoLogin from '../views/KakaoLogin.vue'
 import TotalHabit from '../views/TotalHabit.vue'
 import TodaysHabit from '../views/TodaysHabit.vue'
 import MyPage from '../views/MyPage.vue'
@@ -18,10 +17,6 @@ const routes = [
   {
     path: '/main',
     component: MainPage
-  },
-  {
-    path: '/login',
-    component: KakaoLogin
   },
   {
     path: '/total',

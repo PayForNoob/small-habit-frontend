@@ -1,10 +1,11 @@
 <template>
-  <div>
+  <div class="container">
     <habit-header class="header"></habit-header>
-    <div class="container">
+    <pulse-loader v-if="loading == true" class="로딩중"></pulse-loader>
+    <div class="contents" v-if="loading == false">
       <div class="목표목록_박스">
         <div class="목표목록_목표갯수">목표{{ habitItems.length }}</div>
-        <div v-if="habitItems.length">
+        <div v-if="habitItems.length != 0" class="목표목록">
           <habit-list
             v-for="(habitItem) in habitItems"
             :habitItem="habitItem"
@@ -12,7 +13,7 @@
           >
           </habit-list>
         </div>
-        <div v-else>오늘의 목표 없음</div>
+        <div v-if="habitItems.length == 0">오늘의 목표 없음</div>
         <!-- 없음 디자인 추가할 예정-->
       </div>
       <div class="습관_생성">
@@ -26,16 +27,26 @@
 <script>
 import HabitList from "@/components/HabitList.vue";
 import HabitHeader from "../components/HabitHeader.vue";
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
 
 export default {
   components: {
     HabitList,
     HabitHeader,
+    PulseLoader,
   },
   data() {
     return {
       habitItems: [],
     }
+  },
+  computed: {
+    loading() {
+      return this.$store.state.loading 
+    },
+  },
+  beforeCreate() {
+    this.$store.commit('loadingStart')
   },
   async created() {
     try {
@@ -47,12 +58,12 @@ export default {
         },
       });
       this.habitItems = data;
+      this.$store.commit('loadingEnd')
       console.log(this.habitItems)
     } catch (err) {
       console.log(err);
     }
   },
-
 }
 </script>
 
@@ -64,22 +75,33 @@ export default {
   background-color: #9b9b9b;
   border-radius: 5px;
 }
+.로딩중 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: calc(100vh - 150px);
+}
 .container {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.contents {
+  display: flex;
   flex-flow: column;
-  margin: 0 auto;
   width: 720px;
 }
 .목표목록_박스 {
   display: flex;
   flex-direction: column;
-  padding: 10px 14px 0 24px;
-  height: calc(100vh - 216px);
-  overflow: auto;
+  padding-top: 10px;
+  height: calc(100vh - 210px);
 }
 .목표목록_목표갯수 {
   height: 50px;
   line-height: 50px;
+  padding-right: 24px;
   margin-bottom: 10px;
   font-family: Roboto;
   font-style: normal;
@@ -88,10 +110,17 @@ export default {
   text-align: right;
   color: #000000;
 }
+.목표목록 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-left: 10px;
+  overflow: auto;
+}
 .습관_생성 {
+  cursor: pointer;
   height: 60px;
   line-height: 60px;
-  margin-bottom: 4px;
   background-color: #777777;
   color: #fff;
   font-size: 20px;
