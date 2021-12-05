@@ -7,17 +7,64 @@
         src="@/assets/img_detail_point.png"
       />
       <p class="머릿말글씨">세부내역</p>
-      <img class="추가버튼_이미지" src="@/assets/img_detail_plus.png" />
+      <img
+        class="추가버튼_이미지"
+        src="@/assets/img_detail_plus.png"
+        @click="toggle"
+      />
     </div>
-    <li class="세부일정내용_박스">
-      가나다라 20회
-      <img class="세부일정삭제버튼_이미지" src="@/assets/img_detail_del.png" />
+    <li
+      v-for="(detailHabitItem, index) in detailHabitItems"
+      :key="index"
+      class="세부일정내용_박스"
+    >
+      {{ detailHabitItem.objective }}
+      <img
+        class="세부일정삭제버튼_이미지"
+        src="@/assets/img_detail_del.png"
+        @click="detailDel"
+      />
     </li>
+    <input
+      v-for="(detailHabitItemsPl, index) in detailHabitItemsPlus"
+      :key="index"
+      class="세부일정내용_박스"
+      style="width: 300px"
+      v-model="text[index]"
+      placeholder="내용을 적어주세요"
+    />
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: ["detailHabitItems"],
+  data() {
+    return {
+      detailHabitItemsPlus: 0,
+      text: [],
+    };
+  },
+  methods: {
+    toggle() {
+      this.detailHabitItemsPlus++;
+    },
+    async detailDel() {
+      try {
+        await this.axios({
+          method: "delete",
+          url: `/api/detailedObjectives/${this.id}`,
+          params: {},
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    },
+  },
+  async created() {
+    console.log(this.detailHabitItems);
+  },
+};
 </script>
 
 <style scoped>
@@ -60,6 +107,7 @@ export default {};
   height: 50px;
   width: 50px;
   margin-left: auto;
+  cursor: pointer;
 }
 .세부일정삭제버튼_이미지 {
   height: 24px;
@@ -67,6 +115,7 @@ export default {};
   margin-right: 110px;
   margin-left: auto;
   margin-top: 3px;
+  cursor: pointer;
 }
 .머릿말글씨 {
   font-family: Roboto;

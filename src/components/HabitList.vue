@@ -1,39 +1,47 @@
 <template>
   <div class="습관카드_상위박스">
-    <div
-      class="습관카드_박스"
-      :class="backgroundColor"
-    >
-    <!-- 상단 -->
+    <div class="습관카드_박스" :class="backgroundColor">
+      <!-- 상단 -->
       <div class="습관카드_내용카드">
         <!-- 체크버튼 -->
-          <!-- 미달성 -->
-        <img @click="habitPracticed(habitItem.id)" 
-        src="@/assets/img_check_unexecuted.png" alt="" 
-        v-if="$route.path != '/total' && !practiced"
-        :class="{pointer: $route.path != '/total'}">
-          <!-- 달성 -->
-        <img @click="undoPracticed(habitItem.id)" :src="checkBtn" 
-        v-if="$route.path == '/total' || practiced"
-        :class="{pointer: $route.path != '/total'}">
-        
+        <!-- 미달성 -->
+        <img
+          @click="habitPracticed(habitItem.id)"
+          src="@/assets/img_check_unexecuted.png"
+          alt=""
+          v-if="$route.path != '/total' && !practiced"
+          :class="{ pointer: $route.path != '/total' }"
+        />
+        <!-- 달성 -->
+        <img
+          @click="undoPracticed(habitItem.id)"
+          :src="checkBtn"
+          v-if="$route.path == '/total' || practiced"
+          :class="{ pointer: $route.path != '/total' }"
+        />
+
         <!-- 습관이름 -->
-        <div class="내용카드_습관이름" @click="clickEdit">
+        <div class="내용카드_습관이름">
           [{{ categoryName }}]{{ habitItem.objective }}
         </div>
 
         <!-- 수정버튼 -->
-        <img class="수정버튼 pointer" src="@/assets/img_edit.png">
+        <img
+          class="수정버튼 pointer"
+          src="@/assets/img_edit.png"
+          @click="clickEdit"
+        />
       </div>
 
       <!-- 세부습관 -->
-      <div class="세부습관_목록" >
-        <div v-for="detailedObjective in habitItem.detailedObjectives"
+      <div class="세부습관_목록">
+        <div
+          v-for="detailedObjective in habitItem.detailedObjectives"
           :key="detailedObjective.id"
           class="세부습관"
         >
-        <img src="@/assets/dot.png" alt="">
-          {{detailedObjective.objective}}
+          <img src="@/assets/dot.png" alt="" />
+          {{ detailedObjective.objective }}
         </div>
       </div>
 
@@ -51,7 +59,7 @@
 
 <script>
 export default {
-  props: ["habitItem",],
+  props: ["habitItem"],
   data() {
     return {
       today: null,
@@ -64,71 +72,66 @@ export default {
   },
   computed: {
     backgroundColor() {
-      if(this.$route.path == '/total' || this.practiced) {
+      if (this.$route.path == "/total" || this.practiced) {
         return "습관카드_달성색상" + this.habitItem.category;
       } else {
-        return "습관카드_미달성"
+        return "습관카드_미달성";
       }
-      
     },
     checkBtn() {
       return require(`@/assets/img_check_${this.checkBtnUrl}.png`);
     },
-
   },
   methods: {
-  // 습관 실천하기
+    // 습관 실천하기
     async habitPracticed(id) {
       try {
         await this.axios({
-          method: 'post',
+          method: "post",
           url: `/api/practiced/${id}`,
           data: {
-            date: this.today
+            date: this.today,
           },
-        })
+        });
+      } catch (err) {
+        console.log(err);
       }
-      catch (err) {
-        console.log(err)
-      } 
-      await this.checkPracticed()
-      this.totalPracticed += 1
+      await this.checkPracticed();
+      this.totalPracticed += 1;
     },
 
-  // 습관 실천 취소
+    // 습관 실천 취소
     async undoPracticed(id) {
-      if(this.$route.path != '/total') {
+      if (this.$route.path != "/total") {
         try {
           await this.axios({
-            method: 'delete',
+            method: "delete",
             url: `/api/practiced/${id}`,
             params: {
-              date: this.today
-            }
-          })
+              date: this.today,
+            },
+          });
+        } catch (err) {
+          console.log(err);
         }
-        catch (err) {
-          console.log(err)
-        } 
-        await this.checkPracticed()
-        this.totalPracticed -= 1
+        await this.checkPracticed();
+        this.totalPracticed -= 1;
       }
-
     },
 
-  // 습관 실천여부 확인
+    // 습관 실천여부 확인
     async checkPracticed() {
       let { data } = await this.axios({
-        method: 'get',
+        method: "get",
         url: `/api/practiced/${this.habitItem.id}`,
         params: {
-          date: this.today
-        }
-      })
-      this.practiced = data
+          date: this.today,
+        },
+      });
+      this.practiced = data;
     },
 
-  // 수정버튼 클릭
+    // 수정버튼 클릭
     clickEdit() {
       this.$router.push({
         path: `/edit/${this.habitItem.id}`,
@@ -187,12 +190,10 @@ export default {
         break;
     }
 
-  let year = new Date().getFullYear()
-  let month = new Date().getMonth() + 1
-  let date = new Date().getDate()
-  this.today =  year + "-" + month + "-" + date
-
-
+    let year = new Date().getFullYear();
+    let month = new Date().getMonth() + 1;
+    let date = new Date().getDate();
+    this.today = year + "-" + month + "-" + date;
   },
 };
 </script>
@@ -243,8 +244,6 @@ export default {
   border-radius: 15px;
 }
 
-
-
 /* 상단 */
 .습관카드_내용카드 {
   display: flex;
@@ -272,7 +271,6 @@ img.수정버튼 {
   opacity: 40%;
 }
 
-
 /* 세부습관 */
 
 .세부습관_목록 {
@@ -298,12 +296,10 @@ img.수정버튼 {
 .구분선 {
   border-top: 2px solid #fff;
   width: 548px;
-  height: 0; 
+  height: 0;
   margin: 10px 0px 10px 70px;
   margin-top: 10px;
 }
-
-
 
 /* 하단 */
 .달성목표_실천박스 {
