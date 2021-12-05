@@ -1,12 +1,46 @@
 <template>
-  <div class="삭제저장_박스">
-    <div class="삭제_박스">삭제</div>
+  <div class="삭제저장_박스" v-if="!deleteClick">
+    <div class="삭제_박스" @click="DeleteClick">삭제</div>
     <div class="저장_박스">저장</div>
   </div>
+
+  <div class="bg" v-if="deleteClick"></div>
+  <habit-modal v-if="deleteClick" class="confirm">
+    <template v-slot:header>
+      <div class="confirm_header">삭제 하시겠습니까?</div>
+    </template>
+    <template v-slot:contents>
+      <div class="confirm_contents">
+        <p>삭제하실 경우 모든 습관 정보가가</p>
+        <p>사라지고 복구할 수 없습니다.</p>
+      </div>
+    </template>
+    <template v-slot:confirm>
+      <div class="dual_button">
+        <div class="button_left" @click="authWithdrawal">확인</div>
+        <div class="button_right" @click="DeleteClick">취소</div>
+      </div>
+    </template>
+  </habit-modal>
 </template>
 
 <script>
-export default {};
+import HabitModal from "@/components/HabitModal.vue";
+export default {
+  components: {
+    HabitModal,
+  },
+  data() {
+    return {
+      deleteClick: false,
+    };
+  },
+  methods: {
+    DeleteClick() {
+      this.deleteClick = !this.deleteClick;
+    },
+  },
+};
 </script>
 
 <style scope>
@@ -28,9 +62,79 @@ export default {};
 .삭제_박스 {
   width: 360px;
   background: #ff5757;
+  cursor: pointer;
 }
 .저장_박스 {
   width: 360px;
   background: #887de5;
+  cursor: pointer;
+}
+@keyframes modal {
+  from {
+    bottom: -360px;
+    opacity: 0;
+  }
+
+  to {
+    bottom: 0px;
+    opacity: 100%;
+  }
+}
+.confirm {
+  position: absolute;
+  bottom: 0px;
+  animation-name: modal;
+  animation-duration: 0.75s;
+  background-color: #fff;
+  z-index: 10000;
+}
+@keyframes bg {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 50%;
+  }
+}
+.bg {
+  animation-name: bg;
+  animation-duration: 0.75s;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  opacity: 50%;
+}
+.confirm_header {
+  font-size: 30px;
+  font-weight: bold;
+}
+.confirm_contents {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  font-size: 24px;
+}
+.dual_button {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+.dual_button div {
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  color: #fff;
+}
+.button_left {
+  cursor: pointer;
+  background-color: #ff545e;
+}
+.button_right {
+  cursor: pointer;
+  background-color: #5e5e5e;
 }
 </style>
