@@ -16,9 +16,9 @@
         <div v-if="habitItems.length == 0">오늘의 목표 없음</div>
         <!-- 없음 디자인 추가할 예정-->
       </div>
-      <div class="습관_생성">
+      <router-link to="/create/selectCategory" class="습관_생성">
         새 습관 생성
-      </div>
+      </router-link>
     </div>
   </div>
 </template>
@@ -119,6 +119,7 @@ export default {
 }
 .습관_생성 {
   cursor: pointer;
+  width: 100%;
   height: 60px;
   line-height: 60px;
   background-color: #777777;

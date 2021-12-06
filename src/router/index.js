@@ -5,6 +5,8 @@ import TotalHabit from '../views/TotalHabit.vue'
 import TodaysHabit from '../views/TodaysHabit.vue'
 import MyPage from '../views/MyPage.vue'
 import EditHabit from '../views/EditHabit.vue'
+import SelectCategory from '../views/SelectCategory.vue'
+import CreateHabit from '../views/CreateHabit.vue'
 import axios from 'axios'
 import { store } from '../store/index.js'
 
@@ -34,6 +36,15 @@ const routes = [
     path: '/edit/:id',
     component: EditHabit,
     props: true
+  },
+  {
+    path: '/create/selectCategory',
+    component: SelectCategory
+  },
+  {
+    path: '/create/:category',
+    component: CreateHabit,
+    name: 'habitCreate'
   },
   {
     path: '/loading',
