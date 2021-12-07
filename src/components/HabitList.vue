@@ -7,7 +7,7 @@
         <!-- 미달성 -->
         <img
           @click="habitPracticed(habitItem.id)"
-          src="@/assets/img_check_unexecuted.png"
+          src="@/assets/checkBtn/img_check_unexecuted.png"
           alt=""
           v-if="$route.path != '/total' && !practiced"
           :class="{ pointer: $route.path != '/total' }"
@@ -79,7 +79,7 @@ export default {
       }
     },
     checkBtn() {
-      return require(`@/assets/img_check_${this.checkBtnUrl}.png`);
+      return require(`@/assets/checkBtn/img_check_${this.checkBtnUrl}.png`);
     },
   },
   methods: {

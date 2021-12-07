@@ -3,9 +3,9 @@
     <habit-header class="header"></habit-header>
     <pulse-loader v-if="loading == true" class="로딩중"></pulse-loader>
     <div class="contents" v-if="loading == false">
-      <div class="목표목록_박스">
-        <div class="목표목록_목표갯수">목표{{ habitItems.length }}</div>
-        <div v-if="habitItems.length != 0" class="목표목록">
+      <div class="습관목록_박스">
+        <div class="습관목록_습관갯수">목표{{ habitItems.length }}</div>
+        <div v-if="habitItems.length != 0" class="습관목록">
           <habit-list
             v-for="habitItem in habitItems"
             :habitItem="habitItem"
@@ -13,12 +13,12 @@
           >
           </habit-list>
         </div>
-        <div v-else>오늘의 목표 없음</div>
+        <div v-else>오늘의 습관 없음</div>
         <!-- 없음 디자인 추가할 예정-->
       </div>
-      <div class="습관_생성">
+      <router-link to="/create/selectCategory" class="습관_생성">
         새 습관 생성
-      </div>
+      </router-link>
     </div>
   </div>
 </template>
@@ -92,13 +92,13 @@ export default {
   flex-flow: column;
   width: 720px;
 }
-.목표목록_박스 {
+.습관목록_박스 {
   display: flex;
   flex-direction: column;
   padding-top: 10px;
   height: calc(100vh - 210px);
 }
-.목표목록_목표갯수 {
+.습관목록_습관갯수 {
   height: 50px;
   line-height: 50px;
   padding-right: 24px;
@@ -110,7 +110,7 @@ export default {
   text-align: right;
   color: #000000;
 }
-.목표목록 {
+.습관목록 {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -119,6 +119,7 @@ export default {
 }
 .습관_생성 {
   cursor: pointer;
+  width: 100%;
   height: 60px;
   line-height: 60px;
   background-color: #777777;

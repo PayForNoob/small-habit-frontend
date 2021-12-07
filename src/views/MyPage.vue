@@ -168,7 +168,7 @@ export default {
   position: absolute;
   bottom: 0px;
   animation-name: modal;
-  animation-duration: 0.75s;
+  animation-duration: 0.25s;
   background-color: #fff;
   z-index: 10000;
 }
@@ -185,7 +185,7 @@ export default {
 }
 .bg {
   animation-name: bg;
-  animation-duration: 0.75s;
+  animation-duration: 0.25s;
   position: fixed;
   top: 0;
   left: 0;

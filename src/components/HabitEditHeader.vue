@@ -39,7 +39,7 @@ export default {
   computed: {
     habitImg() {
       console.log(1);
-      return require(`@/assets/img_habit_${this.habitImgUrl}.png`);
+      return require(`@/assets/habitIcon/img_habit_${this.habitImgUrl}.png`);
     },
   },
   updated() {
