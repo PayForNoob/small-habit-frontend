@@ -33,6 +33,7 @@
       v-model="text[index]"
       placeholder="내용을 적어주세요"
     />
+    <!-- 내용 추가되는거에도 삭제 이미지추가 기존 추가된 세부내역에도 수정할수있게 추가. -->
   </div>
 </template>
 

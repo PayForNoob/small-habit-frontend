@@ -167,11 +167,12 @@ export default {
   font-weight: 500;
   font-size: 36px;
   line-height: 52px;
-  /* border-bottom: 2px solid #ffffff; */
-  text-decoration: underline;
+  border-bottom: 2px solid #ffffff;
+  /* text-decoration: underline; */
   color: #e2e2e2;
   min-width: 50px;
   height: 52px;
+  outline: none;
 
   background-color: #887de5;
 }
@@ -198,8 +199,8 @@ export default {
 .글자편집_이미지 {
   width: 30px;
   height: 30px;
-  margin-left: 5px;
-  margin-bottom: 8px;
+  /* margin-left: 5px;
+  margin-bottom: 8px; */
 }
 
 .흰배경_박스 {

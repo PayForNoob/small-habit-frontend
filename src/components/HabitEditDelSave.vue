@@ -45,6 +45,8 @@ export default {
 
 <style scope>
 .삭제저장_박스 {
+  position: fixed;
+  bottom: 0%;
   display: flex;
   flex-flow: row;
   height: 100px;
@@ -84,7 +86,7 @@ export default {
   position: absolute;
   bottom: 0px;
   animation-name: modal;
-  animation-duration: 0.75s;
+  animation-duration: 0.25s;
   background-color: #fff;
   z-index: 10000;
 }

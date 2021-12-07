@@ -121,15 +121,18 @@ export default {
 .요일_박스 {
   min-height: 50px;
   display: flex;
+  justify-content: space-between;
   flex-flow: row;
+  transition: all 0.25s;
+  user-select: none;
 }
 .요일_선택 {
   width: 50px;
   height: 50px;
   background: #887de5;
   border-radius: 30px;
-  margin-left: 19px;
-  margin-right: 15px;
+  /* margin-left: 19px;
+  margin-right: 15px; */
   line-height: 50px;
   display: block;
   text-align: center;
@@ -160,8 +163,8 @@ export default {
   font-style: normal;
   font-weight: normal;
   font-size: 26px;
-  margin-left: 19px;
-  margin-right: 15px;
+  /* margin-left: 19px;
+  margin-right: 15px; */
   line-height: 50px;
 
   color: #000000;

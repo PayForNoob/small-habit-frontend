@@ -86,7 +86,5 @@ export default {
   /* justify-content: center; */
 }
 .삭제박스 {
-  position: absolute;
-  bottom: 0%;
 }
 </style>
