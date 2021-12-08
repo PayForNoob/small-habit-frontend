@@ -47,7 +47,7 @@
 
 <script>
 export default {
-  props: ["detailHabitItems"],
+  props: ["detailHabitItems", "SaveProps", "id"],
   data() {
     return {
       detailHabitItemsPlus: [],
@@ -55,6 +55,38 @@ export default {
     };
   },
   methods: {
+    async editSave() {
+      if (this.SaveProps) {
+        console.log("세부내역 저장");
+        // console.log(this.detailHabitItems[0].id);
+        // console.log(this.detailHabitItems.length);
+        // console.log(this.detailHabitItemsPlus.length);
+        for (
+          let i = this.detailHabitItems[0].id + this.detailHabitItems.length;
+          i <
+          this.detailHabitItems[0].id +
+            this.detailHabitItems.length +
+            this.detailHabitItemsPlus.length;
+          i++
+        ) {
+          console.log(i);
+          // try {
+          //   await this.axios({
+          //     method: "post",
+          //     url: `/api/detailedObjectives/${this.i}`,
+          //     params: {},
+          //     data: {
+          //       objective: "dasd",
+          //       objectiveId: this.id,
+          //       userId: this.detailHabitItems.userId,
+          //     },
+          //   });
+          // } catch (err) {
+          //   console.log(err);
+          // }
+        }
+      }
+    },
     emitToParent() {
       this.detailHabitItemsPlus.push("");
       console.log(this.detailHabitItemsPlus);
@@ -78,8 +110,9 @@ export default {
     },
   },
   async updated() {
-    console.log("this.detailHabitItems");
-    console.log(this.detailHabitItems);
+    this.editSave();
+    // console.log("this.detailHabitItems");
+    // console.log(this.detailHabitItems);
   },
 };
 </script>

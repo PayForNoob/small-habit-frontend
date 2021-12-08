@@ -6,6 +6,12 @@
     <div class="습관및이미지_박스">
       <div class="습관_박스">
         <div class="습관종류">{{ categoryName }}</div>
+        <select class="습관종류" v-model="selected">
+          <option disabled value="">{{ categoryName }}</option>
+          <option>{{ categoryName }}</option>
+          <option>B</option>
+          <option>C</option>
+        </select>
         <div class="습관명_박스">
           <div class="습관명" placeholder="ddasda" contentEditable="true">
             {{ habitItems.objective }}
@@ -24,7 +30,7 @@
 
 <script>
 export default {
-  props: ["message", "id", "habitItems"],
+  props: ["message", "id", "habitItems", "SaveProps"],
   data() {
     return { categoryName: null, habitImgUrl: null };
   },
@@ -35,6 +41,27 @@ export default {
         params: {},
       });
     },
+    async editSave() {
+      if (this.SaveProps) {
+        console.log("제목, 카테고리 저장");
+        // try {
+        //   await this.axios({
+        //     method: "put",
+        //     url: `/api/Objectives/${this.id}`,
+        //     params: {},
+        //     data: {
+        //       category: "dasd",
+        //       id: this.id,
+        //       objective: this.habitItems.objective,
+        //       schedule: "주간일정",
+        //       userId: this.habitItems.userId,
+        //     },
+        //   });
+        // } catch (err) {
+        //   console.log(err);
+        // }
+      }
+    },
   },
   computed: {
     habitImg() {
@@ -43,9 +70,9 @@ export default {
     },
   },
   updated() {
-    console.log(this.habitItems.category);
-    console.log(this.message);
-    console.log(this.id);
+    console.log("updated");
+    this.editSave();
+
     switch (this.habitItems.category) {
       case 0:
         this.habitImgUrl = "exercise";
@@ -152,6 +179,7 @@ export default {
   /* identical to box height */
   height: 50px;
   padding: 0 26px;
+  cursor: pointer;
 }
 
 .습관명_박스 {

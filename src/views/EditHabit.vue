@@ -1,10 +1,17 @@
 <template>
   <div class="row">
     <div class="container">
-      <HabitEditHeader :message="message" :habitItems="habitItems" :id="id" />
-      <HabitEditWeek :schedules="habitItems.schedule" />
+      <HabitEditHeader
+        :message="message"
+        :habitItems="habitItems"
+        :id="id"
+        :SaveProps="SaveProps"
+      />
+      <HabitEditWeek :schedules="habitItems.schedule" :SaveProps="SaveProps" />
       <HabitEditDetail
         :detailHabitItems="detailHabitItems"
+        :SaveProps="SaveProps"
+        :id="id"
         @emitToParent="emitToParent"
       />
       <HabitEditDelSave @EditSave="EditSave" />
@@ -29,33 +36,13 @@ export default {
   methods: {
     emitToParent(data) {
       this.detailHabitItemsPlus = data;
-      console.log(this.detailHabitItemsPlus);
+      // console.log(this.detailHabitItemsPlus);
     },
     async EditSave() {
-      console.log("EditSave");
-      console.log(this.detailHabitItems[0].id);
-      console.log(this.detailHabitItems.length);
-      console.log(this.detailHabitItemsPlus.length);
+      this.SaveProps = true;
+      console.log("view 함수 일정 저장");
+
       //세부일정 저장
-      for (
-        let i = this.detailHabitItems[0].id + this.detailHabitItems.length;
-        i <
-        this.detailHabitItems[0].id +
-          this.detailHabitItems.length +
-          this.detailHabitItemsPlus.length;
-        i++
-      ) {
-        console.log(i);
-        // try {
-        //   await this.axios({
-        //     method: "post",
-        //     url: `/api/detailedObjectives/${this.i}`,
-        //     params: {},
-        //   });
-        // } catch (err) {
-        //   console.log(err);
-        // }
-      }
     },
   },
   async created() {
@@ -97,6 +84,7 @@ export default {
       habitItems: [],
       detailHabitItems: [],
       detailHabitItemsPlus: [],
+      SaveProps: false,
     };
   },
 };
