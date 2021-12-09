@@ -1,44 +1,56 @@
 <template>
-  <div class="container">
-    <div class="contents">
-      <div class="세부습관">
-        <div>
-          <img src="@/assets/img_detail_point.png"/>
-          <div><span class="bold">세부습관</span></div>
-        </div>
-        <img
-          class="추가버튼"
-          src="@/assets/img_detail_plus.png"
-          @click="emitToParent"
-        />
-      </div>
-      <div  class="세부습관_목록_박스">
-        <div  class="세부습관_목록">
-          <div v-for="(detailHabitItem, index) in 4"
-          :key="index" 
-          class="세부습관_내용">
-            <div>
-              <img src="@/assets/dot.png" alt="" class="dot">
-              <div>
-                {{detailHabitItem}}
-              </div>
-            </div>
-            <img src="@/assets/img_detail_del.png" alt="세부습관 삭제"
-              @click="SavedDetailDel(index)"
-            />
-          </div>
-        </div>
-      </div>
+  <div class="흰배경_박스">
+    <div class="세부일정머릿글_박스">
+      <img
+        class="_30px_이미지"
+        id="느낌표_이미지"
+        src="@/assets/img_detail_point.png"
+      />
+      <p class="머릿말글씨">세부내역</p>
+      <img
+        class="추가버튼_이미지"
+        src="@/assets/img_detail_plus.png"
+        @click="emitToParent"
+      />
     </div>
+    <li
+      v-for="(detailHabitItem, index) in detailHabitItems"
+      :key="index"
+      class="세부일정내용_박스"
+    >
+      {{ detailHabitItem.objective }}
+      <img
+        class="세부일정삭제버튼_이미지"
+        src="@/assets/img_detail_del.png"
+        @click="SavedDetailDel(index)"
+      />
+    </li>
+    <li
+      v-for="(detailHabitItemsPl, index) in detailHabitItemsPlus"
+      :key="index"
+      class="세부일정내용_박스"
+    >
+      <input
+        style="width: 300px"
+        v-model="text[index]"
+        placeholder="내용을 적어주세요"
+      />
+      <img
+        class="세부일정삭제버튼_이미지"
+        src="@/assets/img_detail_del.png"
+        @click="detailDel(index)"
+      />
+    </li>
+    <!-- 내용 추가되는거에도 삭제 이미지추가 기존 추가된 세부내역에도 수정할수있게 추가. -->
   </div>
 </template>
 
 <script>
 export default {
-  props: ["detailedHabitItems", "SaveProps", "id"],
+  props: ["detailHabitItems", "SaveProps", "id"],
   data() {
     return {
-      detailedHabitItemsPlus: [],
+      detailHabitItemsPlus: [],
       text: [],
     };
   },
@@ -46,15 +58,15 @@ export default {
     async editSave() {
       if (this.SaveProps) {
         console.log("세부내역 저장");
-        // console.log(this.detailedHabitItems[0].id);
-        // console.log(this.detailedHabitItems.length);
-        // console.log(this.detailedHabitItemsPlus.length);
+        // console.log(this.detailHabitItems[0].id);
+        // console.log(this.detailHabitItems.length);
+        // console.log(this.detailHabitItemsPlus.length);
         for (
-          let i = this.detailedHabitItems[0].id + this.detailedHabitItems.length;
+          let i = this.detailHabitItems[0].id + this.detailHabitItems.length;
           i <
-          this.detailedHabitItems[0].id +
-            this.detailedHabitItems.length +
-            this.detailedHabitItemsPlus.length;
+          this.detailHabitItems[0].id +
+            this.detailHabitItems.length +
+            this.detailHabitItemsPlus.length;
           i++
         ) {
           console.log(i);
@@ -66,7 +78,7 @@ export default {
           //     data: {
           //       objective: "dasd",
           //       objectiveId: this.id,
-          //       userId: this.detailedHabitItems.userId,
+          //       userId: this.detailHabitItems.userId,
           //     },
           //   });
           // } catch (err) {
@@ -76,117 +88,102 @@ export default {
       }
     },
     emitToParent() {
-      this.detailedHabitItemsPlus.push("");
-      console.log(this.detailedHabitItemsPlus);
-      this.$emit("emitToParent", this.detailedHabitItemsPlus);
+      this.detailHabitItemsPlus.push("");
+      console.log(this.detailHabitItemsPlus);
+      this.$emit("emitToParent", this.detailHabitItemsPlus);
     },
     detailPlus() {},
     async SavedDetailDel(index) {
       try {
         await this.axios({
           method: "DELETE",
-          url: `/api/detailedObjectives/${this.detailedHabitItems[index].id}`,
+          url: `/api/detailedObjectives/${this.detailHabitItems[index].id}`,
           params: {},
         });
       } catch (err) {
         console.log(err);
       }
-      // this.detailedHabitItems.splice(index);
+      // this.detailHabitItems.splice(index);
     },
     detailDel(index) {
-      this.detailedHabitItemsPlus.splice(index, 1);
+      this.detailHabitItemsPlus.splice(index, 1);
     },
   },
   async updated() {
     this.editSave();
-    // console.log("this.detailedHabitItems");
-    // console.log(this.detailedHabitItems);
+    // console.log("this.detailHabitItems");
+    // console.log(this.detailHabitItems);
   },
 };
 </script>
 
 <style scoped>
-::-webkit-scrollbar {
-  width: 10px;
-}
-::-webkit-scrollbar-thumb {
-  background-color: #9b9b9b;
-  border-radius: 5px;
-}
-.contents {
-  display: flex;
-  flex-flow: column;
-  justify-content: start;
-  align-items: center;
-  gap: 20px;
-  width: 672px;
-  padding-top: 30px;
-  padding-bottom: 20px;
-  margin-bottom: 10px;
+.흰배경_박스 {
+  margin: 0px 24px 10px 24px;
+  min-height: 30px;
+  max-height: 706px;
   background-color: #ffffff;
   border-radius: 20px;
-}
-.bold {
-  font-weight: bold;
-}
-.세부습관 {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  height: 50px;
-  line-height: 50px;
-  padding-left: 40px;
-  padding-right: 20px;
-  font-size: 26px;
-  color: #000000;
-}
-.세부습관 div {
-  display: flex;
-  align-items: center;
-  gap: 40px;
 
+  display: flex;
+  flex-flow: column;
+  padding: 20px 20px 32px 40px;
+
+  overflow: overlay;
 }
-.세부습관 img {
-  width: 30px;
+.흰배경_박스 {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.흰배경_박스::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
+}
+.세부일정머릿글_박스 {
+  display: flex;
+  flex-flow: row;
+}
+.세부일정내용_박스 {
+  display: flex;
+  flex-flow: row;
+  margin-top: 30px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 26px;
+  line-height: 30px;
+  text-align: left;
+
+  margin-left: 70px;
+}
+._30px_이미지 {
   height: 30px;
+  width: 30px;
+  margin-top: 10px;
 }
-img.추가버튼 {
-  width: 50px;
+#느낌표_이미지 {
+  margin-right: 40px;
+}
+.추가버튼_이미지 {
   height: 50px;
+  width: 50px;
+  margin-left: auto;
+  cursor: pointer;
 }
-
-/* 내용 */
-.세부습관_목록_박스 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  width: 80%;
-  max-height: 190px;
-  overflow: auto;
+.세부일정삭제버튼_이미지 {
+  height: 24px;
+  width: 24px;
+  margin-right: 110px;
+  margin-left: auto;
+  margin-top: 3px;
+  cursor: pointer;
 }
-.세부습관_목록 {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  width: 452px;
-  max-height: 190px;
-  line-height: 50px;
-}
-.dot {
-  width: 10px;
-  height: 10px;
-}
-.세부습관_내용 {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.머릿말글씨 {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
   font-size: 26px;
-}
-div.세부습관_내용 > div {
-  display: flex;
-  align-items: center;
-  gap: 20px;
+  line-height: 50px;
+
+  color: #000000;
 }
 </style>
