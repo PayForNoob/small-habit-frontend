@@ -21,7 +21,7 @@
 
 <script>
 export default {
-  props: ["schedule", "SaveProps"],
+  props: ["schedules", "SaveProps"],
   data() {
     return {
       week: ["일", "월", "화", "수", "목", "금", "토"],
@@ -41,6 +41,7 @@ export default {
         this.schedulesTemp = [...this.schedulesTemp, id];
       }
 
+      console.log(this.schedulesTemp)
       this.$forceUpdate();
     },
   },
@@ -50,6 +51,7 @@ export default {
     }
   },
   created() {
+    console.log(this.schedules)
     this.schedulesTemp = this.schedules;
   },
   updated() { 
