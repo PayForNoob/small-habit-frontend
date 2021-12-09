@@ -13,10 +13,10 @@
         />
       </div>
       <div  class="세부습관_목록_박스">
-        <div  class="세부습관_목록"
-          v-for="(detailHabitItem, index) in 3"
-          :key="index">
-          <div class="세부습관_내용">
+        <div  class="세부습관_목록">
+          <div v-for="(detailHabitItem, index) in 4"
+          :key="index" 
+          class="세부습관_내용">
             <div>
               <img src="@/assets/dot.png" alt="" class="dot">
               <div>
@@ -29,7 +29,6 @@
           </div>
         </div>
       </div>
-      <!-- 내용 추가되는거에도 삭제 이미지추가 기존 추가된 세부내역에도 수정할수있게 추가. -->
     </div>
   </div>
 </template>
@@ -107,14 +106,22 @@ export default {
 </script>
 
 <style scoped>
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #9b9b9b;
+  border-radius: 5px;
+}
 .contents {
   display: flex;
   flex-flow: column;
   justify-content: start;
+  align-items: center;
   gap: 20px;
   width: 672px;
   padding-top: 30px;
-  padding-bottom: 30px;
+  padding-bottom: 20px;
   margin-bottom: 10px;
   background-color: #ffffff;
   border-radius: 20px;
@@ -126,6 +133,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
   height: 50px;
   line-height: 50px;
   padding-left: 40px;
@@ -154,13 +162,16 @@ img.추가버튼 {
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  width: 100%;
+  width: 80%;
+  max-height: 190px;
+  overflow: auto;
 }
 .세부습관_목록 {
   display: flex;
   flex-direction: column;
+  gap: 20px;
   width: 452px;
-  height: 50px;
+  max-height: 190px;
   line-height: 50px;
 }
 .dot {
