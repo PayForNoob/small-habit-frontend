@@ -5,17 +5,17 @@
         <img src="@/assets/img_dayCircle_circle.png" />
         <div><span class="bold">반복주기</span> (주 {{ number }}회)</div>
       </div>
-    </div>
-    <div class="요일_박스">
-      <div v-for="(schedule, index) in week" :key="index">
-        <div
-          :class="schedulesTemp.includes(index) ? '요일_선택' : '요일_미선택'"
-          @click="ButtonDay(index)"
-        >
-          {{ schedule }}
+      <div class="요일_박스">
+        <div v-for="(schedule, index) in week" :key="index">
+          <div
+            :class="schedulesTemp.includes(index) ? '요일_선택' : '요일_미선택'"
+            @click="ButtonDay(index)"
+          >
+            {{ schedule }}
+          </div>
         </div>
       </div>
-    </div>
+    </div>    
   </div>
 </template>
 
