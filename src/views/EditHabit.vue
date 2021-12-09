@@ -3,7 +3,7 @@
     <div class="contents">
       <habit-edit-header :habitItem="habitItem" />
       <habit-edit-week :schedule="schedule" :SaveProps="SaveProps"/>
-      <habit-edit-detail :detailHabitItems="detailHabitItems" 
+      <habit-edit-detail :detailedHabitItems="detailedHabitItems" 
         :SaveProps="SaveProps"
         @emitToParent="emitToParent"
       />
@@ -64,7 +64,7 @@ export default {
           url: `/api/detailedObjectives/${this.$route.params.id}`,
         });
         // console.log(data);
-        this.detailedObjectives = data;
+        this.detailedHabitItems = data;
       } catch (err) {
         console.log(err);
       }
@@ -87,4 +87,6 @@ export default {
   height: 100vh;
   background-color: #e1e1e1;
 }
+
+
 </style>
