@@ -1,5 +1,5 @@
 <template>
-  <div class="습관박스" :style="{ backgroundColor: '#' + category.color }" @click="createHabit">
+  <div class="습관박스" :style="{ backgroundColor: category.color }" @click="createHabit">
     <div class="습관이름">{{category.name}}</div>
     <img :src="habitIcon" alt="습관 아이콘">
   </div>
