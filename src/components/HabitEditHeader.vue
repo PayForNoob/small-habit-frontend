@@ -1,28 +1,31 @@
 <template>
-  <div class="상단메뉴_박스">
-    <div class="뒤로가기_박스">
-      <button class="뒤로가기_글씨" @click="clickBackPage">◁ 습관수정</button>
-    </div>
-    <div class="습관및이미지_박스">
-      <div class="습관_박스">
-        <div class="습관종류">{{ categoryName }}</div>
-        <select class="습관종류" v-model="selected">
-          <option disabled value="">{{ categoryName }}</option>
-          <option>{{ categoryName }}</option>
-          <option>B</option>
-          <option>C</option>
-        </select>
-        <div class="습관명_박스">
-          <div class="습관명" placeholder="ddasda" contentEditable="true">
-            {{ habitItems.objective }}
-          </div>
-          <div class="글자편집_이미지박스">
-            <img class="글자편집_이미지" src="@/assets/img_edit_text.png" />
-          </div>
+  <div class="상단메뉴_박스" :style="{ backgroundColor: '#' + category.color }">
+    <div>
+      <div class="뒤로가기_박스">
+        <div class="뒤로가기_버튼" @click="previousPage">
+          <img src="@/assets/Previous-white.png" alt="뒤로가기">
+        </div>
+        <div>
+          습관 수정
         </div>
       </div>
-      <div class="습관이미지_박스">
-        <img v-if="categoryName" class="습관_이미지" :src="habitImg" />
+    </div>
+    <div>
+      <div class="습관정보_박스">
+        <div class="습관_정보">
+          <div class="습관종류" :style="{ color: '#' + category.color }">{{ categoryName }}</div>
+          <div class="습관명_박스">
+            <div class="습관명" :contenteditable="contenteditable" v-html="objective"
+            @input ="editHabitName($event.target.innerHTML)">
+            </div>
+            <div class="습관명_수정_아이콘">
+              <img src="@/assets/img_edit_text.png" />
+            </div>
+          </div>
+        </div>
+        <div class="습관이미지_박스">
+          <img class="습관_아이콘" :src="habitIcon" />
+        </div>
       </div>
     </div>
   </div>
@@ -30,95 +33,41 @@
 
 <script>
 export default {
-  props: ["message", "id", "habitItems", "SaveProps"],
+  props: ["habitItem"],
   data() {
-    return { categoryName: null, habitImgUrl: null };
+    return { 
+      category: null, 
+      objective: null,
+      contenteditable: true
+    };
+  },
+  computed: {
+    habitIcon() {
+      return require(`@/assets/habitIcon/img_habit_${this.category.imgUrl}.png`);
+    },
+    categoryName() {
+      return this.category.name
+    }
   },
   methods: {
-    clickBackPage() {
-      this.$router.push({
-        path: `/today`,
-        params: {},
-      });
+    previousPage() {
+      this.$router.go(-1)
     },
-    async editSave() {
-      if (this.SaveProps) {
-        console.log("제목, 카테고리 저장");
-        // try {
-        //   await this.axios({
-        //     method: "put",
-        //     url: `/api/Objectives/${this.id}`,
-        //     params: {},
-        //     data: {
-        //       category: "dasd",
-        //       id: this.id,
-        //       objective: this.habitItems.objective,
-        //       schedule: "주간일정",
-        //       userId: this.habitItems.userId,
-        //     },
-        //   });
-        // } catch (err) {
-        //   console.log(err);
-        // }
+    editHabitName(value) {
+      if(value.length > 12) {
+        return
+      } else {
+        this.objective = value
       }
     },
   },
-  computed: {
-    habitImg() {
-      console.log(1);
-      return require(`@/assets/habitIcon/img_habit_${this.habitImgUrl}.png`);
-    },
-  },
-  updated() {
-    console.log("updated");
-    this.editSave();
-
-    switch (this.habitItems.category) {
-      case 0:
-        this.habitImgUrl = "exercise";
-        this.categoryName = "운동";
-        console.log(this.habitImgUrl);
-        break;
-
-      case 1:
-        this.habitImgUrl = "hobby";
-        this.categoryName = "취미";
-        break;
-
-      case 2:
-        this.habitImgUrl = "reading";
-        this.categoryName = "독서";
-        break;
-
-      case 3:
-        this.habitImgUrl = "learning";
-        this.categoryName = "학습";
-        break;
-
-      case 4:
-        this.habitImgUrl = "money_management";
-        this.categoryName = "자산관리";
-        break;
-
-      case 5:
-        this.habitImgUrl = "business_life";
-        this.categoryName = "회사생활";
-        break;
-
-      case 6:
-        this.habitImgUrl = "time_for_me";
-        this.categoryName = "나를 위한 시간";
-        break;
-
-      case 7:
-        this.habitImgUrl = "lifestyle";
-        this.categoryName = "생활습관";
-        break;
-
-      default:
-        this.habitImgUrl = null;
-        this.categoryName = null;
-        break;
+  created() {
+    if(this.habitItem) {
+      this.category = this.$store.state.habitCategory[this.habitItem.category]
+      this.objective = this.habitItem.objective
+    } else {
+      this.category = this.$store.state.habitCategory[this.$route.params.category]
+      this.objective = "습관명을 입력해주세요."
     }
   },
 };
@@ -126,93 +75,99 @@ export default {
 
 <style scoped>
 .상단메뉴_박스 {
+  display: flex;
+  flex-direction: column;
   height: 340px;
-  background: #887de5;
   border-radius: 0px 0px 0px 30px;
-  padding: 33px 66px 0 24px;
   margin-bottom: 20px;
 }
 
 .뒤로가기_박스 {
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 24px;
-  line-height: 28px;
-  text-align: left;
-  margin-bottom: 81px;
-  /* width: 120px; */
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  height: 100px;
+  padding-left: 24px;
+  color: #fff;
+  font-size: 30px;
 }
-
-.뒤로가기_글씨 {
-  background: #887de5;
-  color: #e2e2e2;
+.뒤로가기_박스 div {
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
-.뒤로가기_글씨:hover {
-  background: #887de5;
-  color: #e5d1ee;
+.뒤로가기_박스 img {
+  width: 26px;
+  height: 26px;
+}
+.뒤로가기_박스 div:first-child  {
   cursor: pointer;
 }
-.습관및이미지_박스 {
-  display: flex;
-  flex-flow: row;
-  padding: 0 0 0 40px;
-}
 
-.습관_박스 {
+.상단메뉴_박스 > div:nth-child(2) {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.습관정보_박스 {
+  display: flex;
+  justify-content: space-between;
+  width: 672px;
+  height: 210px;
+  padding: 0px 40px;
+}
+.습관_정보 {
   display: flex;
   flex-flow: column;
-  width: 300px;
+  align-content: flex-start;
+  gap: 10px;
+  width: max-content;
 }
-
 .습관종류 {
-  background: rgba(255, 255, 255, 0.5);
+  background: #fff;
+  opacity: 50%;
   border-radius: 30px;
   font-family: Noto Sans KR;
-  font-style: normal;
-  font-weight: normal;
   font-size: 26px;
-  line-height: 50px;
-  color: #887de5;
-  width: fit-content;
-  text-align: center;
-  /* identical to box height */
+  width: 100px;
   height: 50px;
-  padding: 0 26px;
-  cursor: pointer;
+  line-height: 50px;
 }
-
 .습관명_박스 {
   display: flex;
   flex-flow: row;
   text-align: left;
-  width: auto;
-}
-
-.습관명 {
-  font-family: Noto Sans KR;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 36px;
-  line-height: 52px;
-  border-bottom: 2px solid #ffffff;
-  /* text-decoration: underline; */
-  color: #e2e2e2;
-  min-width: 50px;
   height: 52px;
+  line-height: 52px;
+  font-size: 36px;
+}
+.습관명 {
+  color: #fff;
+  border-bottom: 2px solid #fff;
   outline: none;
+  overflow: hidden;
+}
+/* .습관명 input[type=text] {
+  max-width: 300px;
 
-  background-color: #887de5;
+
+  border-bottom: 2px solid #fff;
+  color: #fff;
+
+} */
+.습관명_수정_아이콘 {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
 .습관이미지_박스 {
-  width: 300px;
   display: flex;
-  flex-flow: row-reverse;
-  margin-top: 32px;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
-.습관_이미지 {
+.습관_아이콘 {
   width: 160px;
   height: 160px;
 }

@@ -5,20 +5,16 @@
       <!-- <div class="반복_버튼">◎매주 (주 {{ schedules.length }}번)</div>  -->
       <div class="반복_횟수">
         <img class="반복_버튼" src="@/assets/img_dayCircle_button.png" /> 매주
-        (주 {{ number }}번)
+        (주 {{ number }}회)
       </div>
     </div>
     <div class="요일_박스">
-      <div v-for="(schedule, index) in schedulesTemp" :key="index">
+      <div v-for="(schedule, index) in week" :key="index">
         <div
-          v-if="schedulesTemp.includes(index)"
-          class="요일_선택"
+          :class="schedulesTemp.includes(index) ? '요일_선택' : '요일_미선택'"
           @click="ButtonDay(index)"
         >
-          {{ week[index] }}
-        </div>
-        <div v-else class="요일_미선택" @click="ButtonDay(index)">
-          {{ week[index] }}
+          {{ schedule }}
         </div>
       </div>
     </div>
@@ -30,10 +26,8 @@ export default {
   props: ["schedules", "SaveProps"],
   data() {
     return {
-      number: 7,
-      dayCircleImgUrl: null,
-      week: ["월", "화", "수", "목", "금", "토", "일"],
-      schedulesTemp: {},
+      week: ["일", "월", "화", "수", "목", "금", "토"],
+      schedulesTemp: [],
     };
   },
   methods: {
@@ -43,39 +37,26 @@ export default {
       }
     },
     ButtonDay(id) {
-      console.log(this.schedulesTemp.includes(id));
-      if (this.schedulesTemp[id] != null) {
-        this.schedulesTemp[id] = null;
-        this.number--;
+      if (this.schedulesTemp.includes(id)) {
+        this.schedulesTemp = this.schedulesTemp.filter((item) => item !== id);
       } else {
-        this.schedulesTemp[id] = id;
-        this.number++;
+        this.schedulesTemp = [...this.schedulesTemp, id];
       }
-      this.$forceUpdate;
-      console.log(this.schedulesTemp.includes(id));
-      console.log(this.schedulesTemp);
-    },
-    numberCount() {
-      this.number++;
+
+      this.$forceUpdate();
     },
   },
   computed: {
-    dayImg() {
-      return require(`@/assets/img_dayCircle_btn_white.png`);
-    },
+    number() {
+      return this.schedulesTemp.length
+    }
   },
-  updated() {
-    this.editSave();
-    // for (let i = 0; i < this.schedules.length; i++) {
-    //   if (this.schedules[i]) {
-    //     this.number++;
-    //   }
-    // }
+  created() {
     this.schedulesTemp = this.schedules;
-
-    console.log(this.schedulesTemp);
-    // this.schedulele.inclued();
   },
+  updated() { 
+    this.editSave();
+  }
 };
 </script>
 
