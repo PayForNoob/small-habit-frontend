@@ -62,9 +62,8 @@ export default {
   props: ["habitItem"],
   data() {
     return {
-      today: null,
-      categoryName: null,
-      checkBtnUrl: null,
+      categoryName: this.$store.state.habitCategory[this.habitItem.category].name,
+      checkBtnUrl: this.$store.state.habitCategory[this.habitItem.category].imgUrl,
       detailedHabits: this.habitItem.detailedObjectives,
       practiced: this.habitItem.practiced,
       totalPracticed: this.habitItem.totalPracticed,
@@ -81,6 +80,12 @@ export default {
     checkBtn() {
       return require(`@/assets/checkBtn/img_check_${this.checkBtnUrl}.png`);
     },
+    today() {
+      let year = new Date().getFullYear();
+      let month = new Date().getMonth() + 1;
+      let date = new Date().getDate();
+      return year + "-" + month + "-" + date;
+    }
   },
   methods: {
     // 습관 실천하기
@@ -135,65 +140,8 @@ export default {
     clickEdit() {
       this.$router.push({
         path: `/edit/${this.habitItem.id}`,
-        params: {
-          id: this.habitItem.id,
-        },
       });
-      console.log(this.habitItem.id);
     },
-  },
-  async created() {
-    switch (this.habitItem.category) {
-      case 0:
-        this.checkBtnUrl = "exercise";
-        this.categoryName = "운동";
-        break;
-
-      case 1:
-        this.checkBtnUrl = "hobby";
-        this.categoryName = "취미";
-        break;
-
-      case 2:
-        this.checkBtnUrl = "reading";
-        this.categoryName = "독서";
-        break;
-
-      case 3:
-        this.checkBtnUrl = "learning";
-        this.categoryName = "학습";
-        break;
-
-      case 4:
-        this.checkBtnUrl = "money_management";
-        this.categoryName = "자산관리";
-        break;
-
-      case 5:
-        this.checkBtnUrl = "business_life";
-        this.categoryName = "회사생활";
-        break;
-
-      case 6:
-        this.checkBtnUrl = "time_for_me";
-        this.categoryName = "나를 위한 시간";
-        break;
-
-      case 7:
-        this.checkBtnUrl = "lifestyle";
-        this.categoryName = "생활습관";
-        break;
-
-      default:
-        this.checkBtnUrl = null;
-        this.categoryName = null;
-        break;
-    }
-
-    let year = new Date().getFullYear();
-    let month = new Date().getMonth() + 1;
-    let date = new Date().getDate();
-    this.today = year + "-" + month + "-" + date;
   },
 };
 </script>

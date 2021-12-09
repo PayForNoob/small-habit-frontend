@@ -5,7 +5,7 @@
       <!-- <div class="반복_버튼">◎매주 (주 {{ schedules.length }}번)</div>  -->
       <div class="반복_횟수">
         <img class="반복_버튼" src="@/assets/img_dayCircle_button.png" /> 매주
-        (주 {{ number }}번)
+        (주 {{ number }}회)
       </div>
     </div>
     <div class="요일_박스">
@@ -27,7 +27,7 @@
 
 <script>
 export default {
-  props: ["schedules"],
+  props: ["schedule"],
   data() {
     return {
       number: 7,

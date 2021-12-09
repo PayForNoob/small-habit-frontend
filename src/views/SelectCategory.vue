@@ -10,13 +10,6 @@
             습관생성
           </div>
         </div>
-        <div class="step">
-          <div>1</div>
-          <div></div>
-          <div>2</div>
-          <div></div>
-          <div>3</div>
-        </div>
       </div>
       <div class="coment">
         <div>원하는 습관의 분야를</div>
@@ -72,6 +65,7 @@ export default {
   align-items: center;
   gap: 30px;
   height: 100px;
+  padding-left: 24px;
   font-size: 30px;
 }
 .habitCreate div {
@@ -85,30 +79,6 @@ export default {
 .habitCreate img {
   width: 26px;
   height: 26px;
-}
-.step {
-  height: 30px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding-right: 10px;
-}
-.step div:nth-child(2n + 1) {
-  width: 24px;
-  height: 24px;
-  line-height: 20px;
-  border: 2px solid #999;
-  border-radius: 50px;
-  color: #999;
-}
-.step div:nth-child(2n) {
-  width: 20px;
-  height: 2px;
-  border-bottom: 2px solid #949494;
-}
-.step div:first-child {
-  color: #fff;
-  background-color: #999;
 }
 .coment {
   display: flex;
@@ -127,7 +97,7 @@ export default {
   justify-content: center;
   flex-wrap: wrap;
   gap: 20px;
-  height: calc(100vh - 280px);
+  height: calc(100vh - 250px);
   padding-left: 10px;
   padding-bottom: 20px;
   overflow: auto;

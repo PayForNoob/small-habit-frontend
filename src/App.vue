@@ -18,6 +18,9 @@
   vertical-align: baseline;
   box-sizing: border-box;
 }
+* input {
+  outline: none;
+}
 a {
   text-decoration: none;
   color: #2c3e50;

@@ -1,10 +1,10 @@
 <template>
-  <div class="row">
-    <div class="container">
-      <HabitEditHeader :message="message" :habitItems="habitItems" :id="id" />
-      <HabitEditWeek :schedules="habitItems.schedule" />
-      <HabitEditDetail :detailHabitItems="detailHabitItems" />
-      <HabitEditDelSave class="삭제박스" />
+  <div class="container">
+    <div class="contents">
+      <habit-edit-header :habitItem="habitItem" />
+      <habit-edit-week :schedule="schedule" />
+      <habit-edit-detail :detailHabitItems="detailedObjectives" />
+      <habit-edit-del-save class="삭제박스" />
     </div>
   </div>
 </template>
@@ -16,74 +16,61 @@ import HabitEditDetail from "@/components/HabitEditDetail.vue";
 import HabitEditDelSave from "@/components/HabitEditDelSave.vue";
 
 export default {
-  props: ["id"],
   components: {
     HabitEditHeader,
     HabitEditWeek,
     HabitEditDetail,
-    HabitEditDelSave,
-  },
-  async created() {
-    let today = new Date().getDay();
-    let todaysObjectives = {
-      schedule: today,
-      activated: true,
-    };
-    try {
-      let { data } = await this.axios({
-        method: "get",
-        url: `/api/objectives/${this.id}`,
-        params: {
-          ...todaysObjectives,
-        },
-      });
-      console.log(data);
-      this.habitItems = data;
-    } catch (err) {
-      console.log(err);
-    }
-    try {
-      let { data } = await this.axios({
-        method: "get",
-        url: `/api//detailedObjectives/${this.id}`,
-        params: {
-          //...todaysObjectives,
-        },
-      });
-      console.log(data);
-      this.detailHabitItems = data;
-    } catch (err) {
-      console.log(err);
-    }
+    HabitEditDelSave
   },
   data() {
     return {
       message: "습관명입력",
-      habitItems: [],
-      detailHabitItems: [],
+      habitItem: null,
+      schedule: [],
+      detailedObjectives: [],
     };
+  },
+  async created() {
+    if(this.$route.params.id) {
+      try {
+        let { data } = await this.axios({
+          method: "get",
+          url: `/api/objectives/${this.$route.params.id}`,
+        });
+        // console.log(data);
+        this.habitItem = data;
+        this.schedule = data.schedule;
+      } catch (err) {
+        console.log(err);
+      }
+      try {
+        let { data } = await this.axios({
+          method: "get",
+          url: `/api/detailedObjectives/${this.$route.params.id}`,
+        });
+        // console.log(data);
+        this.detailedObjectives = data;
+      } catch (err) {
+        console.log(err);
+      }
+    }
   },
 };
 </script>
 
 <style scoped>
-.row {
-  display: flex;
-  flex-flow: row;
-
-  justify-content: center;
-}
-
 .container {
   display: flex;
   flex-flow: column;
-  width: 720px;
-  height: 1280px;
-  /* 높이삭제해야함 */
-  border: 1px solid rgb(224, 218, 218);
+  align-items: center;
+}
 
+.contents {
+  display: flex;
+  flex-flow: column;
+  width: 720px;
+  height: 100vh;
   background-color: #e1e1e1;
-  /* justify-content: center; */
 }
 .삭제박스 {
   position: absolute;

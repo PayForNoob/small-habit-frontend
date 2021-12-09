@@ -1,10 +1,8 @@
 <template>
-  <router-link :to="{ name: 'habitCreate', params: { category: categoryId }}">
-    <div class="습관박스" :style="{ backgroundColor: '#' + category.color }">
-      <div class="습관이름">{{category.name}}</div>
-      <img :src="habitIcon" alt="습관 아이콘">
-    </div>
-  </router-link>
+  <div class="습관박스" :style="{ backgroundColor: '#' + category.color }" @click="createHabit">
+    <div class="습관이름">{{category.name}}</div>
+    <img :src="habitIcon" alt="습관 아이콘">
+  </div>
 </template>
 
 <script>
@@ -17,12 +15,14 @@ export default {
   },
   computed: {
     habitIcon() {
-      return require(`@/assets/habitIcon/img_habit_${this.category.iconUrl}.png`); 
+      return require(`@/assets/habitIcon/img_habit_${this.category.imgUrl}.png`); 
     },
   },
   methods: {
     createHabit() {
-      
+      this.$router.push({
+        path: `/habitCreate/${this.categoryId}`,
+      });
     },
   },
 }
@@ -46,22 +46,22 @@ img {
   font-weight: bold;
   cursor: pointer;
 }
-a:nth-child(2n-1) .습관박스 {
+.습관박스:nth-child(2n-1) {
   border-radius: 30px 0px 0px 30px;
 }
-a:nth-child(2n) .습관박스 {
+.습관박스:nth-child(2n) {
   border-radius: 0px 30px 30px 0px;
 }
-a:nth-child(1) .습관박스 {
+.습관박스:nth-child(1) {
   border-radius: 30px 30px 0px 30px;
 }
-a:nth-child(2) .습관박스 {
+.습관박스:nth-child(2) {
   border-radius: 30px 30px 30px 0px;
 }
-a:nth-child(7) .습관박스 {
+.습관박스:nth-child(7) {
   border-radius: 30px 0px 30px 30px;
 }
-a:nth-child(8) .습관박스 {
+.습관박스:nth-child(8) {
   border-radius: 0px 30px 30px 30px;
 }
 .습관이름 {
