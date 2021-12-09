@@ -1,5 +1,5 @@
 <template>
-  <div class="상단메뉴_박스" :style="{ backgroundColor: '#' + category.color }">
+  <div class="상단메뉴_박스" :style="{ backgroundColor: colorCode }">
     <div>
       <div class="뒤로가기_박스">
         <div class="뒤로가기_버튼" @click="previousPage">
@@ -13,9 +13,9 @@
     <div>
       <div class="습관정보_박스">
         <div class="습관_정보">
-          <div class="습관종류" :style="{ color: '#' + category.color }">{{ categoryName }}</div>
+          <div class="습관종류" :style="{ color: colorCode }">{{ categoryName }}</div>
           <div class="습관명_박스">
-            <div class="습관명" :contenteditable="contenteditable" v-html="objective"
+            <div class="습관명" contenteditable="true" v-html="objective"
             @input ="editHabitName($event.target.innerHTML)">
             </div>
             <div class="습관명_수정_아이콘">
@@ -38,7 +38,6 @@ export default {
     return { 
       category: null, 
       objective: null,
-      contenteditable: true
     };
   },
   computed: {
@@ -47,6 +46,9 @@ export default {
     },
     categoryName() {
       return this.category.name
+    },
+    colorCode() {
+      return this.category.color
     }
   },
   methods: {
@@ -70,6 +72,7 @@ export default {
       this.objective = "습관명을 입력해주세요."
     }
   },
+
 };
 </script>
 
@@ -78,7 +81,7 @@ export default {
   display: flex;
   flex-direction: column;
   height: 340px;
-  border-radius: 0px 0px 0px 30px;
+  border-radius: 0px 0px 30px 30px;
   margin-bottom: 20px;
 }
 
