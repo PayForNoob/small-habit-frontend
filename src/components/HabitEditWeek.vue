@@ -27,7 +27,7 @@
 
 <script>
 export default {
-  props: ["schedule"],
+  props: ["schedules", "SaveProps"],
   data() {
     return {
       number: 7,
@@ -37,6 +37,11 @@ export default {
     };
   },
   methods: {
+    editSave() {
+      if (this.SaveProps) {
+        console.log("주 일정 저장");
+      }
+    },
     ButtonDay(id) {
       console.log(this.schedulesTemp.includes(id));
       if (this.schedulesTemp[id] != null) {
@@ -60,6 +65,7 @@ export default {
     },
   },
   updated() {
+    this.editSave();
     // for (let i = 0; i < this.schedules.length; i++) {
     //   if (this.schedules[i]) {
     //     this.number++;
@@ -121,15 +127,27 @@ export default {
 .요일_박스 {
   min-height: 50px;
   display: flex;
+  justify-content: space-between;
   flex-flow: row;
 }
+@keyframes 요일_미선택에서_선택으로 {
+  from {
+    background: #b8b6c9;
+  }
+
+  to {
+    background: #887de5;
+  }
+}
 .요일_선택 {
+  animation-name: 요일_미선택에서_선택으로;
+  animation-duration: 0.15s;
   width: 50px;
   height: 50px;
   background: #887de5;
   border-radius: 30px;
-  margin-left: 19px;
-  margin-right: 15px;
+  /* margin-left: 19px;
+  margin-right: 15px; */
   line-height: 50px;
   display: block;
   text-align: center;
@@ -137,7 +155,8 @@ export default {
   font-style: normal;
   font-weight: normal;
   font-size: 26px;
-
+  transition: all 0.15s;
+  user-select: none;
   color: #ffffff;
 }
 .요일_선택:hover {
@@ -147,7 +166,18 @@ export default {
   background: #6b63b6;
   color: #ffffff;
 }
+@keyframes 요일_선택에서_미선택으로 {
+  from {
+    background: #6b63b6;
+  }
+
+  to {
+    background: #ffffff;
+  }
+}
 .요일_미선택 {
+  animation-name: 요일_선택에서_미선택으로;
+  animation-duration: 0.15s;
   width: 50px;
   height: 50px;
   background: #ffffff;
@@ -160,10 +190,11 @@ export default {
   font-style: normal;
   font-weight: normal;
   font-size: 26px;
-  margin-left: 19px;
-  margin-right: 15px;
+  /* margin-left: 19px;
+  margin-right: 15px; */
   line-height: 50px;
-
+  transition: all 0.15s;
+  user-select: none;
   color: #000000;
 }
 .요일_미선택:hover {

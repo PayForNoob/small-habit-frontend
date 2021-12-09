@@ -2,9 +2,12 @@
   <div class="container">
     <div class="contents">
       <habit-edit-header :habitItem="habitItem" />
-      <habit-edit-week :schedule="schedule" />
-      <habit-edit-detail :detailHabitItems="detailedObjectives" />
-      <habit-edit-del-save class="삭제박스" />
+      <habit-edit-week :schedule="schedule" :SaveProps="SaveProps"/>
+      <habit-edit-detail :detailHabitItems="detailHabitItems" 
+        :SaveProps="SaveProps"
+        @emitToParent="emitToParent"
+      />
+      <habit-edit-del-save @EditSave="EditSave"/>
     </div>
   </div>
 </template>
@@ -20,15 +23,27 @@ export default {
     HabitEditHeader,
     HabitEditWeek,
     HabitEditDetail,
-    HabitEditDelSave
+    HabitEditDelSave,
   },
   data() {
     return {
-      message: "습관명입력",
       habitItem: null,
       schedule: [],
-      detailedObjectives: [],
+      detailHabitItems: [],
+      SaveProps: false,
     };
+  },
+  methods: {
+    emitToParent(data) {
+      this.detailHabitItemsPlus = data;
+      // console.log(this.detailHabitItemsPlus);
+    },
+    async EditSave() {
+      this.SaveProps = true;
+      console.log("view 함수 일정 저장");
+
+      //세부일정 저장
+    },
   },
   async created() {
     if(this.$route.params.id) {
@@ -71,9 +86,5 @@ export default {
   width: 720px;
   height: 100vh;
   background-color: #e1e1e1;
-}
-.삭제박스 {
-  position: absolute;
-  bottom: 0%;
 }
 </style>

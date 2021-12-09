@@ -34,6 +34,7 @@
 <script>
 export default {
   props: ["habitItem"],
+
   data() {
     return { 
       category: null, 
@@ -147,14 +148,7 @@ export default {
   outline: none;
   overflow: hidden;
 }
-/* .습관명 input[type=text] {
-  max-width: 300px;
 
-
-  border-bottom: 2px solid #fff;
-  color: #fff;
-
-} */
 .습관명_수정_아이콘 {
   display: flex;
   flex-direction: column;
@@ -182,8 +176,8 @@ export default {
 .글자편집_이미지 {
   width: 30px;
   height: 30px;
-  margin-left: 5px;
-  margin-bottom: 8px;
+  /* margin-left: 5px;
+  margin-bottom: 8px; */
 }
 
 .흰배경_박스 {

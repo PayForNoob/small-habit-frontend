@@ -10,7 +10,7 @@
       <img
         class="추가버튼_이미지"
         src="@/assets/img_detail_plus.png"
-        @click="toggle"
+        @click="emitToParent"
       />
     </div>
     <li
@@ -22,47 +22,97 @@
       <img
         class="세부일정삭제버튼_이미지"
         src="@/assets/img_detail_del.png"
-        @click="detailDel"
+        @click="SavedDetailDel(index)"
       />
     </li>
-    <input
+    <li
       v-for="(detailHabitItemsPl, index) in detailHabitItemsPlus"
       :key="index"
       class="세부일정내용_박스"
-      style="width: 300px"
-      v-model="text[index]"
-      placeholder="내용을 적어주세요"
-    />
+    >
+      <input
+        style="width: 300px"
+        v-model="text[index]"
+        placeholder="내용을 적어주세요"
+      />
+      <img
+        class="세부일정삭제버튼_이미지"
+        src="@/assets/img_detail_del.png"
+        @click="detailDel(index)"
+      />
+    </li>
+    <!-- 내용 추가되는거에도 삭제 이미지추가 기존 추가된 세부내역에도 수정할수있게 추가. -->
   </div>
 </template>
 
 <script>
 export default {
-  props: ["detailHabitItems"],
+  props: ["detailHabitItems", "SaveProps", "id"],
   data() {
     return {
-      detailHabitItemsPlus: 0,
+      detailHabitItemsPlus: [],
       text: [],
     };
   },
   methods: {
-    toggle() {
-      this.detailHabitItemsPlus++;
+    async editSave() {
+      if (this.SaveProps) {
+        console.log("세부내역 저장");
+        // console.log(this.detailHabitItems[0].id);
+        // console.log(this.detailHabitItems.length);
+        // console.log(this.detailHabitItemsPlus.length);
+        for (
+          let i = this.detailHabitItems[0].id + this.detailHabitItems.length;
+          i <
+          this.detailHabitItems[0].id +
+            this.detailHabitItems.length +
+            this.detailHabitItemsPlus.length;
+          i++
+        ) {
+          console.log(i);
+          // try {
+          //   await this.axios({
+          //     method: "post",
+          //     url: `/api/detailedObjectives/${this.i}`,
+          //     params: {},
+          //     data: {
+          //       objective: "dasd",
+          //       objectiveId: this.id,
+          //       userId: this.detailHabitItems.userId,
+          //     },
+          //   });
+          // } catch (err) {
+          //   console.log(err);
+          // }
+        }
+      }
     },
-    async detailDel() {
+    emitToParent() {
+      this.detailHabitItemsPlus.push("");
+      console.log(this.detailHabitItemsPlus);
+      this.$emit("emitToParent", this.detailHabitItemsPlus);
+    },
+    detailPlus() {},
+    async SavedDetailDel(index) {
       try {
         await this.axios({
-          method: "delete",
-          url: `/api/detailedObjectives/${this.id}`,
+          method: "DELETE",
+          url: `/api/detailedObjectives/${this.detailHabitItems[index].id}`,
           params: {},
         });
       } catch (err) {
         console.log(err);
       }
+      // this.detailHabitItems.splice(index);
+    },
+    detailDel(index) {
+      this.detailHabitItemsPlus.splice(index, 1);
     },
   },
-  async created() {
-    console.log(this.detailHabitItems);
+  async updated() {
+    this.editSave();
+    // console.log("this.detailHabitItems");
+    // console.log(this.detailHabitItems);
   },
 };
 </script>
@@ -71,12 +121,22 @@ export default {
 .흰배경_박스 {
   margin: 0px 24px 10px 24px;
   min-height: 30px;
+  max-height: 706px;
   background-color: #ffffff;
   border-radius: 20px;
 
   display: flex;
   flex-flow: column;
   padding: 20px 20px 32px 40px;
+
+  overflow: overlay;
+}
+.흰배경_박스 {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.흰배경_박스::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
 }
 .세부일정머릿글_박스 {
   display: flex;

@@ -1,7 +1,7 @@
 <template>
   <div class="삭제저장_박스" v-if="!deleteClick">
     <div class="삭제_박스" @click="DeleteClick">삭제</div>
-    <div class="저장_박스">저장</div>
+    <div class="저장_박스" @click="Edit">저장</div>
   </div>
 
   <div class="bg" v-if="deleteClick"></div>
@@ -17,7 +17,7 @@
     </template>
     <template v-slot:confirm>
       <div class="dual_button">
-        <div class="button_left" @click="authWithdrawal">확인</div>
+        <div class="button_left" @click="ㅇㅇㅇ;">확인</div>
         <div class="button_right" @click="DeleteClick">취소</div>
       </div>
     </template>
@@ -39,12 +39,18 @@ export default {
     DeleteClick() {
       this.deleteClick = !this.deleteClick;
     },
+    Edit() {
+      console.log("Edit함수");
+      this.$emit("EditSave");
+    },
   },
 };
 </script>
 
 <style scope>
 .삭제저장_박스 {
+  position: fixed;
+  bottom: 0%;
   display: flex;
   flex-flow: row;
   height: 100px;
@@ -84,7 +90,7 @@ export default {
   position: absolute;
   bottom: 0px;
   animation-name: modal;
-  animation-duration: 0.75s;
+  animation-duration: 0.25s;
   background-color: #fff;
   z-index: 10000;
 }
