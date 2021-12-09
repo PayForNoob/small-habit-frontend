@@ -113,4 +113,6 @@ export default {
 }
 .삭제박스 {
 }
+
+
 </style>
