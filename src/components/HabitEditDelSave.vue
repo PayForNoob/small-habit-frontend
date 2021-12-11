@@ -1,27 +1,28 @@
 <template>
-  <div class="삭제저장_박스" v-if="!deleteClick">
-    <div class="삭제_박스" @click="DeleteClick">삭제</div>
-    <div class="저장_박스" @click="Edit">저장</div>
+  <div>
+    <div class="삭제저장_박스" v-if="!deleteClick">
+      <div class="삭제_박스" @click="DeleteClick">삭제</div>
+      <div class="저장_박스" @click="Edit">저장</div>
+    </div>
+    <div class="bg" v-if="deleteClick"></div>
+    <habit-modal v-if="deleteClick" class="confirm">
+      <template v-slot:header>
+        <div class="confirm_header">삭제 하시겠습니까?</div>
+      </template>
+      <template v-slot:contents>
+        <div class="confirm_contents">
+          <p>삭제하실 경우 모든 습관 정보가가</p>
+          <p>사라지고 복구할 수 없습니다.</p>
+        </div>
+      </template>
+      <template v-slot:confirm>
+        <div class="dual_button">
+          <div class="button_left" @click="ㅇㅇㅇ;">확인</div>
+          <div class="button_right" @click="DeleteClick">취소</div>
+        </div>
+      </template>
+    </habit-modal>
   </div>
-
-  <div class="bg" v-if="deleteClick"></div>
-  <habit-modal v-if="deleteClick" class="confirm">
-    <template v-slot:header>
-      <div class="confirm_header">삭제 하시겠습니까?</div>
-    </template>
-    <template v-slot:contents>
-      <div class="confirm_contents">
-        <p>삭제하실 경우 모든 습관 정보가가</p>
-        <p>사라지고 복구할 수 없습니다.</p>
-      </div>
-    </template>
-    <template v-slot:confirm>
-      <div class="dual_button">
-        <div class="button_left" @click="ㅇㅇㅇ;">확인</div>
-        <div class="button_right" @click="DeleteClick">취소</div>
-      </div>
-    </template>
-  </habit-modal>
 </template>
 
 <script>
@@ -53,14 +54,14 @@ export default {
   bottom: 0%;
   display: flex;
   flex-flow: row;
-  height: 100px;
+  height: 60px;
+  line-height: 60px;
   margin-top: auto;
 
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
-  font-size: 26px;
-  line-height: 100px;
+  font-size: 20px;
   text-align: center;
 
   color: #ffffff;
