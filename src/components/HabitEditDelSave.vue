@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="삭제저장_박스" v-if="!deleteClick">
-      <div class="삭제_박스" @click="DeleteClick">삭제 a</div>
+      <div class="삭제_박스" @click="DeleteClick">삭제</div>
       <div class="저장_박스" @click="Edit">저장</div>
     </div>
     <div class="bg" v-if="deleteClick"></div>
