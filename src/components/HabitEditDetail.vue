@@ -12,7 +12,6 @@
           <img src="@/assets/add-detailHabit.png" alt="세부습관 추가 버튼"/>
         </div>
       </div>
-<<<<<<< HEAD
       <div class="세부습관_목록_박스">
         <div class="스크롤_영역">
           <div class="세부습관_목록"
@@ -22,17 +21,6 @@
               <img src="@/assets/dot.png" alt="">
               <div contenteditable="true">
                 세부습관을 작성해주세요.
-=======
-      <div  class="세부습관_목록_박스">
-        <div  class="세부습관_목록">
-          <div v-for="(detailHabitItem, index) in 4"
-          :key="index" 
-          class="세부습관_내용">
-            <div>
-              <img src="@/assets/dot.png" alt="" class="dot">
-              <div>
-                {{detailHabitItem}}
->>>>>>> 43fbefc (css 수정)
               </div>
             </div>
             <img
@@ -58,7 +46,6 @@
           </div>
         </div>
       </div>
-<<<<<<< HEAD
       <!-- <div
         v-for="(detailHabitItemsPl, index) in detailHabitItemsPlus"
         :key="index"
@@ -77,8 +64,6 @@
           />
         </div>
       </div> -->
-=======
->>>>>>> 43fbefc (css 수정)
     </div>
     <!-- 내용 추가되는거에도 삭제 이미지추가 기존 추가된 세부내역에도 수정할수있게 추가. -->
   </div>
@@ -167,7 +152,6 @@ export default {
   background-color: #9b9b9b;
   border-radius: 5px;
 }
-<<<<<<< HEAD
 img {
   width: 30px;
   height: 30px;
@@ -181,19 +165,16 @@ img {
   align-items: center;
   line-height: 50px;
 }
-=======
->>>>>>> 43fbefc (css 수정)
 .contents {
   display: flex;
   flex-flow: column;
   justify-content: start;
-  align-items: center;
   gap: 20px;
   width: 672px;
   min-height: 110px;
   max-height: 300px;
   padding-top: 30px;
-  padding-bottom: 20px;
+  padding-bottom: 30px;
   margin-bottom: 10px;
   background-color: #ffffff;
   border-radius: 20px;
@@ -204,9 +185,6 @@ img {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
-  height: 50px;
-  line-height: 50px;
   padding-left: 40px;
   padding-right: 20px;
 }
@@ -238,7 +216,6 @@ img {
   display: flex;
   flex-flow: column;
   gap: 20px;
-<<<<<<< HEAD
   max-height: 200px;
   padding-left: 20px;
   padding-right: 10px;
@@ -249,18 +226,8 @@ img {
   display: flex;
   justify-content: space-between;
   align-items: center;
-=======
-  width: 80%;
-  max-height: 190px;
-  overflow: auto;
-}
-.세부습관_목록 {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
->>>>>>> 43fbefc (css 수정)
   width: 452px;
-  max-height: 190px;
+  height: 50px;
   line-height: 50px;
 }
 .미작성 {
