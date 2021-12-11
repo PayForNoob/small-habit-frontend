@@ -2,11 +2,15 @@
   <div class="container">
     <div class="contents">
       <HabitEditHeader :habitItem="habitItem" />
-      <HabitEditWeek :schedules="habitItem.schedule" :SaveProps="SaveProps" />
+      <HabitEditWeek 
+      :schedules="habitItem.schedule" 
+      :SaveProps="SaveProps" 
+      :categoryColor="categoryColor"/>
       <HabitEditDetail
         :detailHabitItems="detailHabitItems"
         :SaveProps="SaveProps"
         :id="id"
+        :categoryColor="categoryColor"
         @emitToParent="emitToParent"
       />
       <HabitEditDelSave class="삭제박스" @EditSave="EditSave"/>
@@ -28,6 +32,19 @@ export default {
     HabitEditDetail,
     HabitEditDelSave,
   },
+  data() {
+    return {
+      SaveProps: false,
+      habitItem: {
+        schedule: [],
+        objective: '',
+        category: this.category,
+      },
+      detailHabitItems: [],
+      detailHabitItemsPlus: [],
+      categoryColor: '#000',
+    };
+  },
   methods: {
     emitToParent(data) {
       this.detailHabitItemsPlus = data;
@@ -46,23 +63,15 @@ export default {
     },
   },
   async created() {
-    let today = new Date().getDay();
-    let todaysObjectives = {
-      schedule: today,
-      activated: true,
-    };
-
     if(this.id) {
       try {
         let { data } = await this.axios({
           method: "get",
           url: `/api/objectives/${this.id}`,
-          params: {
-            ...todaysObjectives,
-          },
         });
         console.log(data);
         this.habitItem = data;
+        this.categoryColor = this.$store.state.habitCategory[data.category].color
       } catch (err) {
         console.log(err);
       }
@@ -72,28 +81,16 @@ export default {
           method: "get",
           url: `/api/detailedObjectives/${this.id}`,
         });
-        console.log(data);
+        // console.log(data);
         this.detailHabitItems = data;
       } catch (err) {
         console.log(err);
       }
+    } else {
+      this.categoryColor = this.$store.state.habitCategory[this.category].color
     }
   },
-  data() {
-    return {
-      message: "습관명입력",
-      detailHabitItems: [],
-      detailHabitItemsPlus: [],
-      SaveProps: false,
-      habitItem: {
-        schedule: [],
-        objective: '',
-        category: this.category,
-      },
-      schedule: [],
-      detailedObjectives: [],
-    };
-  },
+
 };
 </script>
 
@@ -111,8 +108,4 @@ export default {
   height: 100vh;
   background-color: #e1e1e1;
 }
-.삭제박스 {
-}
-
-
 </style>

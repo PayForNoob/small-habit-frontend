@@ -1,53 +1,77 @@
 <template>
-  <div class="흰배경_박스">
-    <div class="세부일정머릿글_박스">
-      <img
-        class="_30px_이미지"
-        id="느낌표_이미지"
-        src="@/assets/img_detail_point.png"
-      />
-      <p class="머릿말글씨">세부내역</p>
-      <img
-        class="추가버튼_이미지"
-        src="@/assets/img_detail_plus.png"
-        @click="emitToParent"
-      />
+  <div class="container">
+    <div class="contents">
+      <div class="세부습관_머릿글">
+        <div>
+          <img src="@/assets/img_detail_point.png" />
+          <div class="bold">세부습관</div>
+        </div>
+        <div class="추가버튼_이미지" 
+        :style="{ backgroundColor: categoryColor }"
+        @click="emitToParent" >
+          <img src="@/assets/add-detailHabit.png" alt="세부습관 추가 버튼"/>
+        </div>
+      </div>
+      <div class="세부습관_목록_박스">
+        <div class="스크롤_영역">
+          <div class="세부습관_목록"
+          v-for="(detailHabitItem, index) in detailHabitItemsPlus"
+          :key="index">
+            <div class="세부습관_이름 미작성">
+              <img src="@/assets/dot.png" alt="">
+              <div contenteditable="true">
+                세부습관을 작성해주세요.
+              </div>
+            </div>
+            <img
+              class="세부습관_삭제"
+              src="@/assets/img_detail_del.png"
+              @click="detailDel(index)"
+            />
+          </div>
+          <div class="세부습관_목록"
+          v-for="(detailHabitItem, index) in detailHabitItems"
+          :key="index">
+            <div class="세부습관_이름">
+              <img src="@/assets/dot.png" alt="">
+              <div contenteditable="true">
+                {{ detailHabitItem.objective }}
+              </div>
+            </div>
+            <img
+              class="세부습관_삭제"
+              src="@/assets/img_detail_del.png"
+              @click="SavedDetailDel(index)"
+            />
+          </div>
+        </div>
+      </div>
+      <!-- <div
+        v-for="(detailHabitItemsPl, index) in detailHabitItemsPlus"
+        :key="index"
+        class="세부습관_목록_박스"
+      >
+        <div class="세부습관_목록">
+          <input
+            style="width: 300px"
+            v-model="text[index]"
+            placeholder="내용을 적어주세요"
+          />
+          <img
+            class="세부습관_삭제"
+            src="@/assets/img_detail_del.png"
+            @click="detailDel(index)"
+          />
+        </div>
+      </div> -->
     </div>
-    <li
-      v-for="(detailHabitItem, index) in detailHabitItems"
-      :key="index"
-      class="세부일정내용_박스"
-    >
-      {{ detailHabitItem.objective }}
-      <img
-        class="세부일정삭제버튼_이미지"
-        src="@/assets/img_detail_del.png"
-        @click="SavedDetailDel(index)"
-      />
-    </li>
-    <li
-      v-for="(detailHabitItemsPl, index) in detailHabitItemsPlus"
-      :key="index"
-      class="세부일정내용_박스"
-    >
-      <input
-        style="width: 300px"
-        v-model="text[index]"
-        placeholder="내용을 적어주세요"
-      />
-      <img
-        class="세부일정삭제버튼_이미지"
-        src="@/assets/img_detail_del.png"
-        @click="detailDel(index)"
-      />
-    </li>
     <!-- 내용 추가되는거에도 삭제 이미지추가 기존 추가된 세부내역에도 수정할수있게 추가. -->
   </div>
 </template>
 
 <script>
 export default {
-  props: ["detailHabitItems", "SaveProps", "id"],
+  props: ["detailHabitItems", "SaveProps", "id", "categoryColor"],
   data() {
     return {
       detailHabitItemsPlus: [],
@@ -109,6 +133,9 @@ export default {
       this.detailHabitItemsPlus.splice(index, 1);
     },
   },
+  created() {
+    console.log(this.categoryColor)
+  },
   async updated() {
     this.editSave();
     // console.log("this.detailHabitItems");
@@ -118,72 +145,109 @@ export default {
 </script>
 
 <style scoped>
-.흰배경_박스 {
-  margin: 0px 24px 10px 24px;
-  min-height: 30px;
-  max-height: 706px;
-  background-color: #ffffff;
-  border-radius: 20px;
-
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #9b9b9b;
+  border-radius: 5px;
+}
+img {
+  width: 30px;
+  height: 30px;
+}
+.bold {
+  font-weight: bold;
+}
+.container {
   display: flex;
   flex-flow: column;
-  padding: 20px 20px 32px 40px;
-
-  overflow: overlay;
+  align-items: center;
+  line-height: 50px;
 }
-.흰배경_박스 {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
-.흰배경_박스::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera*/
-}
-.세부일정머릿글_박스 {
+.contents {
   display: flex;
-  flex-flow: row;
-}
-.세부일정내용_박스 {
-  display: flex;
-  flex-flow: row;
-  margin-top: 30px;
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: normal;
+  flex-flow: column;
+  justify-content: start;
+  gap: 20px;
+  width: 672px;
+  min-height: 110px;
+  max-height: 300px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  margin-bottom: 10px;
+  background-color: #ffffff;
+  border-radius: 20px;
   font-size: 26px;
-  line-height: 30px;
-  text-align: left;
+}
+/* 세부습관 머릿글 */
+.세부습관_머릿글 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 40px;
+  padding-right: 20px;
+}
+.세부습관_머릿글 > div {
+  display: flex;  
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
 
-  margin-left: 70px;
-}
-._30px_이미지 {
-  height: 30px;
-  width: 30px;
-  margin-top: 10px;
-}
-#느낌표_이미지 {
-  margin-right: 40px;
 }
 .추가버튼_이미지 {
   height: 50px;
   width: 50px;
-  margin-left: auto;
   cursor: pointer;
+  border-radius: 100%;
 }
-.세부일정삭제버튼_이미지 {
+.추가버튼_이미지 img {
+  width: 70%;
+  height: 70%;
+}
+
+/* 세부습관 목록 */
+.세부습관_목록_박스 {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+.스크롤_영역 {
+  display: flex;
+  flex-flow: column;
+  gap: 20px;
+  max-height: 200px;
+  padding-left: 20px;
+  padding-right: 10px;
+  padding-bottom: 0px;
+  overflow: scroll;
+}
+.세부습관_목록 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 452px;
+  height: 50px;
+  line-height: 50px;
+}
+.미작성 {
+  opacity: 50%;
+}
+.세부습관_이름 {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.세부습관_이름 div {
+  outline: none;
+}
+.세부습관_이름 img{
+  width: 10px;
+  height: 10px;
+}
+.세부습관_삭제 {
   height: 24px;
   width: 24px;
-  margin-right: 110px;
-  margin-left: auto;
-  margin-top: 3px;
   cursor: pointer;
-}
-.머릿말글씨 {
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 26px;
-  line-height: 50px;
-
-  color: #000000;
 }
 </style>

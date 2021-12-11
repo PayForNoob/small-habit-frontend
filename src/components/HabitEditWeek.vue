@@ -8,7 +8,9 @@
       <div class="요일_박스">
         <div v-for="(schedule, index) in week" :key="index">
           <div
+            :style="{ backgroundColor: schedulesTemp.includes(index) ? categoryColor : '#dedede' }"
             :class="schedulesTemp.includes(index) ? '요일_선택' : '요일_미선택'"
+            class="요일"
             @click="ButtonDay(index)"
           >
             {{ schedule }}
@@ -21,7 +23,7 @@
 
 <script>
 export default {
-  props: ["schedules", "SaveProps"],
+  props: ["schedules", "SaveProps", "categoryColor"],
   data() {
     return {
       week: ["일", "월", "화", "수", "목", "금", "토"],
@@ -31,7 +33,7 @@ export default {
   methods: {
     editSave() {
       if (this.SaveProps) {
-        console.log("주 일정 저장");
+        // console.log("주 일정 저장");
       }
     },
     ButtonDay(id) {
@@ -41,7 +43,7 @@ export default {
         this.schedulesTemp = [...this.schedulesTemp, id];
       }
 
-      console.log(this.schedulesTemp)
+      // console.log(this.schedulesTemp)
       this.$forceUpdate();
     },
   },
@@ -51,7 +53,7 @@ export default {
     }
   },
   created() {
-    console.log(this.schedules)
+    // console.log(this.schedules)
     this.schedulesTemp = this.schedules;
   },
   updated() { 
@@ -94,7 +96,6 @@ img {
   display: flex;
   justify-content: center;
   gap: 40px;
-
 }
 .요일 {
   display: flex;
@@ -102,11 +103,12 @@ img {
   align-items: center;
   width: 50px;
   height: 50px;
-  border: 2px solid #dedede;
   border-radius: 100%;
   font-size: 24px;
   color: #000;
+  cursor: pointer;
   transition: all 0.15s;
+  animation-duration: 0.15s;
 }
 @keyframes 요일_미선택에서_선택으로 {
   from {
@@ -119,26 +121,7 @@ img {
 }
 .요일_선택 {
   animation-name: 요일_미선택에서_선택으로;
-  animation-duration: 0.15s;
-  width: 50px;
-  height: 50px;
-  background: #887de5;
-  border-radius: 30px;
-  /* margin-left: 19px;
-  margin-right: 15px; */
-  line-height: 50px;
-  display: block;
-  text-align: center;
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 26px;
-  transition: all 0.15s;
-  user-select: none;
   color: #ffffff;
-}
-.요일_선택:hover {
-  cursor: pointer;
 }
 .요일_선택:active {
   background: #6b63b6;
@@ -146,16 +129,12 @@ img {
 }
 @keyframes 요일_선택에서_미선택으로 {
   from {
-    background: #6b63b6;
+    background-color: #1d184d;
   }
 
   to {
     background: #ffffff;
   }
-}
-
-.요일_미선택:hover {
-  cursor: pointer;
 }
 .요일_미선택:active {
   background: #b8b6c9;

@@ -6,7 +6,7 @@
           <img src="@/assets/Previous-white.png" alt="뒤로가기">
         </div>
         <div>
-          습관 수정
+          {{$route.params.id ? "습관 수정" : "습관 생성"}}
         </div>
       </div>
     </div>
@@ -15,8 +15,8 @@
         <div class="습관_정보">
           <div class="습관종류" :style="{ color: colorCode }">{{ categoryName }}</div>
           <div class="습관명_박스">
-            <div class="습관명" contenteditable="true" v-html="objective"
-            @input ="editHabitName($event.target.innerHTML)">
+            <div class="습관명" contenteditable="true">
+              {{habitItem.objective ? habitItem.objective : "습관명을 입력해주세요."}}
             </div>
             <div class="습관명_수정_아이콘">
               <img src="@/assets/img_edit_text.png" />
@@ -145,6 +145,7 @@ export default {
   font-size: 36px;
 }
 .습관명 {
+  min-width: 50px;
   color: #fff;
   border-bottom: 2px solid #fff;
   outline: none;
