@@ -6,22 +6,24 @@
           <img src="@/assets/img_detail_point.png" />
           <div class="bold">세부습관</div>
         </div>
-        <div class="추가버튼_이미지" 
-        :style="{ backgroundColor: categoryColor }"
-        @click="emitToParent" >
-          <img src="@/assets/add-detailHabit.png" alt="세부습관 추가 버튼"/>
+        <div
+          class="추가버튼_이미지"
+          :style="{ backgroundColor: categoryColor }"
+          @click="emitToParent"
+        >
+          <img src="@/assets/add-detailHabit.png" alt="세부습관 추가 버튼" />
         </div>
       </div>
       <div class="세부습관_목록_박스">
         <div class="스크롤_영역">
-          <div class="세부습관_목록"
-          v-for="(detailHabitItem, index) in detailHabitItemsPlus"
-          :key="index">
+          <div
+            class="세부습관_목록"
+            v-for="(detailHabitItem, index) in detailHabitItemsPlus"
+            :key="index"
+          >
             <div class="세부습관_이름 미작성">
-              <img src="@/assets/dot.png" alt="">
-              <div contenteditable="true">
-                세부습관을 작성해주세요.
-              </div>
+              <img src="@/assets/dot.png" alt="" />
+              <div contenteditable="true">세부습관을 작성해주세요.</div>
             </div>
             <img
               class="세부습관_삭제"
@@ -29,11 +31,13 @@
               @click="detailDel(index)"
             />
           </div>
-          <div class="세부습관_목록"
-          v-for="(detailHabitItem, index) in detailHabitItems"
-          :key="index">
+          <div
+            class="세부습관_목록"
+            v-for="(detailHabitItem, index) in detailHabitItems"
+            :key="index"
+          >
             <div class="세부습관_이름">
-              <img src="@/assets/dot.png" alt="">
+              <img src="@/assets/dot.png" alt="" />
               <div contenteditable="true">
                 {{ detailHabitItem.objective }}
               </div>
@@ -134,7 +138,7 @@ export default {
     },
   },
   created() {
-    console.log(this.categoryColor)
+    console.log(this.categoryColor);
   },
   async updated() {
     this.editSave();
@@ -153,8 +157,10 @@ export default {
   border-radius: 5px;
 }
 img {
-  width: 30px;
-  height: 30px;
+  max-width: 30px;
+  width: 2.5vw;
+  max-height: 30px;
+  height: 2.5vw;
 }
 .bold {
   font-weight: bold;
@@ -169,35 +175,37 @@ img {
   display: flex;
   flex-flow: column;
   justify-content: start;
-  gap: 20px;
-  width: 672px;
+  gap: min(1.5vw, 20px);
+  width: 57vw;
+  max-width: 672px;
   min-height: 110px;
   max-height: 300px;
-  padding-top: 30px;
-  padding-bottom: 30px;
-  margin-bottom: 10px;
+  padding-top: min(2.5vw, 30px);
+  padding-bottom: min(2.5vw, 30px);
+  margin-bottom: min(1vw, 10px);
   background-color: #ffffff;
-  border-radius: 20px;
-  font-size: 26px;
+  border-radius: min(2vw, 20px);
+  font-size: min(2vw, 26px);
 }
 /* 세부습관 머릿글 */
 .세부습관_머릿글 {
   display: flex;
+  height: 5vw;
+  max-height: 50px;
   justify-content: space-between;
   align-items: center;
-  padding-left: 40px;
-  padding-right: 20px;
+  padding-left: min(3.5vw, 40px);
+  padding-right: min(1.5vw, 20px);
 }
 .세부습관_머릿글 > div {
-  display: flex;  
+  display: flex;
   justify-content: center;
   align-items: center;
-  gap: 40px;
-
+  gap: min(3.5vw, 40px);
 }
 .추가버튼_이미지 {
-  height: 50px;
-  width: 50px;
+  height: min(4.5vw, 50px);
+  width: min(4.5vw, 50px);
   cursor: pointer;
   border-radius: 100%;
 }
@@ -215,10 +223,10 @@ img {
 .스크롤_영역 {
   display: flex;
   flex-flow: column;
-  gap: 20px;
+  gap: min(1.5vw, 20px);
   max-height: 200px;
-  padding-left: 20px;
-  padding-right: 10px;
+  padding-left: min(1.5vw, 20px);
+  padding-right: min(1vw, 10px);
   padding-bottom: 0px;
   overflow: scroll;
 }
@@ -226,9 +234,11 @@ img {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 452px;
-  height: 50px;
-  line-height: 50px;
+  max-width: 452px;
+  width: 45vw;
+  height: 3.5vw;
+  max-height: 50px;
+  line-height: min(4.5vw, 50px);
 }
 .미작성 {
   opacity: 50%;
@@ -241,13 +251,17 @@ img {
 .세부습관_이름 div {
   outline: none;
 }
-.세부습관_이름 img{
-  width: 10px;
-  height: 10px;
+.세부습관_이름 img {
+  max-width: 10px;
+  width: 1vw;
+  max-height: 10px;
+  height: 1vw;
 }
 .세부습관_삭제 {
-  height: 24px;
-  width: 24px;
+  height: 2vw;
+  max-height: 24px;
+  max-width: 24px;
+  width: 2vw;
   cursor: pointer;
 }
 </style>

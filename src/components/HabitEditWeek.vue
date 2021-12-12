@@ -8,7 +8,11 @@
       <div class="요일_박스">
         <div v-for="(schedule, index) in week" :key="index">
           <div
-            :style="{ backgroundColor: schedulesTemp.includes(index) ? categoryColor : '#dedede' }"
+            :style="{
+              backgroundColor: schedulesTemp.includes(index)
+                ? categoryColor
+                : '#dedede',
+            }"
             :class="schedulesTemp.includes(index) ? '요일_선택' : '요일_미선택'"
             class="요일"
             @click="ButtonDay(index)"
@@ -17,7 +21,7 @@
           </div>
         </div>
       </div>
-    </div>    
+    </div>
   </div>
 </template>
 
@@ -49,16 +53,16 @@ export default {
   },
   computed: {
     number() {
-      return this.schedulesTemp.length
-    }
+      return this.schedulesTemp.length;
+    },
   },
   created() {
     // console.log(this.schedules)
     this.schedulesTemp = this.schedules;
   },
-  updated() { 
+  updated() {
     this.editSave();
-  }
+  },
 };
 </script>
 
@@ -67,44 +71,51 @@ export default {
   display: flex;
   flex-flow: column;
   justify-content: start;
-  gap: 40px;
-  width: 672px;
-  height: 180px;
-  padding-top: 30px;
-  margin-bottom: 10px;
+  gap: min(4vw, 40px);
+  width: 57vw;
+  max-width: 672px;
+  height: 16vw;
+  max-height: 180px;
+  padding-top: min(2.5vw, 30px);
+  margin-bottom: min(1vw, 10px);
   background-color: #ffffff;
-  border-radius: 20px;
+  border-radius: min(1.5vw, 20px);
 }
 img {
-  width: 30px;
-  height: 30px;
+  width: 2vw;
+  max-width: 30px;
+  height: 2vw;
+  max-height: 30px;
 }
 .bold {
   font-weight: bold;
 }
 .반복_주기 {
   display: flex;
-  gap: 40px;
-  height: 30px;
-  line-height: 30px;
-  padding-left: 40px;
-  font-size: 26px;
+  gap: min(2vw, 40px);
+  height: 2vw;
+  max-height: 30px;
+  line-height: min(2vw, 30px);
+  padding-left: min(3vw, 40px);
+  font-size: min(2vw, 26px);
   color: #000000;
 }
 
 .요일_박스 {
   display: flex;
   justify-content: center;
-  gap: 40px;
+  gap: min(3.5vw, 40px);
 }
 .요일 {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 50px;
-  height: 50px;
+  width: 4vw;
+  height: 4vw;
+  max-width: 50px;
+  max-height: 50px;
   border-radius: 100%;
-  font-size: 24px;
+  font-size: min(1.7vw, 24px);
   color: #000;
   cursor: pointer;
   transition: all 0.15s;
