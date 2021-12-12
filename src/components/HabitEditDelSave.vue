@@ -17,7 +17,7 @@
       </template>
       <template v-slot:confirm>
         <div class="dual_button">
-          <div class="button_left" @click="ㅇㅇㅇ;">확인</div>
+          <div class="button_left" @click="deleteObjective">확인</div>
           <div class="button_right" @click="DeleteClick">취소</div>
         </div>
       </template>
@@ -37,6 +37,19 @@ export default {
     };
   },
   methods: {
+    async deleteObjective() {
+      try {
+        await this.axios({
+          method: 'delete',
+          url: `/api/objective/${this.$route.params.id}`,
+        })
+        console.log('성공')
+        location.href = '/today'
+      }
+      catch (err) {
+        console.log(err.data);
+      } 
+    },
     DeleteClick() {
       this.deleteClick = !this.deleteClick;
     },
