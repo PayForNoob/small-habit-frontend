@@ -56,14 +56,15 @@ export default {
   flex-flow: row;
   width: 61vw;
   max-width: 720px;
-  height: 60px;
-  line-height: 60px;
+  max-height: 60px;
+  height: 6vw;
+  line-height: min(5vw, 60px);
   margin-top: auto;
 
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
-  font-size: 20px;
+  font-size: min(1.5vw, 20px);
   text-align: center;
 
   color: #ffffff;
@@ -118,14 +119,14 @@ export default {
   opacity: 50%;
 }
 .confirm_header {
-  font-size: 30px;
+  font-size: min(2.5vw, 30px);
   font-weight: bold;
 }
 .confirm_contents {
   display: flex;
   flex-direction: column;
   width: 100%;
-  font-size: 24px;
+  font-size: min(2vw, 24px);
 }
 .dual_button {
   display: flex;
@@ -134,8 +135,9 @@ export default {
 }
 .dual_button div {
   width: 100%;
-  height: 60px;
-  line-height: 60px;
+  max-height: 60px;
+  height: 5vw;
+  line-height: min(5vw, 60px);
   color: #fff;
 }
 .button_left {
