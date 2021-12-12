@@ -2,10 +2,11 @@
   <div class="container">
     <div class="contents">
       <HabitEditHeader :habitItem="habitItem" />
-      <HabitEditWeek 
-      :schedules="habitItem.schedule" 
-      :SaveProps="SaveProps" 
-      :categoryColor="categoryColor"/>
+      <HabitEditWeek
+        :schedules="habitItem.schedule"
+        :SaveProps="SaveProps"
+        :categoryColor="categoryColor"
+      />
       <HabitEditDetail
         :detailHabitItems="detailHabitItems"
         :SaveProps="SaveProps"
@@ -13,7 +14,7 @@
         :categoryColor="categoryColor"
         @emitToParent="emitToParent"
       />
-      <HabitEditDelSave class="삭제박스" @EditSave="EditSave"/>
+      <HabitEditDelSave class="삭제박스" @EditSave="EditSave" />
     </div>
   </div>
 </template>
@@ -25,7 +26,7 @@ import HabitEditDetail from "@/components/HabitEditDetail.vue";
 import HabitEditDelSave from "@/components/HabitEditDelSave.vue";
 
 export default {
-  props: ['id', 'category'],
+  props: ["id", "category"],
   components: {
     HabitEditHeader,
     HabitEditWeek,
@@ -37,12 +38,12 @@ export default {
       SaveProps: false,
       habitItem: {
         schedule: [],
-        objective: '',
+        objective: "",
         category: this.category,
       },
       detailHabitItems: [],
       detailHabitItemsPlus: [],
-      categoryColor: '#000',
+      categoryColor: "#000",
     };
   },
   methods: {
@@ -51,8 +52,7 @@ export default {
       // console.log(this.detailHabitItemsPlus);
     },
     async EditSave() {
-      
-      if(this.id) {
+      if (this.id) {
         // 수정
       } else {
         // 생성
@@ -63,7 +63,7 @@ export default {
     },
   },
   async created() {
-    if(this.id) {
+    if (this.id) {
       try {
         let { data } = await this.axios({
           method: "get",
@@ -71,7 +71,8 @@ export default {
         });
         console.log(data);
         this.habitItem = data;
-        this.categoryColor = this.$store.state.habitCategory[data.category].color
+        this.categoryColor =
+          this.$store.state.habitCategory[data.category].color;
       } catch (err) {
         console.log(err);
       }
@@ -87,10 +88,9 @@ export default {
         console.log(err);
       }
     } else {
-      this.categoryColor = this.$store.state.habitCategory[this.category].color
+      this.categoryColor = this.$store.state.habitCategory[this.category].color;
     }
   },
-
 };
 </script>
 
@@ -104,7 +104,8 @@ export default {
 .contents {
   display: flex;
   flex-flow: column;
-  width: 720px;
+  width: 61vw;
+  max-width: 720px;
   height: 100vh;
   background-color: #e1e1e1;
 }

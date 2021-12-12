@@ -54,6 +54,8 @@ export default {
   bottom: 0%;
   display: flex;
   flex-flow: row;
+  width: 61vw;
+  max-width: 720px;
   height: 60px;
   line-height: 60px;
   margin-top: auto;
@@ -67,12 +69,12 @@ export default {
   color: #ffffff;
 }
 .삭제_박스 {
-  width: 360px;
+  width: 30.5vw;
   background: #ff5757;
   cursor: pointer;
 }
 .저장_박스 {
-  width: 360px;
+  width: 30.5vw;
   background: #887de5;
   cursor: pointer;
 }

@@ -8,7 +8,11 @@
       <div class="요일_박스">
         <div v-for="(schedule, index) in week" :key="index">
           <div
-            :style="{ backgroundColor: schedulesTemp.includes(index) ? categoryColor : '#dedede' }"
+            :style="{
+              backgroundColor: schedulesTemp.includes(index)
+                ? categoryColor
+                : '#dedede',
+            }"
             :class="schedulesTemp.includes(index) ? '요일_선택' : '요일_미선택'"
             class="요일"
             @click="ButtonDay(index)"
@@ -17,7 +21,7 @@
           </div>
         </div>
       </div>
-    </div>    
+    </div>
   </div>
 </template>
 
@@ -49,16 +53,16 @@ export default {
   },
   computed: {
     number() {
-      return this.schedulesTemp.length
-    }
+      return this.schedulesTemp.length;
+    },
   },
   created() {
     // console.log(this.schedules)
     this.schedulesTemp = this.schedules;
   },
-  updated() { 
+  updated() {
     this.editSave();
-  }
+  },
 };
 </script>
 
@@ -68,7 +72,8 @@ export default {
   flex-flow: column;
   justify-content: start;
   gap: 40px;
-  width: 672px;
+  width: 57vw;
+  max-width: 672px;
   height: 180px;
   padding-top: 30px;
   margin-bottom: 10px;

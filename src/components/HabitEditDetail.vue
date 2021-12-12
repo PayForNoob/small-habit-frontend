@@ -6,22 +6,24 @@
           <img src="@/assets/img_detail_point.png" />
           <div class="bold">세부습관</div>
         </div>
-        <div class="추가버튼_이미지" 
-        :style="{ backgroundColor: categoryColor }"
-        @click="emitToParent" >
-          <img src="@/assets/add-detailHabit.png" alt="세부습관 추가 버튼"/>
+        <div
+          class="추가버튼_이미지"
+          :style="{ backgroundColor: categoryColor }"
+          @click="emitToParent"
+        >
+          <img src="@/assets/add-detailHabit.png" alt="세부습관 추가 버튼" />
         </div>
       </div>
       <div class="세부습관_목록_박스">
         <div class="스크롤_영역">
-          <div class="세부습관_목록"
-          v-for="(detailHabitItem, index) in detailHabitItemsPlus"
-          :key="index">
+          <div
+            class="세부습관_목록"
+            v-for="(detailHabitItem, index) in detailHabitItemsPlus"
+            :key="index"
+          >
             <div class="세부습관_이름 미작성">
-              <img src="@/assets/dot.png" alt="">
-              <div contenteditable="true">
-                세부습관을 작성해주세요.
-              </div>
+              <img src="@/assets/dot.png" alt="" />
+              <div contenteditable="true">세부습관을 작성해주세요.</div>
             </div>
             <img
               class="세부습관_삭제"
@@ -29,11 +31,13 @@
               @click="detailDel(index)"
             />
           </div>
-          <div class="세부습관_목록"
-          v-for="(detailHabitItem, index) in detailHabitItems"
-          :key="index">
+          <div
+            class="세부습관_목록"
+            v-for="(detailHabitItem, index) in detailHabitItems"
+            :key="index"
+          >
             <div class="세부습관_이름">
-              <img src="@/assets/dot.png" alt="">
+              <img src="@/assets/dot.png" alt="" />
               <div contenteditable="true">
                 {{ detailHabitItem.objective }}
               </div>
@@ -134,7 +138,7 @@ export default {
     },
   },
   created() {
-    console.log(this.categoryColor)
+    console.log(this.categoryColor);
   },
   async updated() {
     this.editSave();
@@ -170,7 +174,8 @@ img {
   flex-flow: column;
   justify-content: start;
   gap: 20px;
-  width: 672px;
+  width: 57vw;
+  max-width: 672px;
   min-height: 110px;
   max-height: 300px;
   padding-top: 30px;
@@ -189,11 +194,10 @@ img {
   padding-right: 20px;
 }
 .세부습관_머릿글 > div {
-  display: flex;  
+  display: flex;
   justify-content: center;
   align-items: center;
   gap: 40px;
-
 }
 .추가버튼_이미지 {
   height: 50px;
@@ -241,7 +245,7 @@ img {
 .세부습관_이름 div {
   outline: none;
 }
-.세부습관_이름 img{
+.세부습관_이름 img {
   width: 10px;
   height: 10px;
 }
