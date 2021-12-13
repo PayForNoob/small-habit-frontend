@@ -71,84 +71,49 @@ export default {
   display: flex;
   flex-flow: column;
   justify-content: start;
-  gap: min(4vw, 40px);
-  width: 57vw;
-  max-width: 672px;
-  height: 16vw;
-  max-height: 180px;
-  padding-top: min(2.5vw, 30px);
-  margin-bottom: min(1vw, 10px);
+  gap:  40px;
+  width: 672px;
+  height: 180px;
+  padding-top: 30px;
+  margin-bottom: 10px;
   background-color: #ffffff;
-  border-radius: min(1.5vw, 20px);
+  border-radius: 20px;
 }
 img {
-  width: 2vw;
-  max-width: 30px;
-  height: 2vw;
-  max-height: 30px;
+  width: 30px;
+  height: 30px;
 }
 .bold {
   font-weight: bold;
 }
 .반복_주기 {
   display: flex;
-  gap: min(2vw, 40px);
-  height: 2vw;
-  max-height: 30px;
-  line-height: min(2vw, 30px);
-  padding-left: min(3vw, 40px);
-  font-size: min(2vw, 26px);
+  gap:40px;
+  height: 30px;
+  line-height: 30px;
+  padding-left: 40px;
+  font-size: 26px;
   color: #000000;
 }
 
 .요일_박스 {
   display: flex;
   justify-content: center;
-  gap: min(3.5vw, 40px);
+  gap: 40px;
 }
 .요일 {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 4vw;
-  height: 4vw;
-  max-width: 50px;
-  max-height: 50px;
+  width: 50px;
+  height: 50px;
   border-radius: 100%;
-  font-size: min(1.7vw, 24px);
+  font-size: 26px;
   color: #000;
   cursor: pointer;
   transition: all 0.15s;
-  animation-duration: 0.15s;
-}
-@keyframes 요일_미선택에서_선택으로 {
-  from {
-    background: #b8b6c9;
-  }
-
-  to {
-    background: #887de5;
-  }
 }
 .요일_선택 {
-  animation-name: 요일_미선택에서_선택으로;
-  color: #ffffff;
-}
-.요일_선택:active {
-  background: #6b63b6;
-  color: #ffffff;
-}
-@keyframes 요일_선택에서_미선택으로 {
-  from {
-    background-color: #1d184d;
-  }
-
-  to {
-    background: #ffffff;
-  }
-}
-.요일_미선택:active {
-  background: #b8b6c9;
   color: #ffffff;
 }
 </style>

@@ -14,7 +14,10 @@
         :categoryColor="categoryColor"
         @emitToParent="emitToParent"
       />
-      <HabitEditDelSave class="삭제박스" @EditSave="EditSave" />
+      <HabitEditDelSave class="삭제박스" 
+      @EditSave="EditSave" 
+      :categoryColor="categoryColor"
+      />
     </div>
   </div>
 </template>

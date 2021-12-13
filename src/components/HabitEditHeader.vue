@@ -86,22 +86,20 @@ export default {
 .상단메뉴_박스 {
   display: flex;
   flex-direction: column;
-  height: 29vw;
+  height: 340px;
   padding-bottom: 2.5vw;
-  max-height: 340px;
-  border-radius: 0px 0px min(2vw, 30px) min(2vw, 30px);
-  margin-bottom: min(2vw, 20px);
+  border-radius: 30px;
+  margin-bottom: 20px;
 }
 
 .뒤로가기_박스 {
   display: flex;
   align-items: center;
-  gap: min(2.5vw, 30px);
-  height: 8.5vw;
-  max-height: 100px;
-  padding-left: min(2vw, 24px);
+  gap: 30px;
+  height: 100px;
+  padding-left: 24px;
   color: #fff;
-  font-size: min(2vw, 25px);
+  font-size: 30px;
 }
 .뒤로가기_박스 div {
   display: flex;
@@ -109,10 +107,8 @@ export default {
   height: 100%;
 }
 .뒤로가기_박스 img {
-  width: 2vw;
-  max-width: 26px;
-  height: 2vw;
-  max-height: 26px;
+  width: 26px;
+  height: 26px;
 }
 .뒤로가기_박스 div:first-child {
   cursor: pointer;
@@ -126,17 +122,15 @@ export default {
 .습관정보_박스 {
   display: flex;
   justify-content: space-between;
-  width: 57vw;
-  max-width: 672px;
-  height: 18vw;
-  max-height: 210px;
-  padding: 0px min(3.5vw, 40px);
+  width: 672px;
+  height: 210px;
+  padding: 0px 40px;
 }
 .습관_정보 {
   display: flex;
   flex-flow: column;
   align-content: flex-start;
-  gap: min(1vw, 10px);
+  gap: 10px;
   width: max-content;
 }
 .습관종류 {
@@ -144,44 +138,34 @@ export default {
   opacity: 50%;
   border-radius: 30px;
   font-family: Noto Sans KR;
-  font-size: min(2vw, 26px);
-  width: min(8vw, 100px);
-  height: min(4vw, 50px);
-  line-height: min(4vw, 50px);
+  font-size: 26px;
+  width: 100px;
+  height: 50px;
+  line-height: 50px;
 }
 .습관명_박스 {
   display: flex;
   flex-flow: row;
   text-align: left;
-  height: min(4.5vw, 52px);
-  line-height: min(4.5vw, 52px);
-  font-size: min(3vw, 36px);
+  height: 52px;
+  line-height: 52px;
+  font-size: 36px;
 }
 .습관명 {
-  min-width: 1vw;
+  min-width: 10px;
   color: #fff;
-  border-bottom: 0.4vw solid #fff;
+  border-bottom: 2px solid #fff;
   outline: none;
   overflow: hidden;
 }
-/* .습관명 input[type=text] {
-  max-width: 300px;
-
-
-  border-bottom: 2px solid #fff;
-  color: #fff;
-
-} */
 .습관명_수정_아이콘 {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
 }
 .습관명_수정_아이콘 img {
-  height: 2vw;
-  max-height: 26px;
-  width: 2vw;
-  max-width: 26px;
+  height: 26px;
+  width: 26px;
 }
 
 .습관이미지_박스 {
@@ -191,8 +175,8 @@ export default {
 }
 
 .습관_아이콘 {
-  width: min(14vw, 160px);
-  height: min(14vw, 160px);
+  width: 160px;
+  height: 160px;
 }
 
 .글자편집_이미지박스 {
@@ -202,17 +186,4 @@ export default {
   flex-flow: column-reverse;
 }
 
-.글자편집_이미지 {
-  width: 30px;
-  height: 30px;
-  /* margin-left: 5px;
-  margin-bottom: 8px; */
-}
-
-.흰배경_박스 {
-  margin: 0px 24px 10px 24px;
-  min-height: 30px;
-  background-color: #ffffff;
-  border-radius: 20px;
-}
 </style>

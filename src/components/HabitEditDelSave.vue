@@ -1,24 +1,49 @@
 <template>
   <div>
-    <div class="삭제저장_박스" v-if="!deleteClick">
-      <div class="삭제_박스" @click="DeleteClick">삭제</div>
-      <div class="저장_박스" @click="Edit">저장</div>
+    <!-- 습관 수정 -->
+    <div class="버튼_박스" v-if="!confirm && $route.params.id" >
+      <div class="삭제_버튼" @click="activeConfirm">삭제</div>
+      <div class="저장_버튼" @click="Edit" :style="{ backgroundColor: categoryColor }">저장</div>
     </div>
-    <div class="bg" v-if="deleteClick"></div>
-    <habit-modal v-if="deleteClick" class="confirm">
+    <habit-modal v-if="confirm && $route.params.id" class="confirm">
       <template v-slot:header>
         <div class="confirm_header">삭제 하시겠습니까?</div>
       </template>
       <template v-slot:contents>
         <div class="confirm_contents">
-          <p>삭제하실 경우 모든 습관 정보가가</p>
+          <p>삭제하실 경우 모든 습관 정보가</p>
           <p>사라지고 복구할 수 없습니다.</p>
         </div>
       </template>
       <template v-slot:confirm>
         <div class="dual_button">
           <div class="button_left" @click="deleteObjective">확인</div>
-          <div class="button_right" @click="DeleteClick">취소</div>
+          <div class="button_right" @click="activeConfirm">취소</div>
+        </div>
+      </template>
+    </habit-modal>
+
+    <!-- 습관 생성 -->
+    <div class="버튼_박스" v-if="!confirm && $route.params.category">
+      <div class="완료_버튼" @click="activeConfirm" :style="{ backgroundColor: categoryColor }">완료</div>
+    </div>
+    <habit-modal v-if="confirm && $route.params.category">
+      <template v-slot:header >
+        <div class="confirm_header">
+          <img src="@/assets/confetti.png" alt="">
+          <div>습관 생성을 완료했어요!</div>
+          <img src="@/assets/confetti.png" alt="">
+        </div>
+      </template>
+      <template v-slot:contents>
+        <div class="confirm_contents">
+          <p>습관 생성이 완료되었습니다.</p>
+          <p>꾸준한 실천을 응원하겠습니다.</p>
+        </div>
+      </template>
+      <template v-slot:confirm>
+        <div class="complete_button" :style="{ backgroundColor: categoryColor }" @click="activeConfirm">
+          확인
         </div>
       </template>
     </habit-modal>
@@ -27,13 +52,15 @@
 
 <script>
 import HabitModal from "@/components/HabitModal.vue";
+
 export default {
   components: {
     HabitModal,
   },
+  props: ["categoryColor"],
   data() {
     return {
-      deleteClick: false,
+      confirm: false,
     };
   },
   methods: {
@@ -50,90 +77,59 @@ export default {
         console.log(err.data);
       } 
     },
-    DeleteClick() {
-      this.deleteClick = !this.deleteClick;
+    activeConfirm() {
+      this.confirm = !this.confirm;
     },
     Edit() {
       console.log("Edit함수");
       this.$emit("EditSave");
     },
+    createHabit() {
+      console.log('create')
+    }
   },
 };
 </script>
 
 <style scope>
-.삭제저장_박스 {
+.버튼_박스 {
   position: fixed;
   bottom: 0%;
   display: flex;
   flex-flow: row;
-  width: 61vw;
-  max-width: 720px;
-  max-height: 60px;
-  height: 6vw;
-  line-height: min(5vw, 60px);
-  margin-top: auto;
+  width: 720px;
+  height: 60px;
+  line-height: 60px;
 
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
-  font-size: min(1.5vw, 20px);
+  font-size: 20px;
   text-align: center;
-
   color: #ffffff;
 }
-.삭제_박스 {
-  width: 30.5vw;
+.삭제_버튼 {
+  width: 50%;
   background: #ff5757;
   cursor: pointer;
 }
-.저장_박스 {
-  width: 30.5vw;
-  background: #887de5;
+.저장_버튼 {
+  width: 50%;
   cursor: pointer;
 }
-@keyframes modal {
-  from {
-    bottom: -360px;
-    opacity: 0;
-  }
-
-  to {
-    bottom: 0px;
-    opacity: 100%;
-  }
-}
-.confirm {
-  position: absolute;
-  bottom: 0px;
-  animation-name: modal;
-  animation-duration: 0.25s;
-  background-color: #fff;
-  z-index: 10000;
-}
-@keyframes bg {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 50%;
-  }
-}
-.bg {
-  animation-name: bg;
-  animation-duration: 0.75s;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: #000;
-  opacity: 50%;
+.완료_버튼 {
+  width: 100%;
+  cursor: pointer;
 }
 .confirm_header {
-  font-size: min(2.5vw, 30px);
+  display: flex;
+  align-items: center;
+  font-size: 30px;
   font-weight: bold;
+}
+.confirm_header img{
+  width: 50px;
+  height: 45px;
 }
 .confirm_contents {
   display: flex;
@@ -144,13 +140,20 @@ export default {
 .dual_button {
   display: flex;
   justify-content: space-evenly;
+  font-size: 20px;
   width: 100%;
+}
+.complete_button {
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  color: #fff;
+  cursor: pointer;
 }
 .dual_button div {
   width: 100%;
-  max-height: 60px;
-  height: 5vw;
-  line-height: min(5vw, 60px);
+  height: 60px;
+  line-height: 60px;
   color: #fff;
 }
 .button_left {

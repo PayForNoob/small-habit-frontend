@@ -23,7 +23,6 @@
       <div class="withdrawal_btn" @click="activeConfirm" v-if="!confirm">
         탈퇴하기
       </div>
-      <div class="bg" v-if="confirm"></div>
       <habit-modal v-if="confirm" class="confirm">
         <template v-slot:header>
           <div class="confirm_header">정말 탈퇴하시겠습니까?</div>
@@ -170,29 +169,6 @@ export default {
   animation-name: modal;
   animation-duration: 0.25s;
   background-color: #fff;
-  z-index: 10000;
-}
-@keyframes bg {
-
-  from { 
-    opacity: 0;
-  }
-
-  to {
-    opacity: 50%;
-  }
-
-}
-.bg {
-  animation-name: bg;
-  animation-duration: 0.25s;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: #000;
-  opacity: 50%;
 }
 .confirm_header {
   font-size: 30px;

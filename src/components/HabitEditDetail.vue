@@ -14,8 +14,8 @@
           <img src="@/assets/add-detailHabit.png" alt="세부습관 추가 버튼" />
         </div>
       </div>
-      <div class="세부습관_목록_박스">
-        <div class="스크롤_영역">
+      <div class="스크롤_영역">
+        <div class="세부습관_목록_박스">
           <div
             class="세부습관_목록"
             v-for="(detailHabitItem, index) in detailHabitItemsPlus"
@@ -50,26 +50,7 @@
           </div>
         </div>
       </div>
-      <!-- <div
-        v-for="(detailHabitItemsPl, index) in detailHabitItemsPlus"
-        :key="index"
-        class="세부습관_목록_박스"
-      >
-        <div class="세부습관_목록">
-          <input
-            style="width: 300px"
-            v-model="text[index]"
-            placeholder="내용을 적어주세요"
-          />
-          <img
-            class="세부습관_삭제"
-            src="@/assets/img_detail_del.png"
-            @click="detailDel(index)"
-          />
-        </div>
-      </div> -->
     </div>
-    <!-- 내용 추가되는거에도 삭제 이미지추가 기존 추가된 세부내역에도 수정할수있게 추가. -->
   </div>
 </template>
 
@@ -157,10 +138,8 @@ export default {
   border-radius: 5px;
 }
 img {
-  max-width: 30px;
-  width: 2.5vw;
-  max-height: 30px;
-  height: 2.5vw;
+  width: 30px;
+  height: 30px;
 }
 .bold {
   font-weight: bold;
@@ -175,37 +154,34 @@ img {
   display: flex;
   flex-flow: column;
   justify-content: start;
-  gap: min(1.5vw, 20px);
-  width: 57vw;
-  max-width: 672px;
+  gap: 20px;
+  width: 672px;
   min-height: 110px;
-  max-height: 300px;
-  padding-top: min(2.5vw, 30px);
-  padding-bottom: min(2.5vw, 30px);
-  margin-bottom: min(1vw, 10px);
+  padding-top: 30px;
+  padding-bottom: 30px;
+  margin-bottom: 10px;
   background-color: #ffffff;
-  border-radius: min(2vw, 20px);
-  font-size: min(2vw, 26px);
+  border-radius: 20px;
+  font-size: 26px;
 }
 /* 세부습관 머릿글 */
 .세부습관_머릿글 {
   display: flex;
-  height: 5vw;
-  max-height: 50px;
+  height: 50px;
   justify-content: space-between;
   align-items: center;
-  padding-left: min(3.5vw, 40px);
-  padding-right: min(1.5vw, 20px);
+  padding-left: 40px;
+  padding-right: 20px;
 }
 .세부습관_머릿글 > div {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: min(3.5vw, 40px);
+  gap: 40px;
 }
 .추가버튼_이미지 {
-  height: min(4.5vw, 50px);
-  width: min(4.5vw, 50px);
+  height: 50px;
+  width: 50px;
   cursor: pointer;
   border-radius: 100%;
 }
@@ -215,30 +191,28 @@ img {
 }
 
 /* 세부습관 목록 */
-.세부습관_목록_박스 {
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-}
 .스크롤_영역 {
   display: flex;
   flex-flow: column;
-  gap: min(1.5vw, 20px);
-  max-height: 200px;
-  padding-left: min(1.5vw, 20px);
-  padding-right: min(1vw, 10px);
-  padding-bottom: 0px;
+  align-items: center;
+  max-height: 220px;
+  padding-left: 20px;
+  padding-right: 10px;
+  margin: 0 10px;
   overflow: scroll;
+}
+.세부습관_목록_박스 {
+  display: flex;
+  flex-flow: column;
+  gap: 10px;
 }
 .세부습관_목록 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 452px;
-  width: 45vw;
-  height: 3.5vw;
-  max-height: 50px;
-  line-height: min(4.5vw, 50px);
+  width: 452px;
+  height: 50px;
+  line-height: 50px;
 }
 .미작성 {
   opacity: 50%;
@@ -250,18 +224,15 @@ img {
 }
 .세부습관_이름 div {
   outline: none;
+  min-width: 20px;
 }
 .세부습관_이름 img {
-  max-width: 10px;
-  width: 1vw;
-  max-height: 10px;
-  height: 1vw;
+  width: 10px;
+  height: 10px;
 }
 .세부습관_삭제 {
-  height: 2vw;
-  max-height: 24px;
-  max-width: 24px;
-  width: 2vw;
+  height: 24px;
+  width: 24px;
   cursor: pointer;
 }
 </style>
