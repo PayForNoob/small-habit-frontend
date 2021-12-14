@@ -1,9 +1,9 @@
 <template>
   <div>
     <!-- 습관 수정 -->
-    <div class="버튼_박스" v-if="!confirm && $route.params.id" >
+    <div class="버튼_박스" v-if="$route.params.id" >
       <div class="삭제_버튼" @click="activeConfirm">삭제</div>
-      <div class="저장_버튼" @click="Edit" :style="{ backgroundColor: categoryColor }">저장</div>
+      <div class="저장_버튼" @click="Edit" :style="{ backgroundColor: category.color }">저장</div>
     </div>
     <habit-modal v-if="confirm && $route.params.id" class="confirm">
       <template v-slot:header>
@@ -24,10 +24,10 @@
     </habit-modal>
 
     <!-- 습관 생성 -->
-    <div class="버튼_박스" v-if="!confirm && $route.params.category">
-      <div class="완료_버튼" @click="activeConfirm" :style="{ backgroundColor: categoryColor }">완료</div>
+    <div class="버튼_박스" v-if="!editHabit && $route.params.category">
+      <div class="완료_버튼" @click="Edit" :style="{ backgroundColor: category.color }" >완료</div>
     </div>
-    <habit-modal v-if="confirm && $route.params.category">
+    <habit-modal v-if="editHabit && $route.params.category">
       <template v-slot:header >
         <div class="confirm_header">
           <img src="@/assets/confetti.png" alt="">
@@ -42,7 +42,7 @@
         </div>
       </template>
       <template v-slot:confirm>
-        <div class="complete_button" :style="{ backgroundColor: categoryColor }" @click="activeConfirm">
+        <div class="complete_button" :style="{ backgroundColor: category.color }" @click="$router.push('/today')">
           확인
         </div>
       </template>
@@ -57,12 +57,12 @@ export default {
   components: {
     HabitModal,
   },
-  props: ["categoryColor"],
   data() {
     return {
-      confirm: false,
-    };
+      confirm: this.editHabit
+    }
   },
+  props: ["category", "editHabit"],
   methods: {
     async deleteObjective() {
       try {
@@ -77,20 +77,15 @@ export default {
         console.log(err.data);
       } 
     },
-    activeConfirm() {
-      this.confirm = !this.confirm;
-    },
     Edit() {
-      console.log("Edit함수");
       this.$emit("EditSave");
     },
-    createHabit() {
-      console.log('create')
+    activeConfirm() {
+      this.confirm = !this.confirm
     }
   },
 };
 </script>
-
 <style scope>
 .버튼_박스 {
   position: fixed;
@@ -135,7 +130,7 @@ export default {
   display: flex;
   flex-direction: column;
   width: 100%;
-  font-size: min(2vw, 24px);
+  font-size: 24px;
 }
 .dual_button {
   display: flex;

@@ -1,22 +1,27 @@
 <template>
   <div class="container">
     <div class="contents">
-      <HabitEditHeader :habitItem="habitItem" />
+      <HabitEditHeader 
+      :habitItem="habitItem" 
+      :category="habitCategory"
+      @editHabitName="editHabitName"
+      />
       <HabitEditWeek
         :schedules="habitItem.schedule"
-        :SaveProps="SaveProps"
-        :categoryColor="categoryColor"
+        :category="habitCategory"
+        @editSchedule="editSchedule"
       />
       <HabitEditDetail
         :detailHabitItems="detailHabitItems"
-        :SaveProps="SaveProps"
-        :id="id"
-        :categoryColor="categoryColor"
-        @emitToParent="emitToParent"
+        :category="habitCategory"
+        @addDetailHabitItem="addDetailHabitItem"
+        @editDetailHabitItem="editDetailHabitItem"
+        @deleteDetailHabitItem="deleteDetailHabitItem"
       />
-      <HabitEditDelSave class="삭제박스" 
+      <HabitEditDelSave  
       @EditSave="EditSave" 
-      :categoryColor="categoryColor"
+      :category="habitCategory"
+      :editHabit="editHabit"
       />
     </div>
   </div>
@@ -38,48 +43,51 @@ export default {
   },
   data() {
     return {
-      SaveProps: false,
       habitItem: {
         schedule: [],
         objective: "",
         category: this.category,
       },
       detailHabitItems: [],
-      detailHabitItemsPlus: [],
-      categoryColor: "#000",
+      habitCategory: {},
+      editHabit: false
     };
   },
   methods: {
-    emitToParent(data) {
-      this.detailHabitItemsPlus = data;
-      // console.log(this.detailHabitItemsPlus);
+    editHabitName(newValue) {
+      this.habitItem.objective = newValue
+      // console.log(this.habitItem.objective)
     },
-    async EditSave() {
-      if (this.id) {
-        // 수정
-      } else {
-        // 생성
-      }
+    editSchedule(newValue) {
+      this.habitItem.schedule = newValue
+      // console.log(this.habitItem.schedule)
+    },
+    addDetailHabitItem() {
+      this.detailHabitItems.push("");
+      // console.log(this.detailHabitItems)
+    },
+    editDetailHabitItem(ind, newValue) {
+      this.detailHabitItems[ind] = newValue
+      // console.log(this.detailHabitItems)
+    },
 
-      this.SaveProps = true;
-      console.log("view 함수 일정 저장");
-    },
-  },
-  async created() {
-    if (this.id) {
+    // 습관 가져오기
+    async getHabitItems() {
       try {
         let { data } = await this.axios({
           method: "get",
           url: `/api/objectives/${this.id}`,
         });
-        console.log(data);
+        // console.log(data);
         this.habitItem = data;
-        this.categoryColor =
-          this.$store.state.habitCategory[data.category].color;
+        this.habitCategory = this.$store.state.habitCategory[data.category]
+
       } catch (err) {
         console.log(err);
       }
-
+    },
+    // 세부습관들 가져오기
+    async getDetailHabitItems() {
       try {
         let { data } = await this.axios({
           method: "get",
@@ -90,8 +98,100 @@ export default {
       } catch (err) {
         console.log(err);
       }
+    },
+
+
+    // 습관 생성하기
+    async createHabit() {
+      try {
+        let { data } = await this.axios({
+          method: this.id ? "put" : "post",
+          url:  this.id ? `/api/objectives/${this.id}` : '/api/objectives',
+          data: {...this.habitItem}
+        });
+        // console.log(data)
+        if(this.detailHabitItems.length > 0) {
+          this.detailHabitItems.forEach(async (el) =>  {  
+            if(el.id) {
+              await this.editDetailHabit(el.id, el)
+            } else {
+              await this.createDetailHabit(data.id, el)
+            }
+          });
+          this.editHabit = !this.editHabit
+        } else {
+          this.editHabit = !this.editHabit
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    // 세부습관 생성
+    async createDetailHabit(objectiveId, newDetailHabit) {
+      try {
+        await this.axios({
+          method: "post",
+          url: `/api/detailedObjectives/${objectiveId}`,
+          data: {
+            objective: newDetailHabit
+          }
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    // 세부습관 수정
+    async editDetailHabit(id, editDetailHabit) {
+      try {
+        await this.axios({
+          method: "put",
+          url: `/api/detailedObjectives/${id}`,
+          data: {
+            objective: editDetailHabit
+          }
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    },
+
+
+    // 세부습관 삭제 
+    async deleteDetailHabitItem(ind) {
+      if(this.detailHabitItems[ind].id) {
+        try {
+          await this.axios({
+            method: "DELETE",
+            url: `/api/detailedObjectives/${this.detailHabitItems[ind].id}`
+          });
+        } catch (err) {
+          console.log(err);
+        }
+        this.detailHabitItems.splice(ind, 1)
+      } else {
+        this.detailHabitItems.splice(ind, 1)
+      }
+
+    },
+
+
+    // 습관 저장
+    async EditSave() {
+      if (this.id) {
+        await this.createHabit()
+        this.$router.push('/today')
+      } else {
+        await this.createHabit()
+      }
+    },
+  },
+  async created() {
+    if (this.id) {
+      await this.getHabitItems()
+
+      await this.getDetailHabitItems()
     } else {
-      this.categoryColor = this.$store.state.habitCategory[this.category].color;
+      this.habitCategory = this.$store.state.habitCategory[this.category]
     }
   },
 };

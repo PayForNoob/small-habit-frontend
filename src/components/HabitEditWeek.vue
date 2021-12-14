@@ -10,7 +10,7 @@
           <div
             :style="{
               backgroundColor: schedulesTemp.includes(index)
-                ? categoryColor
+                ? category.color
                 : '#dedede',
             }"
             :class="schedulesTemp.includes(index) ? '요일_선택' : '요일_미선택'"
@@ -27,27 +27,23 @@
 
 <script>
 export default {
-  props: ["schedules", "SaveProps", "categoryColor"],
+  props: ["schedules", "category"],
   data() {
     return {
       week: ["일", "월", "화", "수", "목", "금", "토"],
-      schedulesTemp: [],
+      schedulesTemp: this.schedules
     };
   },
   methods: {
-    editSave() {
-      if (this.SaveProps) {
-        // console.log("주 일정 저장");
-      }
-    },
-    ButtonDay(id) {
-      if (this.schedulesTemp.includes(id)) {
-        this.schedulesTemp = this.schedulesTemp.filter((item) => item !== id);
+    ButtonDay(ind) {
+      if (this.schedulesTemp.includes(ind)) {
+        this.schedulesTemp = this.schedulesTemp.filter((item) => item !== ind);
+        this.schedulesTemp.sort();
       } else {
-        this.schedulesTemp = [...this.schedulesTemp, id];
+        this.schedulesTemp = [...this.schedulesTemp, ind];
+        this.schedulesTemp.sort();
       }
-
-      // console.log(this.schedulesTemp)
+      this.$emit('editSchedule', this.schedulesTemp);
       this.$forceUpdate();
     },
   },
@@ -55,13 +51,6 @@ export default {
     number() {
       return this.schedulesTemp.length;
     },
-  },
-  created() {
-    // console.log(this.schedules)
-    this.schedulesTemp = this.schedules;
-  },
-  updated() {
-    this.editSave();
   },
 };
 </script>

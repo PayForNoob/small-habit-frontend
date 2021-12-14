@@ -1,5 +1,5 @@
 <template>
-  <div class="상단메뉴_박스" :style="{ backgroundColor: colorCode }">
+  <div class="상단메뉴_박스" :style="{ backgroundColor: category.color }">
     <div>
       <div class="뒤로가기_박스">
         <div class="뒤로가기_버튼" @click="previousPage">
@@ -13,15 +13,13 @@
     <div>
       <div class="습관정보_박스">
         <div class="습관_정보">
-          <div class="습관종류" :style="{ color: colorCode }">
-            {{ categoryName }}
+          <div class="습관종류" :style="{ color: category.color }">
+            {{ category.name }}
           </div>
           <div class="습관명_박스">
-            <div class="습관명" contenteditable="true">
+            <div class="습관명" contenteditable="true" ref="habitName" @input="inputHabitName">
               {{
-                habitItem.objective
-                  ? habitItem.objective
-                  : "습관명을 입력해주세요."
+                habitItem.objective ? habitItem.objective : "습관명을 입력해주세요."
               }}
             </div>
             <div class="습관명_수정_아이콘">
@@ -30,7 +28,7 @@
           </div>
         </div>
         <div class="습관이미지_박스">
-          <img class="습관_아이콘" :src="habitIcon" />
+          <img class="습관_아이콘" :src="require(`@/assets/habitIcon/img_habit_${this.category.imgUrl}.png`)" />
         </div>
       </div>
     </div>
@@ -39,44 +37,13 @@
 
 <script>
 export default {
-  props: ["habitItem"],
-  data() {
-    return {
-      category: null,
-      objective: null,
-    };
-  },
-  computed: {
-    habitIcon() {
-      return require(`@/assets/habitIcon/img_habit_${this.category.imgUrl}.png`);
-    },
-    categoryName() {
-      return this.category.name;
-    },
-    colorCode() {
-      return this.category.color;
-    },
-  },
+  props: ["habitItem", "category"],
   methods: {
     previousPage() {
       this.$router.go(-1);
     },
-    editHabitName(value) {
-      if (value.length > 12) {
-        return;
-      } else {
-        this.objective = value;
-      }
-    },
-  },
-  created() {
-    if (this.habitItem) {
-      this.category = this.$store.state.habitCategory[this.habitItem.category];
-      this.objective = this.habitItem.objective;
-    } else {
-      this.category =
-        this.$store.state.habitCategory[this.$route.params.category];
-      this.objective = "습관명을 입력해주세요.";
+    inputHabitName() {
+      this.$emit('editHabitName', this.$refs.habitName.innerHTML);
     }
   },
 };
@@ -87,8 +54,7 @@ export default {
   display: flex;
   flex-direction: column;
   height: 340px;
-  padding-bottom: 2.5vw;
-  border-radius: 30px;
+  border-radius: 0px 0px 30px 30px;
   margin-bottom: 20px;
 }
 

@@ -8,8 +8,8 @@
         </div>
         <div
           class="추가버튼_이미지"
-          :style="{ backgroundColor: categoryColor }"
-          @click="emitToParent"
+          :style="{ backgroundColor: category.color }"
+          @click="addDetailHabit"
         >
           <img src="@/assets/add-detailHabit.png" alt="세부습관 추가 버튼" />
         </div>
@@ -18,34 +18,19 @@
         <div class="세부습관_목록_박스">
           <div
             class="세부습관_목록"
-            v-for="(detailHabitItem, index) in detailHabitItemsPlus"
-            :key="index"
-          >
-            <div class="세부습관_이름 미작성">
-              <img src="@/assets/dot.png" alt="" />
-              <div contenteditable="true">세부습관을 작성해주세요.</div>
-            </div>
-            <img
-              class="세부습관_삭제"
-              src="@/assets/img_detail_del.png"
-              @click="detailDel(index)"
-            />
-          </div>
-          <div
-            class="세부습관_목록"
             v-for="(detailHabitItem, index) in detailHabitItems"
             :key="index"
           >
             <div class="세부습관_이름">
               <img src="@/assets/dot.png" alt="" />
-              <div contenteditable="true">
-                {{ detailHabitItem.objective }}
+              <div contenteditable="true" @input="editDetailHabit(index, $event.currentTarget.innerHTML)">
+                {{ detailHabitItem.objective ? detailHabitItem.objective : "세부습관을 입력해주세요."  }}
               </div>
             </div>
             <img
               class="세부습관_삭제"
               src="@/assets/img_detail_del.png"
-              @click="SavedDetailDel(index)"
+              @click="deleteDetailHabit(index)"
             />
           </div>
         </div>
@@ -56,75 +41,22 @@
 
 <script>
 export default {
-  props: ["detailHabitItems", "SaveProps", "id", "categoryColor"],
+  props: ["detailHabitItems", "category"],
   data() {
     return {
       detailHabitItemsPlus: [],
-      text: [],
     };
   },
   methods: {
-    async editSave() {
-      if (this.SaveProps) {
-        console.log("세부내역 저장");
-        // console.log(this.detailHabitItems[0].id);
-        // console.log(this.detailHabitItems.length);
-        // console.log(this.detailHabitItemsPlus.length);
-        for (
-          let i = this.detailHabitItems[0].id + this.detailHabitItems.length;
-          i <
-          this.detailHabitItems[0].id +
-            this.detailHabitItems.length +
-            this.detailHabitItemsPlus.length;
-          i++
-        ) {
-          console.log(i);
-          // try {
-          //   await this.axios({
-          //     method: "post",
-          //     url: `/api/detailedObjectives/${this.i}`,
-          //     params: {},
-          //     data: {
-          //       objective: "dasd",
-          //       objectiveId: this.id,
-          //       userId: this.detailHabitItems.userId,
-          //     },
-          //   });
-          // } catch (err) {
-          //   console.log(err);
-          // }
-        }
-      }
+    addDetailHabit() {
+      this.$emit('addDetailHabitItem')
     },
-    emitToParent() {
-      this.detailHabitItemsPlus.push("");
-      console.log(this.detailHabitItemsPlus);
-      this.$emit("emitToParent", this.detailHabitItemsPlus);
+    editDetailHabit(ind, newValue) {
+      this.$emit('editDetailHabitItem', ind, newValue);
     },
-    detailPlus() {},
-    async SavedDetailDel(index) {
-      try {
-        await this.axios({
-          method: "DELETE",
-          url: `/api/detailedObjectives/${this.detailHabitItems[index].id}`,
-          params: {},
-        });
-      } catch (err) {
-        console.log(err);
-      }
-      // this.detailHabitItems.splice(index);
+    deleteDetailHabit(ind) {
+      this.$emit('deleteDetailHabitItem', ind)
     },
-    detailDel(index) {
-      this.detailHabitItemsPlus.splice(index, 1);
-    },
-  },
-  created() {
-    console.log(this.categoryColor);
-  },
-  async updated() {
-    this.editSave();
-    // console.log("this.detailHabitItems");
-    // console.log(this.detailHabitItems);
   },
 };
 </script>
