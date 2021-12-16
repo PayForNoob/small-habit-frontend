@@ -118,7 +118,7 @@ export default {
   font-size: 36px;
 }
 .습관명 {
-  min-width: 10px;
+  min-width: 30px;
   color: #fff;
   border-bottom: 2px solid #fff;
   outline: none;

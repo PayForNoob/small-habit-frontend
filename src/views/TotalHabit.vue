@@ -59,7 +59,7 @@ export default {
       });
       this.habitItems = data;
       this.$store.commit('loadingEnd')
-      console.log(this.habitItems)
+      // console.log(this.habitItems)
     } catch (err) {
       console.log(err);
     }

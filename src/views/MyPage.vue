@@ -95,7 +95,7 @@ export default {
     }
     this.nicknamesBackgroundColor = this.backgroundColor[nickname]
     this.emailsBackgroundColor = this.backgroundColor[email]
-    console.log('tag', email, nickname)
+    // console.log('tag', email, nickname)
   }
 };
 </script>

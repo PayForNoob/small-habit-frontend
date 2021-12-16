@@ -20,8 +20,9 @@
       />
       <HabitEditDelSave  
       @EditSave="EditSave" 
+      :habitItem="habitItem"
       :category="habitCategory"
-      :editHabit="editHabit"
+      :edit="edit"
       />
     </div>
   </div>
@@ -50,7 +51,7 @@ export default {
       },
       detailHabitItems: [],
       habitCategory: {},
-      editHabit: false
+      edit: false
     };
   },
   methods: {
@@ -102,7 +103,7 @@ export default {
 
 
     // 습관 생성하기
-    async createHabit() {
+    async editHabit() {
       try {
         let { data } = await this.axios({
           method: this.id ? "put" : "post",
@@ -118,9 +119,9 @@ export default {
               await this.createDetailHabit(data.id, el)
             }
           });
-          this.editHabit = !this.editHabit
+          this.edit = !this.edit
         } else {
-          this.editHabit = !this.editHabit
+          this.edit = !this.edit
         }
       } catch (err) {
         console.log(err);
@@ -178,10 +179,10 @@ export default {
     // 습관 저장
     async EditSave() {
       if (this.id) {
-        await this.createHabit()
+        await this.editHabit()
         this.$router.push('/today')
       } else {
-        await this.createHabit()
+        await this.editHabit()
       }
     },
   },
@@ -207,8 +208,7 @@ export default {
 .contents {
   display: flex;
   flex-flow: column;
-  width: 61vw;
-  max-width: 720px;
+  width: 720px;
   height: 100vh;
   background-color: #e1e1e1;
 }

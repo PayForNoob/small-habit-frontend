@@ -2,7 +2,7 @@
   <div>
     <!-- 습관 수정 -->
     <div class="버튼_박스" v-if="$route.params.id" >
-      <div class="삭제_버튼" @click="activeConfirm">삭제</div>
+      <div class="삭제_버튼" @click="confirm = !confirm">삭제</div>
       <div class="저장_버튼" @click="Edit" :style="{ backgroundColor: category.color }">저장</div>
     </div>
     <habit-modal v-if="confirm && $route.params.id" class="confirm">
@@ -18,16 +18,16 @@
       <template v-slot:confirm>
         <div class="dual_button">
           <div class="button_left" @click="deleteObjective">확인</div>
-          <div class="button_right" @click="activeConfirm">취소</div>
+          <div class="button_right" @click="confirm = !confirm">취소</div>
         </div>
       </template>
     </habit-modal>
 
-    <!-- 습관 생성 -->
-    <div class="버튼_박스" v-if="!editHabit && $route.params.category">
+    <!-- 습관 생성-내용 있음 -->
+    <div class="버튼_박스" v-if="$route.params.category">
       <div class="완료_버튼" @click="Edit" :style="{ backgroundColor: category.color }" >완료</div>
     </div>
-    <habit-modal v-if="editHabit && $route.params.category">
+    <habit-modal v-if="edit && $route.params.category">
       <template v-slot:header >
         <div class="confirm_header">
           <img src="@/assets/confetti.png" alt="">
@@ -47,6 +47,25 @@
         </div>
       </template>
     </habit-modal>
+    <!-- 습관 생성-내용 없음 -->
+    <habit-modal v-if="confirm && $route.params.category">
+      <template v-slot:header >
+        <div class="confirm_header">
+          <div>습관 생성에 실패했습니다.</div>
+        </div>
+      </template>
+      <template v-slot:contents>
+        <div class="confirm_contents">
+          <p>작성하지 않은 내용이 있습니다.</p>
+          <p>마저 작성해주시기 바랍니다.</p>
+        </div>
+      </template>
+      <template v-slot:confirm>
+        <div class="complete_button" :style="{ backgroundColor: category.color }" @click="confirm = !confirm">
+          확인
+        </div>
+      </template>
+    </habit-modal>
   </div>
 </template>
 
@@ -59,10 +78,10 @@ export default {
   },
   data() {
     return {
-      confirm: this.editHabit
+      confirm: false
     }
   },
-  props: ["category", "editHabit"],
+  props: ["habitItem", "category", "edit"],
   methods: {
     async deleteObjective() {
       try {
@@ -78,11 +97,13 @@ export default {
       } 
     },
     Edit() {
-      this.$emit("EditSave");
+      if(this.habitItem.objective && this.habitItem.schedule) {
+        this.$emit("EditSave");
+      } else {
+        this.confirm = !this.confirm
+      }
+      
     },
-    activeConfirm() {
-      this.confirm = !this.confirm
-    }
   },
 };
 </script>
@@ -142,6 +163,7 @@ export default {
   width: 100%;
   height: 60px;
   line-height: 60px;
+  font-size: 20px;
   color: #fff;
   cursor: pointer;
 }
