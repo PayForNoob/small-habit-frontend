@@ -20,9 +20,7 @@ export default {
   },
   methods: {
     createHabit() {
-      this.$router.push({
-        path: `/habitCreate/${this.categoryId}`,
-      });
+      this.$router.push(`/create/${this.categoryId}`);
     },
   },
 }
