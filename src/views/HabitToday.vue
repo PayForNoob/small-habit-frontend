@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <habit-header class="header"></habit-header>
+    <Header class="header"></header>
     <pulse-loader v-if="loading == true" class="로딩중"></pulse-loader>
     <div class="contents" v-if="loading == false">
       <div class="습관목록_박스">
@@ -25,13 +25,13 @@
 
 <script>
 import HabitList from "@/components/HabitList.vue";
-import HabitHeader from "../components/HabitHeader.vue";
+import Header from "../components/Header.vue";
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
 
 export default {
   components: {
     HabitList,
-    HabitHeader,
+    Header,
     PulseLoader,
   },
   data() {

@@ -16,23 +16,23 @@
         <div>선택해보세요!</div>
       </div>
       <div class="습관목록">
-        <category-box
+        <HabitCreateCategory
           v-for="(category, ind) in 8"
           :categoryId="ind"
           :key="ind"
         >
-        </category-box>
+        </HabitCreateCategory>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import CategoryBox from '../components/HabitCreate/CategoryBox.vue'
+import HabitCreateCategory from '../components/HabitCreateCategory.vue'
 
 export default {
   components: {
-    CategoryBox
+    HabitCreateCategory
   },
   methods: {
     previousPage() {

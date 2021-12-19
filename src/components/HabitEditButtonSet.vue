@@ -5,7 +5,7 @@
       <div class="삭제_버튼" @click="confirm = !confirm">삭제</div>
       <div class="저장_버튼" @click="Edit" :style="{ backgroundColor: category.color }">저장</div>
     </div>
-    <habit-modal v-if="confirm && $route.params.id" class="confirm">
+    <base-modal v-if="confirm && $route.params.id" class="confirm">
       <template v-slot:header>
         <div class="confirm_header">삭제 하시겠습니까?</div>
       </template>
@@ -21,13 +21,13 @@
           <div class="button_right" @click="confirm = !confirm">취소</div>
         </div>
       </template>
-    </habit-modal>
+    </base-modal>
 
     <!-- 습관 생성-내용 있음 -->
     <div class="버튼_박스" v-if="$route.params.category">
       <div class="완료_버튼" @click="Edit" :style="{ backgroundColor: category.color }" >완료</div>
     </div>
-    <habit-modal v-if="edit && $route.params.category">
+    <base-modal v-if="edit && $route.params.category">
       <template v-slot:header >
         <div class="confirm_header">
           <img src="@/assets/confetti.png" alt="">
@@ -46,9 +46,9 @@
           확인
         </div>
       </template>
-    </habit-modal>
+    </base-modal>
     <!-- 습관 생성-내용 없음 -->
-    <habit-modal v-if="confirm && $route.params.category">
+    <base-modal v-if="confirm && $route.params.category">
       <template v-slot:header >
         <div class="confirm_header">
           <div>습관 생성에 실패했습니다.</div>
@@ -65,16 +65,16 @@
           확인
         </div>
       </template>
-    </habit-modal>
+    </base-modal>
   </div>
 </template>
 
 <script>
-import HabitModal from "@/components/HabitModal.vue";
+import BaseModal from "@/components/BaseModal.vue";
 
 export default {
   components: {
-    HabitModal,
+    BaseModal,
   },
   data() {
     return {

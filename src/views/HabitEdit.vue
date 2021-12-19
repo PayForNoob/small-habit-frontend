@@ -1,46 +1,46 @@
 <template>
   <div class="container">
     <div class="contents">
-      <HabitEditHeader 
-      :habitItem="habitItem" 
-      :category="habitCategory"
-      @editHabitName="editHabitName"
+      <TheHabitHeader 
+        :habitItem="habitItem" 
+        :category="habitCategory"
+        @editHabitName="editHabitName"
       />
-      <HabitEditWeek
+      <TheSelectSchedule
         :schedules="habitItem.schedule"
         :category="habitCategory"
         @editSchedule="editSchedule"
       />
-      <HabitEditDetail
+      <TheHabitDetailList
         :detailHabitItems="detailHabitItems"
         :category="habitCategory"
         @addDetailHabitItem="addDetailHabitItem"
         @editDetailHabitItem="editDetailHabitItem"
         @deleteDetailHabitItem="deleteDetailHabitItem"
       />
-      <HabitEditDelSave  
-      @EditSave="EditSave" 
-      :habitItem="habitItem"
-      :category="habitCategory"
-      :edit="edit"
+      <HabitEditButtonSet  
+        @EditSave="EditSave" 
+        :habitItem="habitItem"
+        :category="habitCategory"
+        :edit="edit"
       />
     </div>
   </div>
 </template>
 
 <script>
-import HabitEditHeader from "@/components/HabitEditHeader.vue";
-import HabitEditWeek from "@/components/HabitEditWeek.vue";
-import HabitEditDetail from "@/components/HabitEditDetail.vue";
-import HabitEditDelSave from "@/components/HabitEditDelSave.vue";
+import TheHabitHeader from "@/components/TheHabitHeader.vue";
+import TheSelectSchedule from "@/components/TheSelectSchedule.vue";
+import TheHabitDetailList from "@/components/TheHabitDetailList.vue";
+import HabitEditButtonSet from "@/components/HabitEditButtonSet.vue";
 
 export default {
   props: ["id", "category"],
   components: {
-    HabitEditHeader,
-    HabitEditWeek,
-    HabitEditDetail,
-    HabitEditDelSave,
+    TheHabitHeader,
+    TheSelectSchedule,
+    TheHabitDetailList,
+    HabitEditButtonSet,
   },
   data() {
     return {

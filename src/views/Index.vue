@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <habit-header class="header"></habit-header>
+    <Header class="header"/>
     <div class="contents">
       <div class="text">
         <div class="text_header">
@@ -28,11 +28,11 @@
 </template>
 
 <script>
-import HabitHeader from '../components/HabitHeader.vue'
+import Header from '../components/Header.vue'
 
 export default {
   components: {
-    HabitHeader
+    Header
   },
 }
 </script>

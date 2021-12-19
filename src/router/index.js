@@ -1,53 +1,40 @@
 import { createWebHistory, createRouter } from 'vue-router'
-import LoadingPage from '../views/LoadingPage.vue'
-import MainPage from '../views/MainPage.vue'
-import TotalHabit from '../views/TotalHabit.vue'
-import TodaysHabit from '../views/TodaysHabit.vue'
-import MyPage from '../views/MyPage.vue'
-import EditHabit from '../views/EditHabit.vue'
-import SelectCategory from '../views/SelectCategory.vue'
 import axios from 'axios'
 import { store } from '../store/index.js'
-
-
 const routes = [
   {
     path: '/',
-    redirect: '/main'
-  },
-  {
-    path: '/main',
-    component: MainPage
+    component: () => import(/* webpackChunkName: "index" */ '@/views/Index.vue')
   },
   {
     path: '/total',
-    component: TotalHabit
+    component: () => import(/* webpackChunkName: "habit" */ '@/views/HabitTotal.vue')
   },
   {
     path: '/today',
-    component: TodaysHabit
+    component: () => import(/* webpackChunkName: "habit" */ '@/views/HabitToday.vue')
   },
   {
-    path: '/mypage',
-    component: MyPage
+    path: '/myinfo',
+    component: () => import(/* webpackChunkName: "myinfo" */ '@/views/MyInfo.vue')
   },
   {
     path: '/edit/:id',
-    component: EditHabit,
-    props: true
+    props: true,
+    component: () => import(/* webpackChunkName: "habit" */ '@/views/HabitEdit.vue')
   },
   {
-    path: '/habitCreate/:category',
-    component: EditHabit,
-    props: true
+    path: '/create',
+    component: () => import(/* webpackChunkName: "habit" */ '@/views/HabitSelectCategory.vue')
   },
   {
-    path: '/create/selectCategory',
-    component: SelectCategory
+    path: '/create/:category',
+    props: true,
+    component: () => import(/* webpackChunkName: "habit" */ '@/views/HabitEdit.vue')
   },
   {
     path: '/loading',
-    component: LoadingPage
+    component: () => import(/* webpackChunkName: "loading" */ '@/views/Loading.vue')
   }
 ]
 

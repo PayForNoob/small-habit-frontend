@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <habit-header class="header"></habit-header>
+    <Header class="header"></header>
     <div class="contents">
       <div class="userInfo">
         <div class="infoBox" :style="{ backgroundColor: nicknamesBackgroundColor }">
@@ -23,7 +23,7 @@
       <div class="withdrawal_btn" @click="activeConfirm" v-if="!confirm">
         탈퇴하기
       </div>
-      <habit-modal v-if="confirm" class="confirm">
+      <base-modal v-if="confirm" class="confirm">
         <template v-slot:header>
           <div class="confirm_header">정말 탈퇴하시겠습니까?</div>
         </template>
@@ -39,20 +39,20 @@
             <div class="button_right" @click="activeConfirm">취소</div>
           </div> 
         </template>
-      </habit-modal>
+      </base-modal>
     </div>
 
   </div>
 </template>
 
 <script>
-import HabitHeader from '../components/HabitHeader.vue'
-import HabitModal from '@/components/HabitModal.vue'
+import Header from '../components/Header.vue'
+import BaseModal from '@/components/BaseModal.vue'
 
 export default {
   components: {
-    HabitHeader,
-    HabitModal,
+    Header,
+    BaseModal,
 
   },
   data() {

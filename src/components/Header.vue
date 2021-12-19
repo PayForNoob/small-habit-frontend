@@ -26,8 +26,8 @@
           오늘실천
         </div>
       </router-link>
-      <router-link to="/mypage" >
-        <div :class="{ 'active': $route.path == '/mypage' }">
+      <router-link to="/myinfo" >
+        <div :class="{ 'active': $route.path == '/myinfo' }">
           마이페이지
         </div>
       </router-link>
