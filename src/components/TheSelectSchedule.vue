@@ -59,7 +59,7 @@ export default {
 .내용 {
   display: flex;
   flex-flow: column;
-  justify-content: start;
+  justify-content: flex-start;
   gap:  40px;
   width: 672px;
   height: 180px;

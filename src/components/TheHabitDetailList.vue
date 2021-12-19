@@ -85,7 +85,7 @@ img {
 .내용 {
   display: flex;
   flex-flow: column;
-  justify-content: start;
+  justify-content: flex-start;
   gap: 20px;
   width: 672px;
   min-height: 110px;
