@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="bg"></div>
-    <div class="confirm" >
+    <div class="배경"></div>
+    <div class="모달" >
       <slot name="header"></slot>
       <slot name="contents"></slot>
       <slot name="confirm"></slot>
@@ -27,7 +27,7 @@ export default {
     opacity: 100%;
   }
 }
-.confirm {
+.모달 {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -51,7 +51,7 @@ export default {
     opacity: 50%;
   }
 }
-.bg {
+.배경 {
   animation-name: bg;
   animation-duration: 0.75s;
   position: fixed;

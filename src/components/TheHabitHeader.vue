@@ -93,21 +93,22 @@ export default {
   padding: 0px 40px;
 }
 .습관_정보 {
-  display: flex;
-  flex-flow: column;
   align-content: flex-start;
   gap: 10px;
   width: max-content;
 }
 .습관종류 {
+  min-width: 100px;
+  min-height: 50px;
+  padding: 0px 20px;
   background: #fff;
   opacity: 50%;
   border-radius: 30px;
   font-family: Noto Sans KR;
   font-size: 26px;
-  width: 100px;
-  height: 50px;
   line-height: 50px;
+  text-align: center;
+  display: inline-block;
 }
 .습관명_박스 {
   display: flex;
