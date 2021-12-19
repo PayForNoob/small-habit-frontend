@@ -25,4 +25,16 @@ a {
   text-decoration: none;
   color: #2c3e50;
 }
+
+.컨테이너 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.내용 {
+  width: 720px;
+  display: flex;
+  flex-direction: column;
+}
+
 </style>

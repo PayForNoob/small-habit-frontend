@@ -1,6 +1,6 @@
 <template>
-  <div class="container">
-    <div class="contents">
+  <div class="컨테이너">
+    <div class="내용">
       <TheHabitHeader 
         :habitItem="habitItem" 
         :category="habitCategory"
@@ -199,17 +199,5 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-}
 
-.contents {
-  display: flex;
-  flex-flow: column;
-  width: 720px;
-  height: 100vh;
-  background-color: #e1e1e1;
-}
 </style>

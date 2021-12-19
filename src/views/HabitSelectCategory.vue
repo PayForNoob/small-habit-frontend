@@ -1,17 +1,15 @@
 <template>
-  <div class="container">
-    <div class="contents">
-      <div>
-        <div class="habitCreate">
-          <div @click="previousPage">
-            <img src="@/assets/Previous-black.png" alt="뒤로가기">
-          </div>
-          <div>
-            습관생성
-          </div>
+  <div class="컨테이너">
+    <div class="내용">
+      <div class="제목">
+        <div @click="previousPage">
+          <img src="@/assets/Previous-black.png" alt="뒤로가기">
+        </div>
+        <div>
+          습관생성
         </div>
       </div>
-      <div class="coment">
+      <div class="설명">
         <div>원하는 습관의 분야를</div>
         <div>선택해보세요!</div>
       </div>
@@ -50,17 +48,7 @@ export default {
   background-color: #9b9b9b;
   border-radius: 5px;
 }
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.contents {
-  width: 720px;
-  display: flex;
-  flex-direction: column;
-}
-.habitCreate {
+.제목 {
   display: flex;
   align-items: center;
   gap: 30px;
@@ -68,26 +56,26 @@ export default {
   padding-left: 24px;
   font-size: 30px;
 }
-.habitCreate div {
+.제목 div {
   display: flex;
   align-items: center;
   height: 100%;
 }
-.habitCreate div:first-child {
+.제목 div:first-child {
   cursor: pointer;
 }
-.habitCreate img {
+.제목 img {
   width: 26px;
   height: 26px;
 }
-.coment {
+.설명 {
   display: flex;
   flex-direction: column;
   width: 100%;
   padding-left: 50px;
   margin-bottom: 70px;
 }
-.coment div {
+.설명 div {
   display: flex;
   width: 100%;
   font-size: 30px;

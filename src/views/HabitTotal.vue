@@ -16,7 +16,7 @@
         <div v-if="habitItems.length == 0">오늘의 목표 없음</div>
         <!-- 없음 디자인 추가할 예정-->
       </div>
-      <router-link to="/create/selectCategory" class="습관_생성">
+      <router-link to="/create" class="습관_생성">
         새 습관 생성
       </router-link>
     </div>
