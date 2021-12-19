@@ -1,9 +1,9 @@
 <template>
-  <div class="container">
-    <div class="contents">
+  <div class="컨테이너">
+    <div class="내용">
       <div class="반복_주기">
         <img src="@/assets/img_dayCircle_circle.png" />
-        <div><span class="bold">반복주기</span> (주 {{ number }}회)</div>
+        <div><span class="굵은글씨">반복주기</span> (주 {{ number }}회)</div>
       </div>
       <div class="요일_박스">
         <div v-for="(schedule, index) in week" :key="index">
@@ -56,7 +56,7 @@ export default {
 </script>
 
 <style scoped>
-.contents {
+.내용 {
   display: flex;
   flex-flow: column;
   justify-content: start;
@@ -72,7 +72,7 @@ img {
   width: 30px;
   height: 30px;
 }
-.bold {
+.굵은글씨 {
   font-weight: bold;
 }
 .반복_주기 {

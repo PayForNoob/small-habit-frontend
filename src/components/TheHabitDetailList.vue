@@ -1,10 +1,10 @@
 <template>
-  <div class="container">
-    <div class="contents">
+  <div class="컨테이너">
+    <div class="내용">
       <div class="세부습관_머릿글">
         <div>
           <img src="@/assets/img_detail_point.png" />
-          <div class="bold">세부습관</div>
+          <div class="굵은글씨">세부습관</div>
         </div>
         <div
           class="추가버튼_이미지"
@@ -73,16 +73,16 @@ img {
   width: 30px;
   height: 30px;
 }
-.bold {
+.굵은글씨 {
   font-weight: bold;
 }
-.container {
+.컨테이너 {
   display: flex;
   flex-flow: column;
   align-items: center;
   line-height: 50px;
 }
-.contents {
+.내용 {
   display: flex;
   flex-flow: column;
   justify-content: start;

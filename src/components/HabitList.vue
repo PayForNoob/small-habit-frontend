@@ -27,7 +27,7 @@
 
         <!-- 수정버튼 -->
         <img
-          class="수정버튼 pointer"
+          class="수정버튼 버튼"
           src="@/assets/img_edit.png"
           @click="clickEdit"
         />
@@ -147,7 +147,7 @@ export default {
 </script>
 
 <style scoped>
-.pointer {
+.버튼 {
   cursor: pointer;
 }
 
