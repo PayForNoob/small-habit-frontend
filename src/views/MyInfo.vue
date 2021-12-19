@@ -1,7 +1,7 @@
 <template>
   <div class="컨테이너">
     <Header class="header"></Header>
-    <div class="컨테이너_내용">
+    <div class="내용">
       <div class="유저정보_컨테이너">
         <div
           class="유저정보_내용"
@@ -26,16 +26,16 @@
         탈퇴하기
       </div>
       <base-modal v-if="confirm" class="재확인">
-        <template v-slot:머릿말>
+        <template v-slot:header>
           <div class="재확인_머릿말">정말 탈퇴하시겠습니까?</div>
         </template>
-        <template v-slot:내용>
+        <template v-slot:contents>
           <div class="재확인_내용">
             <p>탈퇴하실 경우 회원님의 모든 정보가</p>
             <p>사라지고 복구할 수 없습니다.</p>
           </div>
         </template>
-        <template v-slot:재확인>
+        <template v-slot:confirm>
           <div class="이중버튼">
             <div class="이중버튼_좌측" @click="authWithdrawal">확인</div>
             <div class="이중버튼_우측" @click="activeConfirm">취소</div>
@@ -110,7 +110,7 @@ export default {
   flex-direction: column;
   align-items: center;
 }
-.컨테이너_내용 {
+.내용 {
   position: relative;
   display: flex;
   flex-direction: column;
