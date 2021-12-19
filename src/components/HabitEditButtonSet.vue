@@ -36,7 +36,7 @@
         </div>
       </template>
       <template v-slot:contents>
-        <div class="모달_내용">
+        <div class="모달_내용">
           <p>습관 생성이 완료되었습니다.</p>
           <p>꾸준한 실천을 응원하겠습니다.</p>
         </div>
@@ -55,7 +55,7 @@
         </div>
       </template>
       <template v-slot:contents>
-        <div class="모달_내용">
+        <div class="모달_내용">
           <p>작성하지 않은 내용이 있습니다.</p>
           <p>마저 작성해주시기 바랍니다.</p>
         </div>
