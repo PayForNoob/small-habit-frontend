@@ -25,20 +25,20 @@
       <div class="유저삭제_버튼" @click="activeConfirm" v-if="!confirm">
         탈퇴하기
       </div>
-      <base-modal v-if="confirm" class="재확인">
+      <base-modal v-if="confirm" class="모달">
         <template v-slot:header>
-          <div class="재확인_머릿말">정말 탈퇴하시겠습니까?</div>
+          <div class="모달_헤더">정말 탈퇴하시겠습니까?</div>
         </template>
         <template v-slot:contents>
-          <div class="재확인_내용">
+          <div class="모달_내용">
             <p>탈퇴하실 경우 회원님의 모든 정보가</p>
             <p>사라지고 복구할 수 없습니다.</p>
           </div>
         </template>
         <template v-slot:confirm>
-          <div class="재확인_버튼">
-            <div class="재확인_왼쪽버튼" @click="authWithdrawal">확인</div>
-            <div class="재확인_오른쪽버튼" @click="activeConfirm">취소</div>
+          <div class="모달_버튼">
+            <div class="모달_확인버튼" @click="authWithdrawal">확인</div>
+            <div class="모달_삭제버튼" @click="activeConfirm">취소</div>
           </div>
         </template>
       </base-modal>
@@ -166,39 +166,39 @@ export default {
     opacity: 100%;
   }
 }
-.재확인 {
+.모달 {
   position: absolute;
   bottom: 0px;
   animation-name: modal;
   animation-duration: 0.25s;
   background-color: #fff;
 }
-.재확인_머릿말 {
+.모달_헤더 {
   font-size: 30px;
   font-weight: bold;
 }
-.재확인_내용 {
+.모달_내용 {
   display: flex;
   flex-direction: column;
   width: 100%;
   font-size: 24px;
 }
-.재확인_버튼 {
+.모달_버튼 {
   display: flex;
   justify-content: space-evenly;
   width: 100%;
 }
-.재확인_버튼 div {
+.모달_버튼 div {
   width: 100%;
   height: 60px;
   line-height: 60px;
   color: #fff;
 }
-.재확인확인_버튼 {
+.모달_확인버튼 {
   cursor: pointer;
   background-color: #ff545e;
 }
-.재확인_오른쪽버튼 {
+.모달_삭제버튼 {
   cursor: pointer;
   background-color: #5e5e5e;
 }
