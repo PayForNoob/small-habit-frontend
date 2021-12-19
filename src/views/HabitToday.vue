@@ -1,8 +1,8 @@
 <template>
-  <div class="container">
-    <Header class="header"></header>
+  <div class="컨테이너">
+    <Header class="header"></Header>
     <pulse-loader v-if="loading == true" class="로딩중"></pulse-loader>
-    <div class="contents" v-if="loading == false">
+    <div class="컨테이너_내용" v-if="loading == false">
       <div class="습관목록_박스">
         <div class="습관목록_습관갯수">목표{{ habitItems.length }}</div>
         <div v-if="habitItems.length != 0" class="습관목록">
@@ -16,9 +16,7 @@
         <div v-else>오늘의 습관 없음</div>
         <!-- 없음 디자인 추가할 예정-->
       </div>
-      <router-link to="/create" class="습관_생성">
-        새 습관 생성
-      </router-link>
+      <router-link to="/create" class="습관_생성"> 새 습관 생성 </router-link>
     </div>
   </div>
 </template>
@@ -26,7 +24,7 @@
 <script>
 import HabitList from "@/components/HabitList.vue";
 import Header from "../components/Header.vue";
-import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
+import PulseLoader from "vue-spinner/src/PulseLoader.vue";
 
 export default {
   components: {
@@ -41,11 +39,11 @@ export default {
   },
   computed: {
     loading() {
-      return this.$store.state.loading 
+      return this.$store.state.loading;
     },
   },
   beforeCreate() {
-    this.$store.commit('loadingStart')
+    this.$store.commit("loadingStart");
   },
   async created() {
     let today = new Date().getDay();
@@ -58,11 +56,11 @@ export default {
         },
       });
       this.habitItems = data;
-      this.$store.commit('loadingEnd')
+      this.$store.commit("loadingEnd");
       // console.log(this.habitItems)
     } catch (err) {
       console.log(err);
-    }  
+    }
   },
 };
 </script>
@@ -82,12 +80,12 @@ export default {
   width: 100%;
   height: calc(100vh - 150px);
 }
-.container {
+.컨테이너 {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.contents {
+.컨테이너_내용 {
   display: flex;
   flex-flow: column;
   width: 720px;
@@ -125,6 +123,6 @@ export default {
   background-color: #777777;
   color: #fff;
   font-size: 20px;
+  text-align: center;
 }
-
 </style>

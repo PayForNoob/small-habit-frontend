@@ -4,15 +4,19 @@
       <div>
         <img src="../assets/kakao_login_medium_narrow.png" class="숨김">
       </div>
-      <div  class="로고">
-        <img src="@/assets/logo.png" alt="">
+      <div class="로고">
+        <img src="@/assets/logo.png" alt="" />
       </div>
-      <div class="로그인" v-if="!user" >
-        <img src="../assets/kakao_login_medium_narrow.png"
-        alt="kakao_login_button" class="login_btn" @click="kakaoLogin">
+      <div class="로그인" v-if="!user">
+        <img
+          src="../assets/kakao_login_medium_narrow.png"
+          alt="kakao_login_button"
+          class="login_btn"
+          @click="kakaoLogin"
+        />
       </div>
       <div class="로그아웃" @click="logout" v-else>
-        <img src="@/assets/logout_btn.png" alt="로그아웃 버튼">
+        <img src="@/assets/logout_btn.png" alt="로그아웃 버튼" />
       </div>
     </div>
     <div class="상단메뉴" v-if="user">
@@ -36,11 +40,10 @@
 </template>
 
 <script>
-
 export default {
   computed: {
     user() {
-      return this.$store.state.user
+      return this.$store.state.user;
     },
   },
   methods: {
@@ -50,24 +53,23 @@ export default {
       console.log(window.Kakao.isInitialized());
 
       window.Kakao.Auth.authorize({
-        redirectUri: 'http://localhost:8080/loading'
+        redirectUri: "http://localhost:8080/loading",
       });
     },
     async logout() {
       try {
         await this.axios({
-          method: 'delete',
-          url: '/api/auth',
-        })
-        location.href = '/main'
-      }
-      catch (err) {
+          method: "delete",
+          url: "/api/auth",
+        });
+        location.href = "/";
+      } catch (err) {
         console.log(err.data);
-      } 
+      }
     },
   },
   props: ["isActived", "notActived"],
-}
+};
 </script>
 
 <style lang="css" scoped>
@@ -92,7 +94,8 @@ header {
   width: 80px;
   height: 80px;
 }
-.로그인, .로그아웃 {
+.로그인,
+.로그아웃 {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -122,5 +125,4 @@ header {
   color: #2c3e50;
   text-align: center;
 }
-
 </style>
