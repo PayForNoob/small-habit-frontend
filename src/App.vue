@@ -25,13 +25,16 @@ a {
   text-decoration: none;
   color: #2c3e50;
 }
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  max-height: 100vh;
-  overflow: hidden;
+
+.컨테이너 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+.내용 {
+  width: 720px;
+  display: flex;
+  flex-direction: column;
+}
+
 </style>
