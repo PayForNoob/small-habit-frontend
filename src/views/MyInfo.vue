@@ -1,7 +1,7 @@
 <template>
   <div class="컨테이너">
     <Header class="header"></Header>
-    <div class="내용">
+    <div class="컨테이너_내용">
       <div class="유저정보_컨테이너">
         <div
           class="유저정보_내용"
@@ -110,7 +110,7 @@ export default {
   flex-direction: column;
   align-items: center;
 }
-.내용 {
+.컨테이너_내용 {
   position: relative;
   display: flex;
   flex-direction: column;
