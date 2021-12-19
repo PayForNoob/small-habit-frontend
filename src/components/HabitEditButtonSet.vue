@@ -16,16 +16,16 @@
         </div>
       </template>
       <template v-slot:confirm>
-        <div class="모달버튼">
-          <div class="삭제버튼" @click="deleteObjective">확인</div>
-          <div class="취소버튼" @click="confirm = !confirm">취소</div>
+        <div class="모달_버튼">
+          <div class="삭제_버튼" @click="deleteObjective">확인</div>
+          <div class="취소_버튼" @click="confirm = !confirm">취소</div>
         </div>
       </template>
     </base-modal>
 
     <!-- 습관 생성-내용 있음 -->
     <div class="버튼_박스" v-if="$route.params.category">
-      <div class="완료_버튼" @click="Edit" :style="{ backgroundColor: category.color }" >완료</div>
+      <div class="모달_완료버튼" @click="Edit" :style="{ backgroundColor: category.color }" >완료</div>
     </div>
     <base-modal v-if="edit && $route.params.category">
       <template v-slot:header >
@@ -133,7 +133,7 @@ export default {
   width: 50%;
   cursor: pointer;
 }
-.완료_버튼 {
+.모달_완료버튼 {
   width: 100%;
   cursor: pointer;
 }
@@ -154,7 +154,7 @@ export default {
   font-size: 24px;
   align-items: center;
 }
-.모달버튼 {
+.모달_버튼 {
   display: flex;
   justify-content: space-evenly;
   font-size: 20px;
@@ -168,18 +168,18 @@ export default {
   color: #fff;
   cursor: pointer;
 }
-.모달버튼 div {
+.모달_버튼 div {
   width: 100%;
   height: 60px;
   line-height: 60px;
   color: #fff;
   text-align: center;
 }
-.삭제버튼 {
+.삭제_버튼 {
   cursor: pointer;
   background-color: #ff545e;
 }
-.취소버튼 {
+.취소_버튼 {
   cursor: pointer;
   background-color: #5e5e5e;
 }

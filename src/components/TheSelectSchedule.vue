@@ -1,6 +1,6 @@
 <template>
   <div class="컨테이너">
-    <div class="일정설정">
+    <div class="내용">
       <div class="반복_주기">
         <img src="@/assets/img_dayCircle_circle.png" />
         <div><span class="굵은글씨">반복주기</span> (주 {{ number }}회)</div>
@@ -56,7 +56,7 @@ export default {
 </script>
 
 <style scoped>
-.일정설정 {
+.내용 {
   display: flex;
   flex-flow: column;
   justify-content: start;

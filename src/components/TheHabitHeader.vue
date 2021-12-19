@@ -98,7 +98,7 @@ export default {
   width: max-content;
 }
 .습관종류 {
-  min-width: 100px;
+  min-width: 120px;
   min-height: 50px;
   padding: 0px 20px;
   background: #fff;
