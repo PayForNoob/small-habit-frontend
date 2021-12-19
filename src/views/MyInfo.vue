@@ -22,7 +22,7 @@
           </div>
         </div>
       </div>
-      <div class="유저삭제버튼" @click="activeConfirm" v-if="!confirm">
+      <div class="유저삭제_버튼" @click="activeConfirm" v-if="!confirm">
         탈퇴하기
       </div>
       <base-modal v-if="confirm" class="재확인">
@@ -36,9 +36,9 @@
           </div>
         </template>
         <template v-slot:confirm>
-          <div class="이중버튼">
-            <div class="이중버튼_좌측" @click="authWithdrawal">확인</div>
-            <div class="이중버튼_우측" @click="activeConfirm">취소</div>
+          <div class="재확인_버튼">
+            <div class="재확인_왼쪽버튼" @click="authWithdrawal">확인</div>
+            <div class="재확인_오른쪽버튼" @click="activeConfirm">취소</div>
           </div>
         </template>
       </base-modal>
@@ -144,7 +144,7 @@ export default {
   margin-bottom: 10px;
   font-weight: bold;
 }
-.유저삭제버튼 {
+.유저삭제_버튼 {
   display: flex;
   justify-content: center;
   cursor: pointer;
@@ -183,22 +183,22 @@ export default {
   width: 100%;
   font-size: 24px;
 }
-.이중버튼 {
+.재확인_버튼 {
   display: flex;
   justify-content: space-evenly;
   width: 100%;
 }
-.이중버튼 div {
+.재확인_버튼 div {
   width: 100%;
   height: 60px;
   line-height: 60px;
   color: #fff;
 }
-.이중버튼_좌측 {
+.재확인확인_버튼 {
   cursor: pointer;
   background-color: #ff545e;
 }
-.이중버튼_우측 {
+.재확인_오른쪽버튼 {
   cursor: pointer;
   background-color: #5e5e5e;
 }
