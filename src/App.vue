@@ -5,8 +5,7 @@
 </template>
 
 <script>
-  export default {
-  }
+export default {};
 </script>
 
 <style>
@@ -36,5 +35,4 @@ a {
   display: flex;
   flex-direction: column;
 }
-
 </style>

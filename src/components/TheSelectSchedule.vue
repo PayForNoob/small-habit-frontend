@@ -31,7 +31,7 @@ export default {
   data() {
     return {
       week: ["일", "월", "화", "수", "목", "금", "토"],
-      schedulesTemp: this.schedules
+      schedulesTemp: this.schedules,
     };
   },
   methods: {
@@ -43,7 +43,7 @@ export default {
         this.schedulesTemp = [...this.schedulesTemp, ind];
         this.schedulesTemp.sort();
       }
-      this.$emit('editSchedule', this.schedulesTemp);
+      this.$emit("editSchedule", this.schedulesTemp);
       this.$forceUpdate();
     },
   },
@@ -60,7 +60,7 @@ export default {
   display: flex;
   flex-flow: column;
   justify-content: flex-start;
-  gap:  40px;
+  gap: 40px;
   width: 672px;
   height: 180px;
   padding-top: 30px;
@@ -77,7 +77,7 @@ img {
 }
 .반복_주기 {
   display: flex;
-  gap:40px;
+  gap: 40px;
   height: 30px;
   line-height: 30px;
   padding-left: 40px;
