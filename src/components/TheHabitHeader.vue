@@ -101,6 +101,7 @@ export default {
   min-width: 120px;
   min-height: 50px;
   padding: 0px 20px;
+  margin-bottom: 10px;
   background: #fff;
   opacity: 50%;
   border-radius: 30px;
