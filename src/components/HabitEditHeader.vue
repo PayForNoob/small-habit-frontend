@@ -27,8 +27,8 @@
             </div>
           </div>
         </div>
-        <div class="습관이미지_박스">
-          <img class="습관_아이콘" :src="require(`@/assets/habitIcon/img_habit_${this.category.imgUrl}.png`)" />
+        <div class="습관이미지_박스" v-if="category && category.imgUrl">
+          <img class="습관_아이콘" :src="require(`@/assets/habitIcon/img_habit_${category.imgUrl}.png`)" />
         </div>
       </div>
     </div>
