@@ -1,13 +1,13 @@
 <template>
-  <div class="container">
+  <div class="컨테이너">
     <Header class="header"></Header>
     <pulse-loader v-if="loading == true" class="로딩중"></pulse-loader>
-    <div class="contents" v-if="loading == false">
-      <div class="목표목록_박스">
-        <div class="목표목록_목표갯수">목표{{ habitItems.length }}</div>
-        <div v-if="habitItems.length != 0" class="목표목록">
+    <div class="컨테이너_내용" v-if="loading == false">
+      <div class="습관목록_박스">
+        <div class="습관목록_목표갯수">목표{{ habitItems.length }}</div>
+        <div v-if="habitItems.length != 0" class="습관목록">
           <habit-list
-            v-for="(habitItem) in habitItems"
+            v-for="habitItem in habitItems"
             :habitItem="habitItem"
             :key="habitItem.id"
           >
@@ -16,9 +16,7 @@
         <div v-if="habitItems.length == 0">오늘의 목표 없음</div>
         <!-- 없음 디자인 추가할 예정-->
       </div>
-      <router-link to="/create" class="습관_생성">
-        새 습관 생성
-      </router-link>
+      <router-link to="/create" class="습관_생성"> 새 습관 생성 </router-link>
     </div>
   </div>
 </template>
@@ -27,7 +25,7 @@
 <script>
 import HabitList from "@/components/HabitList.vue";
 import Header from "@/components/Header.vue";
-import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
+import PulseLoader from "vue-spinner/src/PulseLoader.vue";
 
 export default {
   components: {
@@ -38,15 +36,15 @@ export default {
   data() {
     return {
       habitItems: [],
-    }
+    };
   },
   computed: {
     loading() {
-      return this.$store.state.loading 
+      return this.$store.state.loading;
     },
   },
   beforeCreate() {
-    this.$store.commit('loadingStart')
+    this.$store.commit("loadingStart");
   },
   async created() {
     try {
@@ -58,13 +56,13 @@ export default {
         },
       });
       this.habitItems = data;
-      this.$store.commit('loadingEnd')
+      this.$store.commit("loadingEnd");
       // console.log(this.habitItems)
     } catch (err) {
       console.log(err);
     }
   },
-}
+};
 </script>
 
 <style scoped>
@@ -82,23 +80,23 @@ export default {
   width: 100%;
   height: calc(100vh - 150px);
 }
-.container {
+.컨테이너 {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.contents {
+.컨테이너_내용 {
   display: flex;
   flex-flow: column;
   width: 720px;
 }
-.목표목록_박스 {
+.습관목록_박스 {
   display: flex;
   flex-direction: column;
   padding-top: 10px;
   height: calc(100vh - 210px);
 }
-.목표목록_목표갯수 {
+.습관목록_목표갯수 {
   height: 50px;
   line-height: 50px;
   padding-right: 24px;
@@ -110,7 +108,7 @@ export default {
   text-align: right;
   color: #000000;
 }
-.목표목록 {
+.습관목록 {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -125,5 +123,6 @@ export default {
   background-color: #777777;
   color: #fff;
   font-size: 20px;
+  text-align: center;
 }
 </style>

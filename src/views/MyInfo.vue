@@ -1,112 +1,116 @@
 <template>
-  <div class="container">
-    <Header class="header"></header>
-    <div class="contents">
-      <div class="userInfo">
-        <div class="infoBox" :style="{ backgroundColor: nicknamesBackgroundColor }">
-          <div class="nickname">
-            닉네임
-          </div>
+  <div class="컨테이너">
+    <Header class="header"></Header>
+    <div class="컨테이너_내용">
+      <div class="유저정보_컨테이너">
+        <div
+          class="유저정보_내용"
+          :style="{ backgroundColor: nicknamesBackgroundColor }"
+        >
+          <div class="닉네임">닉네임</div>
           <div>
             {{ user.nickname }}
           </div>
         </div>
-        <div class="infoBox" :style="{ backgroundColor: emailsBackgroundColor }">
-          <div class="email">
-            이메일
-          </div>
+        <div
+          class="유저정보_내용"
+          :style="{ backgroundColor: emailsBackgroundColor }"
+        >
+          <div class="이메일">이메일</div>
           <div>
             {{ user.email }}
           </div>
         </div>
       </div>
-      <div class="withdrawal_btn" @click="activeConfirm" v-if="!confirm">
+      <div class="유저삭제버튼" @click="activeConfirm" v-if="!confirm">
         탈퇴하기
       </div>
-      <base-modal v-if="confirm" class="confirm">
-        <template v-slot:header>
-          <div class="confirm_header">정말 탈퇴하시겠습니까?</div>
+      <base-modal v-if="confirm" class="재확인">
+        <template v-slot:머릿말>
+          <div class="재확인_머릿말">정말 탈퇴하시겠습니까?</div>
         </template>
-        <template v-slot:contents>
-          <div class="confirm_contents">
+        <template v-slot:내용>
+          <div class="재확인_내용">
             <p>탈퇴하실 경우 회원님의 모든 정보가</p>
             <p>사라지고 복구할 수 없습니다.</p>
           </div>
         </template>
-        <template v-slot:confirm>
-          <div class="dual_button">
-            <div class="button_left" @click="authWithdrawal">확인</div>
-            <div class="button_right" @click="activeConfirm">취소</div>
-          </div> 
+        <template v-slot:재확인>
+          <div class="이중버튼">
+            <div class="이중버튼_좌측" @click="authWithdrawal">확인</div>
+            <div class="이중버튼_우측" @click="activeConfirm">취소</div>
+          </div>
         </template>
       </base-modal>
     </div>
-
   </div>
 </template>
 
 <script>
-import Header from '../components/Header.vue'
-import BaseModal from '@/components/BaseModal.vue'
+import Header from "../components/Header.vue";
+import BaseModal from "@/components/BaseModal.vue";
 
 export default {
   components: {
     Header,
     BaseModal,
-
   },
   data() {
     return {
       user: this.$store.state.user,
       backgroundColor: [
-        "#B8B1F0", "#EAA2A6", "#A8DDAD", "#FFD98E", 
-        "#AFC2FF", "#95DFD2", "#FFBAAA", "#FFB6F2"
+        "#B8B1F0",
+        "#EAA2A6",
+        "#A8DDAD",
+        "#FFD98E",
+        "#AFC2FF",
+        "#95DFD2",
+        "#FFBAAA",
+        "#FFB6F2",
       ],
       nicknamesBackgroundColor: "#000",
       emailsBackgroundColor: "#000",
-      confirm: false
-    }
+      confirm: false,
+    };
   },
   methods: {
     activeConfirm() {
-      this.confirm = !this.confirm
+      this.confirm = !this.confirm;
     },
     async authWithdrawal() {
       try {
         await this.axios({
-          method: 'delete',
-          url: '/api/withdrawal',
-        })
+          method: "delete",
+          url: "/api/withdrawal",
+        });
         // this.$store.state.user = null
-        location.href = '/main'
-      }
-      catch (err) {
+        location.href = "/main";
+      } catch (err) {
         console.log(err.data);
-      } 
-    }
-    
+      }
+    },
   },
   created() {
-    let nickname = Math.floor(Math.random() * 8)
-    let email = Math.floor(Math.random() * 8)
+    let nickname = Math.floor(Math.random() * 8);
+    let email = Math.floor(Math.random() * 8);
 
-    while(nickname == email) {
-      email = Math.floor(Math.random() * 8)
+    while (nickname == email) {
+      email = Math.floor(Math.random() * 8);
     }
-    this.nicknamesBackgroundColor = this.backgroundColor[nickname]
-    this.emailsBackgroundColor = this.backgroundColor[email]
+    this.nicknamesBackgroundColor = this.backgroundColor[nickname];
+    this.emailsBackgroundColor = this.backgroundColor[email];
     // console.log('tag', email, nickname)
-  }
+  },
 };
 </script>
 
 <style scoped>
-.container {
+.컨테이너 {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.contents {
+.컨테이너_내용 {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -115,13 +119,13 @@ export default {
   width: 720px;
   height: calc(100vh - 150px);
 }
-.userInfo {
+.유저정보_컨테이너 {
   display: flex;
   flex-direction: column;
   padding: 30px 24px 0px;
   width: 100%;
 }
-.infoBox {
+.유저정보_내용 {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -135,69 +139,67 @@ export default {
   color: #fff;
   font-size: 20px;
 }
-.nickname, .email {
+.닉네임,
+.이메일 {
   margin-bottom: 10px;
   font-weight: bold;
 }
-.withdrawal_btn {
+.유저삭제버튼 {
   display: flex;
   justify-content: center;
   cursor: pointer;
   width: 100%;
   height: 60px;
   line-height: 60px;
-  background-color: #FF5757;
+  background-color: #ff5757;
   color: #fff;
   font-size: 20px;
 }
 @keyframes modal {
-
-  from { 
-    bottom: -360px; 
+  from {
+    bottom: -360px;
     opacity: 0;
   }
 
   to {
-    bottom: 0px; 
+    bottom: 0px;
     opacity: 100%;
   }
-
 }
-.confirm {
+.재확인 {
   position: absolute;
   bottom: 0px;
   animation-name: modal;
   animation-duration: 0.25s;
   background-color: #fff;
 }
-.confirm_header {
+.재확인_머릿말 {
   font-size: 30px;
   font-weight: bold;
 }
-.confirm_contents {
+.재확인_내용 {
   display: flex;
   flex-direction: column;
   width: 100%;
   font-size: 24px;
 }
-.dual_button {
+.이중버튼 {
   display: flex;
   justify-content: space-evenly;
   width: 100%;
 }
-.dual_button div {
+.이중버튼 div {
   width: 100%;
   height: 60px;
   line-height: 60px;
   color: #fff;
 }
-.button_left {
+.이중버튼_좌측 {
   cursor: pointer;
   background-color: #ff545e;
 }
-.button_right {
+.이중버튼_우측 {
   cursor: pointer;
   background-color: #5e5e5e;
 }
-
 </style>
