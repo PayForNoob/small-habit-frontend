@@ -199,5 +199,8 @@ export default {
 </script>
 
 <style scoped>
-
+.내용 {
+  height: calc(100vh - 60px);
+  background-color: #e1e1e1;
+}
 </style>
