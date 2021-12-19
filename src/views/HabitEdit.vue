@@ -1,29 +1,31 @@
 <template>
   <div class="컨테이너">
     <div class="내용">
-      <TheHabitHeader 
-        :habitItem="habitItem" 
+      <TheHabitHeader
+        :habitItem="habitItem"
         :category="habitCategory"
         @editHabitName="editHabitName"
       />
-      <TheSelectSchedule
-        :schedules="habitItem.schedule"
-        :category="habitCategory"
-        @editSchedule="editSchedule"
-      />
-      <TheHabitDetailList
-        :detailHabitItems="detailHabitItems"
-        :category="habitCategory"
-        @addDetailHabitItem="addDetailHabitItem"
-        @editDetailHabitItem="editDetailHabitItem"
-        @deleteDetailHabitItem="deleteDetailHabitItem"
-      />
-      <HabitEditButtonSet  
-        @EditSave="EditSave" 
-        :habitItem="habitItem"
-        :category="habitCategory"
-        :edit="edit"
-      />
+      <div class="배경">
+        <TheSelectSchedule
+          :schedules="habitItem.schedule"
+          :category="habitCategory"
+          @editSchedule="editSchedule"
+        />
+        <TheHabitDetailList
+          :detailHabitItems="detailHabitItems"
+          :category="habitCategory"
+          @addDetailHabitItem="addDetailHabitItem"
+          @editDetailHabitItem="editDetailHabitItem"
+          @deleteDetailHabitItem="deleteDetailHabitItem"
+        />
+        <HabitEditButtonSet
+          @EditSave="EditSave"
+          :habitItem="habitItem"
+          :category="habitCategory"
+          :edit="edit"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -51,16 +53,16 @@ export default {
       },
       detailHabitItems: [],
       habitCategory: {},
-      edit: false
+      edit: false,
     };
   },
   methods: {
     editHabitName(newValue) {
-      this.habitItem.objective = newValue
+      this.habitItem.objective = newValue;
       // console.log(this.habitItem.objective)
     },
     editSchedule(newValue) {
-      this.habitItem.schedule = newValue
+      this.habitItem.schedule = newValue;
       // console.log(this.habitItem.schedule)
     },
     addDetailHabitItem() {
@@ -68,7 +70,7 @@ export default {
       // console.log(this.detailHabitItems)
     },
     editDetailHabitItem(ind, newValue) {
-      this.detailHabitItems[ind] = newValue
+      this.detailHabitItems[ind] = newValue;
       // console.log(this.detailHabitItems)
     },
 
@@ -81,8 +83,7 @@ export default {
         });
         // console.log(data);
         this.habitItem = data;
-        this.habitCategory = this.$store.state.habitCategory[data.category]
-
+        this.habitCategory = this.$store.state.habitCategory[data.category];
       } catch (err) {
         console.log(err);
       }
@@ -101,27 +102,26 @@ export default {
       }
     },
 
-
     // 습관 생성하기
     async editHabit() {
       try {
         let { data } = await this.axios({
           method: this.id ? "put" : "post",
-          url:  this.id ? `/api/objectives/${this.id}` : '/api/objectives',
-          data: {...this.habitItem}
+          url: this.id ? `/api/objectives/${this.id}` : "/api/objectives",
+          data: { ...this.habitItem },
         });
         // console.log(data)
-        if(this.detailHabitItems.length > 0) {
-          this.detailHabitItems.forEach(async (el) =>  {  
-            if(el.id) {
-              await this.editDetailHabit(el.id, el)
+        if (this.detailHabitItems.length > 0) {
+          this.detailHabitItems.forEach(async (el) => {
+            if (el.id) {
+              await this.editDetailHabit(el.id, el);
             } else {
-              await this.createDetailHabit(data.id, el)
+              await this.createDetailHabit(data.id, el);
             }
           });
-          this.edit = !this.edit
+          this.edit = !this.edit;
         } else {
-          this.edit = !this.edit
+          this.edit = !this.edit;
         }
       } catch (err) {
         console.log(err);
@@ -134,8 +134,8 @@ export default {
           method: "post",
           url: `/api/detailedObjectives/${objectiveId}`,
           data: {
-            objective: newDetailHabit
-          }
+            objective: newDetailHabit,
+          },
         });
       } catch (err) {
         console.log(err);
@@ -148,51 +148,48 @@ export default {
           method: "put",
           url: `/api/detailedObjectives/${id}`,
           data: {
-            objective: editDetailHabit
-          }
+            objective: editDetailHabit,
+          },
         });
       } catch (err) {
         console.log(err);
       }
     },
 
-
-    // 세부습관 삭제 
+    // 세부습관 삭제
     async deleteDetailHabitItem(ind) {
-      if(this.detailHabitItems[ind].id) {
+      if (this.detailHabitItems[ind].id) {
         try {
           await this.axios({
             method: "DELETE",
-            url: `/api/detailedObjectives/${this.detailHabitItems[ind].id}`
+            url: `/api/detailedObjectives/${this.detailHabitItems[ind].id}`,
           });
         } catch (err) {
           console.log(err);
         }
-        this.detailHabitItems.splice(ind, 1)
+        this.detailHabitItems.splice(ind, 1);
       } else {
-        this.detailHabitItems.splice(ind, 1)
+        this.detailHabitItems.splice(ind, 1);
       }
-
     },
-
 
     // 습관 저장
     async EditSave() {
       if (this.id) {
-        await this.editHabit()
-        this.$router.push('/today')
+        await this.editHabit();
+        this.$router.push("/today");
       } else {
-        await this.editHabit()
+        await this.editHabit();
       }
     },
   },
   async created() {
     if (this.id) {
-      await this.getHabitItems()
+      await this.getHabitItems();
 
-      await this.getDetailHabitItems()
+      await this.getDetailHabitItems();
     } else {
-      this.habitCategory = this.$store.state.habitCategory[this.category]
+      this.habitCategory = this.$store.state.habitCategory[this.category];
     }
   },
 };
@@ -200,7 +197,9 @@ export default {
 
 <style scoped>
 .내용 {
-  height: calc(100vh - 60px);
   background-color: #e1e1e1;
+}
+.배경 {
+  height: calc(100vh - 360px);
 }
 </style>
