@@ -2,7 +2,7 @@
   <header>
     <div class="헤더">
       <div>
-        <img src="../assets/kakao_login_medium_narrow.png" class="hidden" />
+        <img src="../assets/kakao_login_medium_narrow.png" class="숨김">
       </div>
       <div class="로고">
         <img src="@/assets/logo.png" alt="" />
@@ -20,14 +20,20 @@
       </div>
     </div>
     <div class="상단메뉴" v-if="user">
-      <router-link to="/total">
-        <div :class="{ active: $route.path == '/total' }">전체습관</div>
+      <router-link to="/total" >
+        <div :class="{ '현재페이지': $route.path == '/total' }">
+          전체습관
+        </div>
       </router-link>
-      <router-link to="/today">
-        <div :class="{ active: $route.path == '/today' }">오늘실천</div>
+      <router-link to="/today" >
+        <div :class="{ '현재페이지': $route.path == '/today' }">
+          오늘실천
+        </div>
       </router-link>
-      <router-link to="/myinfo">
-        <div :class="{ active: $route.path == '/myinfo' }">마이페이지</div>
+      <router-link to="/myinfo" >
+        <div :class="{ '현재페이지': $route.path == '/myinfo' }">
+          마이페이지
+        </div>
       </router-link>
     </div>
   </header>
@@ -72,7 +78,7 @@ header {
   flex-direction: column;
   width: 100%;
 }
-.hidden {
+.숨김 {
   opacity: 0;
 }
 .헤더 {
@@ -114,8 +120,9 @@ header {
 .상단메뉴 a {
   color: #9b9b9b;
 }
-.active {
+.현재페이지 {
   border-bottom: 4px solid #000;
   color: #2c3e50;
+  text-align: center;
 }
 </style>
