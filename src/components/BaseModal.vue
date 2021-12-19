@@ -28,6 +28,7 @@ export default {
   }
 }
 .모달 {
+  text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
