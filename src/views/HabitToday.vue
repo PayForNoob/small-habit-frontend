@@ -13,7 +13,7 @@
           >
           </habit-list>
         </div>
-        <div v-else>오늘의 습관 없음</div>
+        <div v-else class="습관없음">오늘의 습관 없음</div>
         <!-- 없음 디자인 추가할 예정-->
       </div>
       <router-link to="/create" class="습관_생성"> 새 습관 생성 </router-link>
@@ -107,6 +107,9 @@ export default {
   font-size: 24px;
   text-align: right;
   color: #000000;
+}
+.습관없음 {
+  text-align: center;
 }
 .습관목록 {
   display: flex;

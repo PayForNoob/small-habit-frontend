@@ -1,7 +1,8 @@
 <template>
   <div class="컨테이너">
     <Header class="header"></Header>
-    <div class="컨테이너_내용">
+    <pulse-loader v-if="loading == true" class="로딩중"></pulse-loader>
+    <div v-if="loading == false" class="컨테이너_내용">
       <div class="유저정보_컨테이너">
         <div
           class="유저정보_내용"
@@ -49,11 +50,13 @@
 <script>
 import Header from "../components/Header.vue";
 import BaseModal from "@/components/BaseModal.vue";
+import PulseLoader from "vue-spinner/src/PulseLoader.vue";
 
 export default {
   components: {
     Header,
     BaseModal,
+    PulseLoader
   },
   data() {
     return {
@@ -72,6 +75,11 @@ export default {
       emailsBackgroundColor: "#000",
       confirm: false,
     };
+  },
+  computed: {
+    loading() {
+      return this.$store.state.loading;
+    },
   },
   methods: {
     activeConfirm() {

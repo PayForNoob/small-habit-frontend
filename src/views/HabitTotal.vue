@@ -13,7 +13,7 @@
           >
           </habit-list>
         </div>
-        <div v-if="habitItems.length == 0">오늘의 목표 없음</div>
+        <div v-if="habitItems.length == 0" class="습관없음">오늘의 습관 없음</div>
         <!-- 없음 디자인 추가할 예정-->
       </div>
       <router-link to="/create" class="습관_생성"> 새 습관 생성 </router-link>
@@ -95,6 +95,9 @@ export default {
   flex-direction: column;
   padding-top: 10px;
   height: calc(100vh - 210px);
+}
+.습관없음 {
+  text-align: center;
 }
 .습관목록_목표갯수 {
   height: 50px;

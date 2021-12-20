@@ -1,31 +1,29 @@
 <template>
   <div class="컨테이너">
-    <div class="내용">
+    <div class="내용" v-if="getData">
       <TheHabitHeader
-        :habitItem="habitItem"
+        :habitName="habitItem.objective"
         :category="habitCategory"
         @editHabitName="editHabitName"
       />
-      <div class="배경">
-        <TheSelectSchedule
-          :schedules="habitItem.schedule"
-          :category="habitCategory"
-          @editSchedule="editSchedule"
-        />
-        <TheHabitDetailList
-          :detailHabitItems="detailHabitItems"
-          :category="habitCategory"
-          @addDetailHabitItem="addDetailHabitItem"
-          @editDetailHabitItem="editDetailHabitItem"
-          @deleteDetailHabitItem="deleteDetailHabitItem"
-        />
-        <HabitEditButtonSet
-          @EditSave="EditSave"
-          :habitItem="habitItem"
-          :category="habitCategory"
-          :edit="edit"
-        />
-      </div>
+      <TheSelectSchedule
+        :schedules="habitItem.schedule"
+        :category="habitCategory"
+        @editSchedule="editSchedule"
+      />
+      <TheHabitDetailList
+        :detailHabitItems="detailHabitItems"
+        :category="habitCategory"
+        @addDetailHabitItem="addDetailHabitItem"
+        @editDetailHabitItem="editDetailHabitItem"
+        @deleteDetailHabitItem="deleteDetailHabitItem"
+      />
+      <HabitEditButtonSet
+        @EditSave="EditSave"
+        :habitItem="habitItem"
+        :category="habitCategory"
+        :edit="edit"
+      />
     </div>
   </div>
 </template>
@@ -54,6 +52,7 @@ export default {
       detailHabitItems: [],
       habitCategory: {},
       edit: false,
+      getData: this.id ? false : true
     };
   },
   methods: {
@@ -66,12 +65,12 @@ export default {
       // console.log(this.habitItem.schedule)
     },
     addDetailHabitItem() {
-      this.detailHabitItems.push("");
+      this.detailHabitItems.push({objective: ""});
       // console.log(this.detailHabitItems)
     },
     editDetailHabitItem(ind, newValue) {
-      this.detailHabitItems[ind] = newValue;
-      // console.log(this.detailHabitItems)
+      this.detailHabitItems[ind].objective = newValue;
+      // console.log(this.detailHabitItems[ind])
     },
 
     // 습관 가져오기
@@ -84,6 +83,7 @@ export default {
         // console.log(data);
         this.habitItem = data;
         this.habitCategory = this.$store.state.habitCategory[data.category];
+        this.getData = true
       } catch (err) {
         console.log(err);
       }
@@ -113,10 +113,12 @@ export default {
         // console.log(data)
         if (this.detailHabitItems.length > 0) {
           this.detailHabitItems.forEach(async (el) => {
-            if (el.id) {
-              await this.editDetailHabit(el.id, el);
-            } else {
-              await this.createDetailHabit(data.id, el);
+            if(el.objective.length > 0) {
+              if (el.id) {
+                await this.editDetailHabit(el.id, el.objective);
+              } else {
+                await this.createDetailHabit(data.id, el.objective);
+              }
             }
           });
           this.edit = !this.edit;
@@ -177,7 +179,7 @@ export default {
     async EditSave() {
       if (this.id) {
         await this.editHabit();
-        this.$router.push("/today");
+        this.$router.go(-1);
       } else {
         await this.editHabit();
       }
@@ -197,6 +199,7 @@ export default {
 
 <style scoped>
 .내용 {
+  height: 100vh;
   background-color: #e1e1e1;
 }
 .배경 {

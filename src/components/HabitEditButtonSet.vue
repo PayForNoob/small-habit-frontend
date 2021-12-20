@@ -42,7 +42,7 @@
         </div>
       </template>
       <template v-slot:confirm>
-        <div class="완료버튼" :style="{ backgroundColor: category.color }" @click="$router.push('/today')">
+        <div class="완료버튼" :style="{ backgroundColor: category.color }" @click="$router.go(-2)">
           확인
         </div>
       </template>
@@ -89,15 +89,15 @@ export default {
           method: 'delete',
           url: `/api/objective/${this.$route.params.id}`,
         })
-        console.log('성공')
-        location.href = '/today'
+        // console.log('성공')
+        this.$router.go(-1)
       }
       catch (err) {
         console.log(err.data);
       } 
     },
     Edit() {
-      if(this.habitItem.objective && this.habitItem.schedule) {
+      if(this.habitItem.objective && this.habitItem.schedule[0]) {
         this.$emit("EditSave");
       } else {
         this.confirm = !this.confirm

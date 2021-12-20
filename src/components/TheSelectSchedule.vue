@@ -5,7 +5,7 @@
         <img src="@/assets/img_dayCircle_circle.png" />
         <div><span class="굵은글씨">반복주기</span> (주 {{ number }}회)</div>
       </div>
-      <div class="요일_박스">
+      <div class="요일_박스" >
         <div v-for="(schedule, index) in week" :key="index">
           <div
             :style="{
@@ -27,7 +27,14 @@
 
 <script>
 export default {
-  props: ["schedules", "category"],
+  props: {
+    schedules: {
+      type: Array,
+    }, 
+    category: {
+      type: Object,
+      required: true
+    }},
   data() {
     return {
       week: ["일", "월", "화", "수", "목", "금", "토"],

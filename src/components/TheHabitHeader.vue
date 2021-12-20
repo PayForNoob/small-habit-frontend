@@ -1,5 +1,5 @@
 <template>
-  <div class="상단메뉴_박스" :style="{ backgroundColor: category.color }">
+  <div class="컨테이너" :style="{ backgroundColor: category.color }">
     <div>
       <div class="뒤로가기_박스">
         <div class="뒤로가기_버튼" @click="previousPage">
@@ -17,9 +17,13 @@
             {{ category.name }}
           </div>
           <div class="습관명_박스">
-            <div class="습관명" contenteditable="true" ref="habitName" @input="inputHabitName">
+            <div class="습관명" contenteditable="true" ref="habitName" 
+            
+            @input="inputHabitName" 
+            @focus="this.placeholder = ''" 
+            @blur="this.placeholder = '습관명을 입력해주세요.'">
               {{
-                habitItem.objective ? habitItem.objective : "습관명을 입력해주세요."
+                habitName ? habitName : placeholder
               }}
             </div>
             <div class="습관명_수정_아이콘">
@@ -37,22 +41,38 @@
 
 <script>
 export default {
-  props: ["habitItem", "category"],
+  props: {
+    habitName: {
+      type: String,
+    }, 
+    category: {
+      type: Object,
+      required: true
+    }
+    },
+  data() {
+    return {
+      placeholder: "습관명을 입력해주세요.",
+    }
+  },
   methods: {
     previousPage() {
       this.$router.go(-1);
     },
     inputHabitName() {
-      this.$emit('editHabitName', this.$refs.habitName.innerHTML);
+      let newHabit = this.$refs.habitName.innerHTML.replace('&nbsp;', ' ')
+      console.log(newHabit)
+      this.$emit('editHabitName', newHabit);
     }
   },
 };
 </script>
 
 <style scoped>
-.상단메뉴_박스 {
+.컨테이너 {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   height: 340px;
   border-radius: 0px 0px 30px 30px;
   margin-bottom: 20px;
@@ -80,7 +100,7 @@ export default {
   cursor: pointer;
 }
 
-.상단메뉴_박스 > div:nth-child(2) {
+.컨테이너 > div:nth-child(2) {
   display: flex;
   justify-content: center;
   width: 100%;
