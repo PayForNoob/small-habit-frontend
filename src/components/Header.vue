@@ -87,7 +87,10 @@ header {
   align-items: center;
   padding: 0px 20px;
 }
-.로고 {
+.헤더 div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   height: 80px;
 }
 .로고 img {
@@ -96,11 +99,6 @@ header {
 }
 .로그인,
 .로그아웃 {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: auto;
-  height: 80px;
   cursor: pointer;
 }
 .상단메뉴 {
@@ -124,5 +122,27 @@ header {
   border-bottom: 4px solid #000;
   color: #2c3e50;
   text-align: center;
+} 
+
+/* 반응형 */
+@media (max-width: 750px) {
+  header {
+    max-width: 100vw;
+    height: 40px;
+  }
+  .헤더 {
+    height: 40px;
+  }
+  .로고 img {
+    width: 40px;
+    height: 40px;
+  }
+  .헤더 div:nth-child(2n-1) img {
+    width: 92px;
+    height: 22px;
+  }
+  .컨테이너_내용 {
+    width: 100vw;
+  }
 }
 </style>

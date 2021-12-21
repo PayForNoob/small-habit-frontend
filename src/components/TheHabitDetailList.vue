@@ -24,7 +24,7 @@
             <div class="세부습관_이름">
               <img src="@/assets/dot.png" alt="" />
               <div contenteditable="true" 
-              @input="editDetailHabit(index, $event.currentTarget.innerHTML)"
+              @input="editDetailHabit(index, $event.currentTarget.innerText)"
               @focus="this.placeholder = ''" 
               @blur="this.placeholder = '세부습관을 입력해주세요.'"              
               >
@@ -45,7 +45,14 @@
 
 <script>
 export default {
-  props: ["detailHabitItems", "category"],
+  props: {
+    detailHabitItems: {
+      type: Array
+    },
+    category: {
+      type: Object,
+      required: true
+    }},
   data() {
     return {
       placeholder: "세부습관을 입력해주세요.",
@@ -55,9 +62,13 @@ export default {
     addDetailHabit() {
       this.$emit('addDetailHabitItem')
     },
-    editDetailHabit(ind, newValue) {
-      let detailHabitItem = newValue.replace('&nbsp;', ' ')
-      this.$emit('editDetailHabitItem', ind, detailHabitItem);
+    editDetailHabit(ind, newValue, event) {
+      let newDetailHabit = newValue
+      if(newDetailHabit.length >= 11) {
+        newDetailHabit = newDetailHabit.substring(0, 11)
+      }
+      console.log(newDetailHabit)
+      this.$emit('editDetailHabitItem', ind, newDetailHabit);
     },
     deleteDetailHabit(ind) {
       this.$emit('deleteDetailHabitItem', ind)

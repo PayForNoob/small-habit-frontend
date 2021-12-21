@@ -43,14 +43,17 @@ export default {
 }
 
 .컨테이너_내용 {
-  width: 720px;
-  margin-top: calc((100vh - 846px) / 4);
+  max-width: 720px;
+  height: calc(100vh - 80px);
   display: flex;
   flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
 }
 .문자열 {
   display: flex;
   flex-direction: column;
+  gap: 20px;
   text-align: left;
   padding: 50px;
 }
@@ -66,8 +69,26 @@ export default {
   font-weight: bold;
 }
 .이미지 {
-  margin-top: 20px;
   width: 720px;
   height: 500px;
+}
+@media (max-width: 750px) {
+  .이미지 {
+    width: 100vw;
+    height: auto;
+  }
+  img {
+    width: 100vw;
+    height: auto;
+  }
+  .문자열 {
+    padding: 20px;
+  }
+  .문자열_머릿말 {
+    font-size: 24px;
+  }
+  .문자열_내용 {
+    font-size: 12px;
+  }
 }
 </style>

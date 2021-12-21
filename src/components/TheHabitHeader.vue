@@ -17,9 +17,9 @@
             {{ category.name }}
           </div>
           <div class="습관명_박스">
-            <div class="습관명" contenteditable="true" ref="habitName" 
-            
-            @input="inputHabitName" 
+            <div class="습관명" 
+            contenteditable="true" ref="habitName" 
+            @keyup="inputHabitName" 
             @focus="this.placeholder = ''" 
             @blur="this.placeholder = '습관명을 입력해주세요.'">
               {{
@@ -59,8 +59,12 @@ export default {
     previousPage() {
       this.$router.go(-1);
     },
-    inputHabitName() {
-      let newHabit = this.$refs.habitName.innerHTML.replace('&nbsp;', ' ')
+    inputHabitName(event) {
+      let newHabit = this.$refs.habitName.innerText
+      if(newHabit.length >= 11 && event.code != 'Backspace') {
+        newHabit = newHabit.substring(0, 11)
+        event.preventDefault();
+      }
       console.log(newHabit)
       this.$emit('editHabitName', newHabit);
     }

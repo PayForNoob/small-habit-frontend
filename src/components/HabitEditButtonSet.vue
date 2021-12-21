@@ -97,7 +97,7 @@ export default {
       } 
     },
     Edit() {
-      if(this.habitItem.objective && this.habitItem.schedule[0]) {
+      if(this.habitItem.objective && this.habitItem.schedule.length > 0) {
         this.$emit("EditSave");
       } else {
         this.confirm = !this.confirm
