@@ -35,7 +35,14 @@ import TheHabitDetailList from "@/components/TheHabitDetailList.vue";
 import HabitEditButtonSet from "@/components/HabitEditButtonSet.vue";
 
 export default {
-  props: ["id", "category"],
+  props: {
+    id: {
+      type: Number
+    },
+    category: {
+      type: Number,
+    }
+  },
   components: {
     TheHabitHeader,
     TheSelectSchedule,

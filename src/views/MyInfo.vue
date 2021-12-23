@@ -118,19 +118,10 @@ export default {
   flex-direction: column;
   align-items: center;
 }
-.컨테이너_내용 {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  width: 720px;
-  height: calc(100vh - 150px);
-}
 .유저정보_컨테이너 {
   display: flex;
   flex-direction: column;
-  padding: 30px 24px 0px;
+  padding: 20px 4px 0px;
   width: 100%;
 }
 .유저정보_내용 {
@@ -138,18 +129,19 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+  gap: 10px;
   width: 100%;
   height: 100px;
-  padding-left: 50px;
+  padding: 0px 20px;
   margin-bottom: 10px;
-  background-color: crimson;
   border-radius: 15px;
   color: #fff;
   font-size: 20px;
 }
-.닉네임,
-.이메일 {
-  margin-bottom: 10px;
+.유저정보_내용 div {
+  width: 100%;
+}
+.닉네임, .이메일 {
   font-weight: bold;
 }
 .유저삭제_버튼 {

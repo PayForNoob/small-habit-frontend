@@ -81,7 +81,20 @@ export default {
       confirm: false
     }
   },
-  props: ["habitItem", "category", "edit"],
+  props: {
+    habitItem: {
+      type: Object,
+      required: true
+    }, 
+    category: {
+      type: Object,
+      required: true
+    }, 
+    edit: {
+      type: Boolean,
+      required: true
+    }
+  },
   methods: {
     async deleteObjective() {
       try {

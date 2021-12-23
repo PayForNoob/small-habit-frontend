@@ -13,8 +13,7 @@
           >
           </habit-list>
         </div>
-        <div v-if="habitItems.length == 0" class="습관없음">오늘의 습관 없음</div>
-        <!-- 없음 디자인 추가할 예정-->
+        <div v-else class="습관없음">습관 없음</div>
       </div>
       <router-link to="/create" class="습관_생성"> 새 습관 생성 </router-link>
     </div>

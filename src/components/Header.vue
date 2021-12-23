@@ -1,22 +1,20 @@
 <template>
   <header>
     <div class="헤더">
-      <div>
-        <img src="../assets/kakao_login_medium_narrow.png" class="숨김">
-      </div>
+      <div class="숨김"/>
       <div class="로고">
         <img src="@/assets/logo.png" alt="" />
       </div>
       <div class="로그인" v-if="!user">
         <img
-          src="../assets/kakao_login_medium_narrow.png"
+          src="../assets/kakao_login_small.png"
           alt="kakao_login_button"
           class="login_btn"
           @click="kakaoLogin"
         />
       </div>
       <div class="로그아웃" @click="logout" v-else>
-        <img src="@/assets/logout_btn.png" alt="로그아웃 버튼" />
+        <div>로그아웃</div>
       </div>
     </div>
     <div class="상단메뉴" v-if="user">
@@ -80,40 +78,54 @@ header {
 }
 .숨김 {
   opacity: 0;
+  width: 60px;
+  height: 30px;
 }
 .헤더 {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 10px;
   padding: 0px 20px;
 }
 .헤더 div {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 80px;
+  height: 40px;
 }
-.로고 img {
-  width: 80px;
-  height: 80px;
+img {
+  width: auto;
+  max-height: 40px;
 }
 .로그인,
 .로그아웃 {
   cursor: pointer;
+}
+.로그아웃 div {
+  width: 60px;
+  height: 30px;
+  line-height: 30px;
+  font-size: 12px;
+  color: #fff;
+  text-align: center;
+  border-radius: 4px;
+  background-color: #777;
 }
 .상단메뉴 {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   width: 100%;
-  height: 70px;
+  height: 40px;
   border-bottom: 2px solid #ddd;
 }
 .상단메뉴 div {
-  width: 120px;
-  font-size: 24px;
+  max-width: 120px;
+  font-size: 20px;
   font-weight: bold;
-  line-height: 70px;
+  line-height: 40px;
+  text-align: center;
 }
 .상단메뉴 a {
   color: #9b9b9b;
@@ -124,25 +136,4 @@ header {
   text-align: center;
 } 
 
-/* 반응형 */
-@media (max-width: 750px) {
-  header {
-    max-width: 100vw;
-    height: 40px;
-  }
-  .헤더 {
-    height: 40px;
-  }
-  .로고 img {
-    width: 40px;
-    height: 40px;
-  }
-  .헤더 div:nth-child(2n-1) img {
-    width: 92px;
-    height: 22px;
-  }
-  .컨테이너_내용 {
-    width: 100vw;
-  }
-}
 </style>

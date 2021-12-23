@@ -7,7 +7,12 @@
 
 <script>
 export default {
-  props: ["categoryId"],
+  props: {
+    categoryId:{
+      type: Number,
+      required: true
+    }
+  },
   data() {
     return {
       category: this.$store.state.habitCategory[this.categoryId]
@@ -20,7 +25,9 @@ export default {
   },
   methods: {
     createHabit() {
-      this.$router.push(`/create/${this.categoryId}`);
+      this.$router.push({
+        path: `/create/${this.categoryId}`
+      });
     },
   },
 }

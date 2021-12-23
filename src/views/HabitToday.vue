@@ -13,8 +13,7 @@
           >
           </habit-list>
         </div>
-        <div v-else class="습관없음">오늘의 습관 없음</div>
-        <!-- 없음 디자인 추가할 예정-->
+        <div v-else class="습관없음">습관 없음</div>
       </div>
       <router-link to="/create" class="습관_생성"> 새 습관 생성 </router-link>
     </div>
@@ -46,13 +45,14 @@ export default {
     this.$store.commit("loadingStart");
   },
   async created() {
+    console.log(this.$route)
     let today = new Date().getDay();
     try {
       let { data } = await this.axios({
         method: "get",
         url: "/api/objectives",
         params: {
-          schedule: today,
+          schedule: this.$route.path == '/today' ? today : "0, 1, 2, 3, 4, 5, 6",
         },
       });
       this.habitItems = data;
@@ -67,7 +67,7 @@ export default {
 
 <style scoped>
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 4px;
 }
 ::-webkit-scrollbar-thumb {
   background-color: #9b9b9b;
@@ -80,27 +80,17 @@ export default {
   width: 100%;
   height: calc(100vh - 150px);
 }
-.컨테이너 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.컨테이너_내용 {
-  display: flex;
-  flex-flow: column;
-  width: 720px;
-}
 .습관목록_박스 {
   display: flex;
   flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  height: calc(100vh - 150px);
   padding-top: 10px;
-  height: calc(100vh - 210px);
 }
 .습관목록_습관갯수 {
-  height: 50px;
-  line-height: 50px;
+  width: 100%;
   padding-right: 24px;
-  margin-bottom: 10px;
   font-family: Roboto;
   font-style: normal;
   font-weight: bold;
@@ -115,7 +105,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-left: 10px;
+  padding-left: 4px;
   overflow: auto;
 }
 .습관_생성 {

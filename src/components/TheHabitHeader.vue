@@ -18,10 +18,10 @@
           </div>
           <div class="습관명_박스">
             <div class="습관명" 
-            contenteditable="true" ref="habitName" 
-            @keyup="inputHabitName" 
-            @focus="this.placeholder = ''" 
-            @blur="this.placeholder = '습관명을 입력해주세요.'">
+            :contenteditable="contenteditable" ref="habitName" 
+            @keydown="inputHabitName" 
+            @focus="focusHabitName" 
+            @blur="placeholder = '습관명을 입력해주세요.'">
               {{
                 habitName ? habitName : placeholder
               }}
@@ -49,26 +49,34 @@ export default {
       type: Object,
       required: true
     }
-    },
+  },
   data() {
     return {
       placeholder: "습관명을 입력해주세요.",
+      contenteditable: true,
     }
   },
   methods: {
     previousPage() {
       this.$router.go(-1);
     },
+    focusHabitName() {
+      this.placeholder = ''
+      this.contenteditable = true
+    },
     inputHabitName(event) {
       let newHabit = this.$refs.habitName.innerText
-      if(newHabit.length >= 11 && event.code != 'Backspace') {
+      console.log(newHabit.length)
+      if(newHabit.length >= 11 && event.keyCode != 8) {
         newHabit = newHabit.substring(0, 11)
+        alert('입력 가능한 최대 글자수를 초과했습니다.')
         event.preventDefault();
       }
       console.log(newHabit)
       this.$emit('editHabitName', newHabit);
     }
   },
+  
 };
 </script>
 

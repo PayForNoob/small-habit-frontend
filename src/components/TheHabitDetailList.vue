@@ -52,7 +52,8 @@ export default {
     category: {
       type: Object,
       required: true
-    }},
+    }
+  },
   data() {
     return {
       placeholder: "세부습관을 입력해주세요.",
