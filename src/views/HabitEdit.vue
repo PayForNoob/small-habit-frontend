@@ -206,10 +206,10 @@ export default {
 
 <style scoped>
 .내용 {
-  height: 100vh;
+  gap: 10px;
+  width: 100%;
+  height: calc(100vh - 60px);
   background-color: #e1e1e1;
-}
-.배경 {
-  height: calc(100vh - 360px);
+  overflow: hidden;
 }
 </style>

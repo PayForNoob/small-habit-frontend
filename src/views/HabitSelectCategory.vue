@@ -42,19 +42,22 @@ export default {
 
 <style scoped>
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 0px;
 }
 ::-webkit-scrollbar-thumb {
   background-color: #9b9b9b;
   border-radius: 5px;
 }
+.내용 {
+  gap: 20px;
+}
 .제목 {
   display: flex;
   align-items: center;
-  gap: 30px;
-  height: 100px;
-  padding-left: 24px;
-  font-size: 30px;
+  gap: 16px;
+  height: 50px;
+  font-size: 20px;
+  font-weight: bold;
 }
 .제목 div {
   display: flex;
@@ -72,22 +75,15 @@ export default {
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding-left: 50px;
-  margin-bottom: 70px;
-}
-.설명 div {
-  display: flex;
-  width: 100%;
-  font-size: 30px;
+  padding-left: 20px;
+  font-size: 24px;
 }
 .습관목록 {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 20px;
-  height: calc(100vh - 250px);
-  padding-left: 10px;
-  padding-bottom: 20px;
+  height: max-content;
   overflow: auto;
 }
 

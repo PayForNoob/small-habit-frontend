@@ -1,5 +1,5 @@
 <template>
-  <div class="컨테이너">
+  <div class="요일설정">
     <div class="내용">
       <div class="반복_주기">
         <img src="@/assets/img_dayCircle_circle.png" />
@@ -11,7 +11,7 @@
             :style="{
               backgroundColor: schedulesTemp.includes(index)
                 ? category.color
-                : '#dedede',
+                : '#fff',
             }"
             :class="schedulesTemp.includes(index) ? '요일_선택' : '요일_미선택'"
             class="요일"
@@ -63,53 +63,57 @@ export default {
 </script>
 
 <style scoped>
+.요일설정 {
+  padding: 0px 5px;
+}
 .내용 {
   display: flex;
   flex-flow: column;
-  justify-content: flex-start;
-  gap: 40px;
-  width: 672px;
-  height: 180px;
-  padding-top: 30px;
-  margin-bottom: 10px;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  height: 140px;
   background-color: #ffffff;
-  border-radius: 20px;
+  border-radius: 15px;
 }
 img {
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
 }
 .굵은글씨 {
   font-weight: bold;
 }
 .반복_주기 {
   display: flex;
-  gap: 40px;
+  align-items: center;
+  gap: 16px;
   height: 30px;
   line-height: 30px;
-  padding-left: 40px;
-  font-size: 26px;
+  padding-left: 20px;
+  font-size: 16px;
   color: #000000;
 }
 
 .요일_박스 {
   display: flex;
-  justify-content: center;
-  gap: 40px;
+  justify-content: space-around;
 }
 .요일 {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 50px;
-  height: 50px;
+  width: 36px;
+  height: 36px;
   border-radius: 100%;
-  font-size: 26px;
+  font-size: 14px;
   color: #000;
   cursor: pointer;
   transition: all 0.15s;
 }
 .요일_선택 {
   color: #ffffff;
+}
+.요일_미선택 {
+  border: 1px solid #dedede;
 }
 </style>

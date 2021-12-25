@@ -23,7 +23,7 @@
           </div>
         </div>
       </div>
-      <div class="유저삭제_버튼" @click="activeConfirm" v-if="!confirm">
+      <div class="탈퇴_버튼" @click="activeConfirm" v-if="!confirm">
         탈퇴하기
       </div>
       <base-modal v-if="confirm" class="모달">
@@ -121,8 +121,8 @@ export default {
 .유저정보_컨테이너 {
   display: flex;
   flex-direction: column;
-  padding: 20px 4px 0px;
-  width: 100%;
+  width: calc(100% - 10px);
+  padding-top: 20px;
 }
 .유저정보_내용 {
   display: flex;
@@ -136,7 +136,7 @@ export default {
   margin-bottom: 10px;
   border-radius: 15px;
   color: #fff;
-  font-size: 20px;
+  font-size: 16px;
 }
 .유저정보_내용 div {
   width: 100%;
@@ -144,7 +144,7 @@ export default {
 .닉네임, .이메일 {
   font-weight: bold;
 }
-.유저삭제_버튼 {
+.탈퇴_버튼 {
   display: flex;
   justify-content: center;
   cursor: pointer;
@@ -153,7 +153,7 @@ export default {
   line-height: 60px;
   background-color: #ff5757;
   color: #fff;
-  font-size: 20px;
+  font-size: 16px;
 }
 @keyframes modal {
   from {

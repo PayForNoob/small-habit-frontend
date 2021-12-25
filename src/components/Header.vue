@@ -85,8 +85,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 10px;
-  padding: 0px 20px;
+  padding: 10px 20px 0px;
 }
 .헤더 div {
   display: flex;

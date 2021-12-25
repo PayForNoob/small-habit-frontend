@@ -47,11 +47,11 @@
       
       <div v-if="$route.path == '/total' || practiced" class="구분선"></div>
       <!-- 하단 -->
-      <div v-if="$route.path == '/total' || practiced">
-        <div class="달성목표_실천박스">
-          <div class="실천횟수">{{ totalPracticed }}회째 실천중!!!</div>
-          <img v-for="num in 3" :key="num" src="@/assets/img_clapping.png" />
-        </div>
+      <div 
+      v-if="$route.path == '/total' || practiced"
+      class="달성목표_실천박스">
+        <div class="실천횟수">{{ totalPracticed }}회째 실천중!!!</div>
+        <img v-for="num in 3" :key="num" src="@/assets/img_clapping.png" />
       </div>
     </div>
   </div>
@@ -216,7 +216,7 @@ export default {
 }
 .내용카드_습관이름 {
   font-weight: bold;
-  font-size: 20px;
+  font-size: 16px;
   line-height: 30px;
   flex-grow: 1;
   color: #000000;
@@ -233,9 +233,9 @@ img.수정버튼 {
   width: 100%;
   height: max-content;
   line-height: 30px;
-  padding-left: 80px;
+  padding-left: 60px;
   text-align: left;
-  font-size: 20px;
+  font-size: 16px;
   color: #000;
 }
 .세부습관 {
@@ -258,22 +258,20 @@ img.수정버튼 {
 .달성목표_실천박스 {
   display: flex;
   flex-direction: row;
+  justify-content: center;
   width: 100%;
   height: 30px;
   align-items: center;
   border-radius: 0% 0% 5px 5px;
 }
 .달성목표_실천박스 img {
-  width: 30px;
-  height: 30px;
+  width: 26px;
+  height: 26px;
 }
 .실천횟수 {
-  line-height: 30px;
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: normal;
+  font-size: 16px;
   color: #666666;
   flex-grow: 0;
-  margin-right: 18px;
+  margin-right: 14px;
 }
 </style>

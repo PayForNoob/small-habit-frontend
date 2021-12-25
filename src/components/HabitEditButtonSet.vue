@@ -125,15 +125,10 @@ export default {
   position: fixed;
   bottom: 0%;
   display: flex;
-  flex-flow: row;
-  width: 720px;
+  width: 100%;
   height: 60px;
   line-height: 60px;
-
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 20px;
+  font-size: 16px;
   text-align: center;
   color: #ffffff;
 }

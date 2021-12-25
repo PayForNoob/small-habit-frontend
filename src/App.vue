@@ -51,7 +51,7 @@ a {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: calc(100% - 90px);
+  height: calc(100vh - 90px);
 }
 .내용 {
   display: flex;

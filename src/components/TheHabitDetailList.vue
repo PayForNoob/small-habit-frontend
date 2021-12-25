@@ -1,7 +1,7 @@
 <template>
-  <div class="컨테이너">
+  <div class="세부습관설정">
     <div class="내용">
-      <div class="세부습관_머릿글">
+      <div class="세부습관">
         <div>
           <img src="@/assets/img_detail_point.png" />
           <div class="굵은글씨">세부습관</div>
@@ -14,7 +14,9 @@
           <img src="@/assets/add-detailHabit.png" alt="세부습관 추가 버튼" />
         </div>
       </div>
-      <div class="스크롤_영역">
+      <div 
+      v-if="detailHabitItems[0]"
+      class="스크롤_영역">
         <div class="세부습관_목록_박스">
           <div
             class="세부습관_목록"
@@ -80,7 +82,7 @@ export default {
 
 <style scoped>
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 1px;
 }
 ::-webkit-scrollbar-thumb {
   background-color: #9b9b9b;
@@ -93,44 +95,50 @@ img {
 .굵은글씨 {
   font-weight: bold;
 }
-.컨테이너 {
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  line-height: 50px;
+.세부습관설정 {
+  padding: 0px 5px;
 }
 .내용 {
   display: flex;
   flex-flow: column;
   justify-content: flex-start;
   gap: 20px;
-  width: 672px;
-  min-height: 110px;
-  padding-top: 30px;
-  padding-bottom: 30px;
-  margin-bottom: 10px;
+  width: 100%;
+  min-height: 80px;
+  max-height: 210px;
+  padding-top: 25px;
+  padding-bottom: 25px;  
   background-color: #ffffff;
-  border-radius: 20px;
-  font-size: 26px;
+  border-radius: 15px;
 }
 /* 세부습관 머릿글 */
-.세부습관_머릿글 {
+.세부습관 {
   display: flex;
-  height: 50px;
+  height: 30px;
   justify-content: space-between;
   align-items: center;
-  padding-left: 40px;
+  padding-left: 20px;
   padding-right: 20px;
 }
-.세부습관_머릿글 > div {
+.세부습관 > div:first-child {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 30px;
+  line-height: 30px;
+  font-size: 16px;
+  color: #000000;
+}
+.세부습관 > div:first-child img {
+  width: 20px;
+  height: 20px;
+}
+.추가버튼_이미지 {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 40px;
-}
-.추가버튼_이미지 {
-  height: 50px;
-  width: 50px;
+  height: 30px;
+  width: 30px;
   cursor: pointer;
   border-radius: 100%;
 }
@@ -144,24 +152,23 @@ img {
   display: flex;
   flex-flow: column;
   align-items: center;
-  max-height: 220px;
-  padding-left: 20px;
-  padding-right: 10px;
-  margin: 0 10px;
-  overflow: scroll;
+  max-height: calc(100% - 75px);
+  overflow: auto;
 }
 .세부습관_목록_박스 {
+  min-width: 250px;
   display: flex;
   flex-flow: column;
-  gap: 10px;
+  gap: 8px;
 }
 .세부습관_목록 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 452px;
-  height: 50px;
-  line-height: 50px;
+  gap: 10px;
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
 }
 .미작성 {
   opacity: 50%;
