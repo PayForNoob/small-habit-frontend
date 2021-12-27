@@ -120,7 +120,7 @@ img {
   border-bottom: 2px solid #ddd;
 }
 .상단메뉴 div {
-  max-width: 120px;
+  width: 100px;
   font-size: 20px;
   font-weight: bold;
   line-height: 40px;

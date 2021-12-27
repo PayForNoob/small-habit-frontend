@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="모달">
     <div class="배경"></div>
-    <div class="모달" >
+    <div class="모달영역">
       <slot name="header"></slot>
       <slot name="contents"></slot>
       <slot name="confirm"></slot>
@@ -16,6 +16,28 @@ export default {
 </script>
 
 <style scoped>
+@keyframes bg {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 50%;
+  }
+}
+.배경 {
+  animation-name: bg;
+  animation-duration: 0.25s;
+  
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  opacity: 50%;
+}
+
 @keyframes modal {
   from {
     bottom: -360px;
@@ -28,39 +50,25 @@ export default {
   }
 }
 .모달 {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  animation-name: modal;
-  animation-duration: 0.25s;
-  position: absolute;
-  bottom: 0px;
-  width: 720px;
-  height: 360px;
-  padding: 50px 0px 0px;
-  border-radius: 30px;
+  position: relative;
+  width: 100%;
   background-color: #fff;
 }
-@keyframes bg {
-  from {
-    opacity: 0;
-  }
+.모달영역 {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  height: 200px;
+  padding-bottom: 40px;
 
-  to {
-    opacity: 50%;
-  }
-}
-.배경 {
-  animation-name: bg;
-  animation-duration: 0.75s;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: #000;
-  opacity: 50%;
+  animation-name: modal;
+  animation-duration: 0.25s;  
+  border-radius: 15px;
+  background-color: #fff;
+  text-align: center;
 }
 </style>

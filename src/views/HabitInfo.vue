@@ -86,7 +86,7 @@ export default {
   align-items: center;
   gap: 10px;
   width: 100%;
-  height: calc(100% - 60px);
+  height: calc(100% - 40px);
   padding-top: 10px;
 }
 .습관목록_습관갯수 {
@@ -112,8 +112,8 @@ export default {
 .습관_생성 {
   cursor: pointer;
   width: 100%;
-  height: 60px;
-  line-height: 60px;
+  height: 40px;
+  line-height: 40px;
   background-color: #777777;
   color: #fff;
   font-size: 16px;

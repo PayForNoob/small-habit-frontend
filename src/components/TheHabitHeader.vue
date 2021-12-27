@@ -1,5 +1,5 @@
 <template>
-  <div class="습관편집" :style="{ backgroundColor: category.color }">
+  <div class="습관설정" :style="{ backgroundColor: category.color }">
     <div class="뒤로가기">
       <div class="뒤로가기_버튼" @click="previousPage">
         <img src="@/assets/Previous-white.png" alt="뒤로가기" />
@@ -8,14 +8,15 @@
         {{ $route.params.id ? "습관 수정" : "습관 생성" }}
       </div>
     </div>
-    <div class="습관정보_박스">
-      <div class="습관_정보">
+    <div class="습관내용_박스">
+      <div class="습관내용">
         <div class="습관종류" :style="{ color: category.color }">
           {{ category.name }}
         </div>
         <div class="습관명_박스">
           <div class="습관명" 
-          :contenteditable="contenteditable" ref="habitName" 
+          :contenteditable="contenteditable" 
+          ref="habitName" 
           @keypress="inputHabitName" 
           @focus="focusHabitName" 
           @blur="placeholder = '습관명을 입력해주세요.'">
@@ -61,8 +62,8 @@ export default {
       this.contenteditable = true
     },
     inputHabitName(event) {
+      console.log(this.$refs.habitName.innerText)
       let newHabit = this.$refs.habitName.innerText
-      console.log(newHabit.length)
       if(newHabit.length >= 11 && event.keyCode != 8) {
         newHabit = newHabit.substring(0, 11)
         event.preventDefault();
@@ -76,7 +77,7 @@ export default {
 </script>
 
 <style scoped>
-.습관편집 {
+.습관설정 {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -106,14 +107,14 @@ export default {
   cursor: pointer;
 }
 
-.습관정보_박스 {
+.습관내용_박스 {
   display: flex;
   justify-content: space-between;
   width: 100%;
   height: 130px;
   padding: 0px 20px;
 }
-.습관_정보 {
+.습관내용 {
   display: flex;
   flex-direction: column;
   align-content: flex-start;

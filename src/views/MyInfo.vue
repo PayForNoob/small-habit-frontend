@@ -26,7 +26,8 @@
       <div class="탈퇴_버튼" @click="activeConfirm" v-if="!confirm">
         탈퇴하기
       </div>
-      <base-modal v-if="confirm" class="모달">
+      
+      <base-modal v-else>
         <template v-slot:header>
           <div class="모달_헤더">정말 탈퇴하시겠습니까?</div>
         </template>
@@ -38,8 +39,8 @@
         </template>
         <template v-slot:confirm>
           <div class="모달_버튼">
-            <div class="모달_확인버튼" @click="authWithdrawal">확인</div>
-            <div class="모달_삭제버튼" @click="activeConfirm">취소</div>
+            <div class="삭제_버튼" @click="authWithdrawal">확인</div>
+            <div class="취소_버튼" @click="activeConfirm">취소</div>
           </div>
         </template>
       </base-modal>
@@ -113,11 +114,6 @@ export default {
 </script>
 
 <style scoped>
-.컨테이너 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 .유저정보_컨테이너 {
   display: flex;
   flex-direction: column;
@@ -144,62 +140,53 @@ export default {
 .닉네임, .이메일 {
   font-weight: bold;
 }
+/* 탈퇴버튼 */
 .탈퇴_버튼 {
   display: flex;
   justify-content: center;
   cursor: pointer;
   width: 100%;
-  height: 60px;
-  line-height: 60px;
+  height: 40px;
+  line-height: 40px;
   background-color: #ff5757;
   color: #fff;
   font-size: 16px;
 }
-@keyframes modal {
-  from {
-    bottom: -360px;
-    opacity: 0;
-  }
-
-  to {
-    bottom: 0px;
-    opacity: 100%;
-  }
-}
-.모달 {
-  position: absolute;
-  bottom: 0px;
-  animation-name: modal;
-  animation-duration: 0.25s;
-  background-color: #fff;
-}
+/* 모달 */
 .모달_헤더 {
-  font-size: 30px;
+  font-size: 20px;
   font-weight: bold;
 }
+.모달_헤더 img{
+  width: 50px;
+  height: 50px;
+}
 .모달_내용 {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  font-size: 24px;
+  font-size: 16px;
 }
 .모달_버튼 {
   display: flex;
-  justify-content: space-evenly;
+  position: absolute;
+  bottom: 0;
   width: 100%;
+  height: 40px;
+  line-height: 40px;
 }
 .모달_버튼 div {
   width: 100%;
-  height: 60px;
-  line-height: 60px;
+  height: 100%;
   color: #fff;
-}
-.모달_확인버튼 {
+  text-align: center;
   cursor: pointer;
-  background-color: #ff545e;
 }
-.모달_삭제버튼 {
-  cursor: pointer;
+.삭제_버튼 {
+  background: #ff5757;
+}
+.취소_버튼 {
   background-color: #5e5e5e;
+}
+.모달_헤더 {
+  font-size: 20px;
+  font-weight: bold;
 }
 </style>
