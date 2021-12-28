@@ -69,10 +69,10 @@ import BaseModal from "@/components/BaseModal.vue";
 export default {
   props: {
     id: {
-      type: Number
+      type: String
     },
     category: {
-      type: Number,
+      type: String,
     }
   },
   components: {

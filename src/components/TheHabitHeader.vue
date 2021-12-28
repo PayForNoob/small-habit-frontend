@@ -15,10 +15,9 @@
         </div>
         <div class="습관명_박스">
           <div class="습관명" 
-          :contenteditable="contenteditable" 
-          ref="habitName" 
-          @keypress="inputHabitName" 
-          @focus="focusHabitName" 
+          :contenteditable="true"
+          @input="inputHabitName" 
+          @focus="placeholder = ''" 
           @blur="placeholder = '습관명을 입력해주세요.'">
             {{
               habitName ? habitName : placeholder
@@ -50,25 +49,20 @@ export default {
   data() {
     return {
       placeholder: "습관을 입력해주세요.",
-      contenteditable: true,
     }
   },
   methods: {
     previousPage() {
       this.$router.go(-1);
     },
-    focusHabitName() {
-      this.placeholder = ''
-      this.contenteditable = true
-    },
     inputHabitName(event) {
-      console.log(this.$refs.habitName.innerText)
-      let newHabit = this.$refs.habitName.innerText
-      if(newHabit.length >= 11 && event.keyCode != 8) {
+      let newHabit = event.currentTarget.innerText
+      if(newHabit.length > 11) {
+        alert('최대 글자수를 초과했습니다.')
         newHabit = newHabit.substring(0, 11)
-        event.preventDefault();
+        event.currentTarget.innerHTML = newHabit
       }
-      console.log(newHabit)
+      // console.log(newHabit)
       this.$emit('editHabitName', newHabit);
     }
   },
@@ -77,6 +71,9 @@ export default {
 </script>
 
 <style scoped>
+input::placeholder {
+  color: #fff;
+}
 .습관설정 {
   display: flex;
   flex-direction: column;
@@ -140,6 +137,7 @@ export default {
   height: 30px;
 }
 .습관명 {
+  width: max-content;
   min-width: 30px;
   overflow: hidden;
   font-size: 20px;

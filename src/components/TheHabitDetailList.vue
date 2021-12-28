@@ -27,8 +27,8 @@
               <img src="@/assets/dot.png" alt="" />
               <div contenteditable="true" 
               @input="editDetailHabit(index, $event.currentTarget.innerText)"
-              @focus="this.placeholder = ''" 
-              @blur="this.placeholder = '세부습관을 입력해주세요.'"              
+              @focus="placeholder = ''" 
+              @blur="placeholder = '세부습관을 입력해주세요.'"              
               >
                 {{ detailHabitItem.objective ? detailHabitItem.objective : placeholder  }}
               </div>
@@ -65,12 +65,14 @@ export default {
     addDetailHabit() {
       this.$emit('addDetailHabitItem')
     },
-    editDetailHabit(ind, newValue, event) {
+    editDetailHabit(ind, newValue) {
       let newDetailHabit = newValue
-      if(newDetailHabit.length >= 11) {
+      if(newDetailHabit.length > 11) {
+        alert('최대 글자수를 초과했습니다.')
         newDetailHabit = newDetailHabit.substring(0, 11)
+        event.currentTarget.innerHTML = newDetailHabit
       }
-      console.log(newDetailHabit)
+      // console.log(newDetailHabit)
       this.$emit('editDetailHabitItem', ind, newDetailHabit);
     },
     deleteDetailHabit(ind) {
@@ -82,7 +84,7 @@ export default {
 
 <style scoped>
 ::-webkit-scrollbar {
-  width: 1px;
+  width: 4px;
 }
 ::-webkit-scrollbar-thumb {
   background-color: #9b9b9b;
@@ -153,7 +155,7 @@ img {
   flex-flow: column;
   align-items: center;
   max-height: calc(100% - 75px);
-  overflow: auto;
+  overflow-y: auto;
 }
 .세부습관_목록_박스 {
   min-width: 250px;

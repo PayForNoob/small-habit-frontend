@@ -45,7 +45,6 @@ export default {
     this.$store.commit("loadingStart");
   },
   async created() {
-    console.log(this.$route)
     let today = new Date().getDay();
     try {
       let { data } = await this.axios({
@@ -67,7 +66,7 @@ export default {
 
 <style scoped>
 ::-webkit-scrollbar {
-  width: 0px;
+  width: 4px;
 }
 ::-webkit-scrollbar-thumb {
   background-color: #9b9b9b;
@@ -107,7 +106,7 @@ export default {
   flex-direction: column;
   align-items: center;
   width: calc(100% - 10px);
-  overflow: auto;
+  overflow-y: auto;
 }
 .습관_생성 {
   cursor: pointer;
