@@ -31,10 +31,10 @@
       <base-modal v-if="confirm" >
         <template v-slot:header>
           <div class="모달_헤더">
-            <img v-if="habitItem.objective && habitItem.schedule.length > 0" 
+            <img v-if="habitItem.objective && habitItem.schedule.length > 0 && $route.params.category" 
             src="@/assets/confetti.png" alt="">
             {{ modalHeader }}
-            <img v-if="habitItem.objective && habitItem.schedule.length > 0" 
+            <img v-if="habitItem.objective && habitItem.schedule.length > 0 && $route.params.category" 
             src="@/assets/confetti.png" alt="">
             </div>
         </template>
