@@ -51,7 +51,7 @@ export default {
       // console.log(window.Kakao.isInitialized());
 
       window.Kakao.Auth.authorize({
-        redirectUri: "http://https://small-habit-app.herokuapp.com/loading",
+        redirectUri: "http://small-habit-app.herokuapp.com/loading",
       });
     },
     async logout() {
