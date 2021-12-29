@@ -7,7 +7,12 @@
 
 <script>
 export default {
-  props: ["categoryId"],
+  props: {
+    categoryId:{
+      type: Number,
+      required: true
+    }
+  },
   data() {
     return {
       category: this.$store.state.habitCategory[this.categoryId]
@@ -21,7 +26,7 @@ export default {
   methods: {
     createHabit() {
       this.$router.push({
-        path: `/habitCreate/${this.categoryId}`,
+        path: `/create/${this.categoryId}`
       });
     },
   },
@@ -30,44 +35,31 @@ export default {
 
 <style scoped>
 img {
-  width: 140px;
-  height: 140px;
+  width: 100px;
+  height: 100px;
 }
 .습관박스 {
   display: flex;
   flex-direction: column;
-  width: 300px;
-  height: 260px;
-  padding-top: 24px;
-  gap: 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  width: 160px;
+  height: 160px;
+  padding-top: 10px;
   align-items: center; 
   color: #fff;
   font-size: 26px;
   font-weight: bold;
   cursor: pointer;
-}
-.습관박스:nth-child(2n-1) {
-  border-radius: 30px 0px 0px 30px;
-}
-.습관박스:nth-child(2n) {
-  border-radius: 0px 30px 30px 0px;
-}
-.습관박스:nth-child(1) {
-  border-radius: 30px 30px 0px 30px;
-}
-.습관박스:nth-child(2) {
-  border-radius: 30px 30px 30px 0px;
-}
-.습관박스:nth-child(7) {
-  border-radius: 30px 0px 30px 30px;
-}
-.습관박스:nth-child(8) {
-  border-radius: 0px 30px 30px 30px;
+  border-radius: 30px 30px 30px 30px;
 }
 .습관이름 {
   display: flex;
   justify-content: flex-start;
+  flex-direction: column;
+  align-items: center;
+  font-size: 20px;
   width: 100%;
-  padding-left: 30px;
 }
 </style>

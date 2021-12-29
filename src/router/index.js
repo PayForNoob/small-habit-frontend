@@ -8,11 +8,11 @@ const routes = [
   },
   {
     path: '/total',
-    component: () => import(/* webpackChunkName: "habit" */ '@/views/HabitTotal.vue')
+    component: () => import(/* webpackChunkName: "habit" */ '@/views/HabitInfo.vue')
   },
   {
     path: '/today',
-    component: () => import(/* webpackChunkName: "habit" */ '@/views/HabitToday.vue')
+    component: () => import(/* webpackChunkName: "habit" */ '@/views/HabitInfo.vue')
   },
   {
     path: '/myinfo',

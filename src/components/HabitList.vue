@@ -10,14 +10,14 @@
           src="@/assets/checkBtn/img_check_unexecuted.png"
           alt=""
           v-if="$route.path != '/total' && !practiced"
-          :class="{ pointer: $route.path != '/total' }"
+          :class="{ '체크버튼': $route.path != '/total' }"
         />
         <!-- 달성 -->
         <img
           @click="undoPracticed(habitItem.id)"
           :src="checkBtn"
           v-if="$route.path == '/total' || practiced"
-          :class="{ pointer: $route.path != '/total' }"
+          :class="{ '체크버튼': $route.path != '/total' }"
         />
 
         <!-- 습관이름 -->
@@ -27,7 +27,7 @@
 
         <!-- 수정버튼 -->
         <img
-          class="수정버튼 pointer"
+          class="수정버튼 버튼"
           src="@/assets/img_edit.png"
           @click="clickEdit"
         />
@@ -44,14 +44,14 @@
           {{ detailedObjective.objective }}
         </div>
       </div>
-
+      
+      <div v-if="$route.path == '/total' || practiced" class="구분선"></div>
       <!-- 하단 -->
-      <div v-if="$route.path == '/total' || practiced">
-        <div class="구분선"></div>
-        <div class="달성목표_실천박스">
-          <div class="실천횟수">{{ totalPracticed }}회째 실천중!!!</div>
-          <img v-for="num in 3" :key="num" src="@/assets/img_clapping.png" />
-        </div>
+      <div 
+      v-if="$route.path == '/total' || practiced"
+      class="달성목표_실천박스">
+        <div class="실천횟수">{{ totalPracticed }}회째 실천중!!!</div>
+        <img v-for="num in 3" :key="num" src="@/assets/img_clapping.png" />
       </div>
     </div>
   </div>
@@ -59,7 +59,11 @@
 
 <script>
 export default {
-  props: ["habitItem"],
+  props: {
+    habitItem: {
+      type: Object,
+      required: true
+    }},
   data() {
     return {
       categoryName: this.$store.state.habitCategory[this.habitItem.category].name,
@@ -147,7 +151,7 @@ export default {
 </script>
 
 <style scoped>
-.pointer {
+.버튼 {
   cursor: pointer;
 }
 
@@ -179,17 +183,22 @@ export default {
 .습관카드_미달성 {
   background: #dddddd;
 }
-
+.습관카드_상위박스 {
+  width: 100%;
+}
+.체크버튼 {
+  cursor: pointer;
+}
 .습관카드_박스 {
   display: flex;
   flex-flow: column;
   justify-content: space-evenly;
-  width: 672px;
-  min-height: 100px;
-  height: max-content;
+  align-items: center;
+  gap: 10px;
   padding: 20px 0px;
   margin-bottom: 10px;
   border-radius: 15px;
+  font-size: 20px;
 }
 
 /* 상단 */
@@ -198,18 +207,17 @@ export default {
   flex-flow: row;
   align-items: center;
   width: 100%;
-  height: 50px;
   padding: 0px 4px 0px 20px;
   border-radius: 5px 5px 0% 0%;
 }
 .습관카드_내용카드 img {
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
 }
 .내용카드_습관이름 {
   font-weight: bold;
-  font-size: 24px;
-  line-height: 50px;
+  font-size: 16px;
+  line-height: 30px;
   flex-grow: 1;
   color: #000000;
   text-align: left;
@@ -225,15 +233,14 @@ img.수정버튼 {
   width: 100%;
   height: max-content;
   line-height: 30px;
-  padding-left: 80px;
+  padding-left: 60px;
   text-align: left;
-  font-size: 20px;
+  font-size: 16px;
   color: #000;
 }
 .세부습관 {
   display: flex;
   align-items: center;
-  margin-top: 10px;
 }
 .세부습관_목록 img {
   width: 6px;
@@ -243,35 +250,28 @@ img.수정버튼 {
 /* 구분선 */
 .구분선 {
   border-top: 2px solid #fff;
-  width: 548px;
+  width: 80%;
   height: 0;
-  margin: 10px 0px 10px 70px;
-  margin-top: 10px;
 }
 
 /* 하단 */
 .달성목표_실천박스 {
   display: flex;
   flex-direction: row;
+  justify-content: center;
   width: 100%;
-  height: 50px;
-  padding-left: 90px;
+  height: 30px;
   align-items: center;
   border-radius: 0% 0% 5px 5px;
 }
 .달성목표_실천박스 img {
-  width: 30px;
-  height: 30px;
+  width: 26px;
+  height: 26px;
 }
 .실천횟수 {
-  height: 50px;
-  line-height: 50px;
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 24px;
+  font-size: 16px;
   color: #666666;
   flex-grow: 0;
-  margin-right: 18px;
+  margin-right: 14px;
 }
 </style>

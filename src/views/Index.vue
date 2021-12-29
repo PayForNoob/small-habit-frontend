@@ -36,23 +36,22 @@ export default {
 </script>
 
 <style scoped>
-.컨테이너 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
 .컨테이너_내용 {
-  width: 720px;
-  margin-top: calc((100vh - 846px) / 4);
-  display: flex;
-  flex-direction: column;
+  justify-content: space-evenly;
+  height: calc(100% - 40px);
+}
+img {
+  width: 100%;
+  height: auto;
 }
 .문자열 {
   display: flex;
   flex-direction: column;
+  gap: 20px;
   text-align: left;
-  padding: 50px;
+  padding: 20px;
+  width: 100%;
 }
 .문자열_머릿말 {
   font-size: 30px;
@@ -64,10 +63,5 @@ export default {
 }
 .문자열_강조 {
   font-weight: bold;
-}
-.이미지 {
-  margin-top: 20px;
-  width: 720px;
-  height: 500px;
 }
 </style>
