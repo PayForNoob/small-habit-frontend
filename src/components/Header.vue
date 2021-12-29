@@ -48,10 +48,10 @@ export default {
     kakaoLogin() {
       window.Kakao.init(process.env.VUE_APP_JAVASCRIPT_KEY);
 
-      console.log(window.Kakao.isInitialized());
+      // console.log(window.Kakao.isInitialized());
 
       window.Kakao.Auth.authorize({
-        redirectUri: "http://localhost:8080/loading",
+        redirectUri: "http://https://small-habit-app.herokuapp.com//loading",
       });
     },
     async logout() {
