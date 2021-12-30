@@ -189,6 +189,7 @@ export default {
               }
             }
           });
+          this.confirm = !this.confirm;
         } else {
           this.confirm = !this.confirm;
         }
