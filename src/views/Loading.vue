@@ -22,10 +22,10 @@ export default {
         location.href = '/today'
       }
       catch (err) {
-        location.href = '/login'
+        location.href = '/'
       } 
     } else {
-      location.href = '/login'
+      location.href = '/'
     }
   },
 }
