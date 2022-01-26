@@ -52,7 +52,9 @@
           <div class="모달_버튼" v-if="$route.params.category">
             <div
             :style="{ backgroundColor: habitCategory.color }"
-            @click="habitItem.objective && habitItem.schedule.length > 0 ? $router.go(-2) : confirm = !confirm">확인</div>
+            @click="habitItem.objective && habitItem.schedule.length > 0 ? $router.go(-2) : confirm = !confirm">
+              확인
+            </div>
           </div>
         </template>
       </base-modal>
@@ -113,15 +115,6 @@ export default {
         return ["작성하지 않은 내용이 있습니다.", "마저 작성해주시기 바랍니다."]
       }
     },
-    modalButton() {
-      if (this.id) {
-        return ["삭제하실 경우 모든 습관 정보가", "사라지고 복구할 수 없습니다."]
-      } else if ( this.habitItem.objective && this.habitItem.schedule.length > 0 ) {
-        return ["습관 생성이 완료되었습니다.", "꾸준한 실천을 응원하겠습니다."]
-      } else {
-        return ["작성하지 않은 내용이 있습니다.", "마저 작성해주시기 바랍니다."]
-      }
-    }
   },
   methods: {
     editHabitName(newValue) {

@@ -60,7 +60,6 @@ export default {
       if(newHabit.length > 11) {
         alert('최대 글자수를 초과했습니다.')
         newHabit = newHabit.substring(0, 11)
-        event.currentTarget.innerHTML = newHabit
       }
       // console.log(newHabit)
       this.$emit('editHabitName', newHabit);

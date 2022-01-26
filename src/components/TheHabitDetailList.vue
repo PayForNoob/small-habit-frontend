@@ -70,7 +70,6 @@ export default {
       if(newDetailHabit.length > 11) {
         alert('최대 글자수를 초과했습니다.')
         newDetailHabit = newDetailHabit.substring(0, 11)
-        event.currentTarget.innerHTML = newDetailHabit
       }
       // console.log(newDetailHabit)
       this.$emit('editDetailHabitItem', ind, newDetailHabit);
